@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "damaged=false": {
+      "model": "aetherwastes:block/ward_pylon"
+    },
+    "damaged=true": {
+      "model": "aetherwastes:block/ward_pylon_damaged"
+    }
+  }
+}

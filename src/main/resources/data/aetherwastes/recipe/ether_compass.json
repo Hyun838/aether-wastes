@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " S ",
+    "CRC",
+    " C "
+  ],
+  "key": {
+    "S": {
+      "item": "aetherwastes:ether_shard"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "id": "aetherwastes:ether_compass",
+    "count": 1
+  }
+}

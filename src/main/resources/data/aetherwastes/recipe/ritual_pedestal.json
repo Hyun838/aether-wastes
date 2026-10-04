@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " S ",
+    "PPP",
+    " P "
+  ],
+  "key": {
+    "S": {
+      "item": "aetherwastes:ether_shard"
+    },
+    "P": {
+      "item": "minecraft:stone_bricks"
+    }
+  },
+  "result": {
+    "id": "aetherwastes:ritual_pedestal",
+    "count": 2
+  }
+}

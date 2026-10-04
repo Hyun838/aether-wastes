@@ -1,0 +1,65 @@
+{
+  "has_precipitation": false,
+  "temperature": 0.6,
+  "downfall": 0.0,
+  "effects": {
+    "fog_color": 3037781,
+    "sky_color": 1059370,
+    "water_color": 3050112,
+    "water_fog_color": 3050112,
+    "grass_color": 4890768,
+    "foliage_color": 4890768,
+    "particle": {
+      "options": {
+        "type": "minecraft:spore_blossom_air"
+      },
+      "probability": 0.006
+    }
+  },
+  "spawners": {
+    "monster": [
+      {
+        "type": "minecraft:zombie",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 2
+      },
+      {
+        "type": "minecraft:cave_spider",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 3
+      }
+    ],
+    "creature": [],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {},
+  "carvers": {},
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "aetherwastes:ether_crystal_ore",
+      "aetherwastes:star_iron_ore",
+      "minecraft:ore_coal_upper",
+      "minecraft:ore_iron_middle"
+    ],
+    [],
+    [],
+    [
+      "aetherwastes:glowcap_underside",
+      "minecraft:patch_grass_plain"
+    ],
+    []
+  ]
+}

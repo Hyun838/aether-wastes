@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "  S",
+    " R ",
+    "R  "
+  ],
+  "key": {
+    "S": {
+      "item": "aetherwastes:ether_shard"
+    },
+    "R": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "id": "aetherwastes:ether_staff",
+    "count": 1
+  }
+}

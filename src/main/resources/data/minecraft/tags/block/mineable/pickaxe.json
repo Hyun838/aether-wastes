@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "aetherwastes:ether_crystal_ore",
+    "aetherwastes:deepslate_ether_crystal_ore",
+    "aetherwastes:star_iron_ore",
+    "aetherwastes:salt_crust",
+    "aetherwastes:charged_crystal",
+    "aetherwastes:anchor",
+    "aetherwastes:forge_hearth",
+    "aetherwastes:ritual_focus",
+    "aetherwastes:ritual_pedestal",
+    "aetherwastes:ward_pylon",
+    "aetherwastes:purifying_obelisk",
+    "aetherwastes:observatory",
+    "aetherwastes:underside_portal"
+  ]
+}

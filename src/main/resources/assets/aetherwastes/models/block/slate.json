@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "aetherwastes:block/slate_top",
+    "bottom": "aetherwastes:block/slate_bottom",
+    "side": "aetherwastes:block/slate_side"
+  }
+}

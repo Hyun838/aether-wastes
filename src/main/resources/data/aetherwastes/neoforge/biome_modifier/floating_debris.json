@@ -1,0 +1,11 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": [
+    "minecraft:plains",
+    "minecraft:sunflower_plains",
+    "minecraft:meadow",
+    "minecraft:savanna"
+  ],
+  "features": "aetherwastes:floating_debris",
+  "step": "surface_structures"
+}

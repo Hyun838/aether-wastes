@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "axis=y,tapped=false": {
+      "model": "aetherwastes:block/bleeding_log"
+    },
+    "axis=x,tapped=false": {
+      "model": "aetherwastes:block/bleeding_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=z,tapped=false": {
+      "model": "aetherwastes:block/bleeding_log_horizontal",
+      "x": 90
+    },
+    "axis=y,tapped=true": {
+      "model": "aetherwastes:block/bleeding_log_tapped"
+    },
+    "axis=x,tapped=true": {
+      "model": "aetherwastes:block/bleeding_log_tapped_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=z,tapped=true": {
+      "model": "aetherwastes:block/bleeding_log_tapped_horizontal",
+      "x": 90
+    }
+  }
+}

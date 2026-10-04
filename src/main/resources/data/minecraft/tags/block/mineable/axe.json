@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "aetherwastes:slate",
+    "aetherwastes:bleeding_log",
+    "aetherwastes:journal_archive",
+    "aetherwastes:glowcap_block"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": [
+    "aetherwastes:ether_crystal_ore",
+    "aetherwastes:star_iron_ore_deep"
+  ],
+  "step": "underground_ores"
+}

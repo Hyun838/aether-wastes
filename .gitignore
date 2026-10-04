@@ -1,0 +1,8 @@
+
+.jdk/
+.jdk-tmp/
+build/
+.gradle/
+run/
+build-log.txt
+AetherWastes.jar

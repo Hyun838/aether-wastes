@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "aetherwastes:block/bleeding_log_top",
+    "side": "aetherwastes:block/bleeding_log"
+  }
+}

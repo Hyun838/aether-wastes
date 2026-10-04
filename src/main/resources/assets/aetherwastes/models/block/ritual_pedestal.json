@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "aetherwastes:block/ritual_pedestal",
+    "bottom": "aetherwastes:block/ritual_pedestal_side",
+    "side": "aetherwastes:block/ritual_pedestal_side"
+  }
+}

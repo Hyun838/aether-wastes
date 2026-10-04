@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "aetherwastes:block/observatory_top",
+    "side": "aetherwastes:block/observatory_side"
+  }
+}

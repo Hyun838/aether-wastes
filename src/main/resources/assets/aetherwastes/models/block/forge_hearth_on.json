@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "aetherwastes:block/forge_hearth_top",
+    "front": "aetherwastes:block/forge_hearth_front_on",
+    "side": "aetherwastes:block/forge_hearth_side"
+  }
+}

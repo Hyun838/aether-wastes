@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": [
+    "minecraft:plains",
+    "minecraft:savanna",
+    "minecraft:savanna_plateau"
+  ],
+  "features": "aetherwastes:ash_patch",
+  "step": "vegetal_decoration"
+}

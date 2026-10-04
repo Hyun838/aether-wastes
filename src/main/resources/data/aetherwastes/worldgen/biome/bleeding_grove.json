@@ -1,0 +1,65 @@
+{
+  "has_precipitation": false,
+  "temperature": 0.7,
+  "downfall": 0.0,
+  "effects": {
+    "fog_color": 5905950,
+    "sky_color": 2756372,
+    "water_color": 7020078,
+    "water_fog_color": 7020078,
+    "grass_color": 7027242,
+    "foliage_color": 7027242,
+    "particle": {
+      "options": {
+        "type": "minecraft:crimson_spore"
+      },
+      "probability": 0.006
+    }
+  },
+  "spawners": {
+    "monster": [
+      {
+        "type": "aetherwastes:resin_walker",
+        "weight": 80,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "minecraft:spider",
+        "weight": 30,
+        "minCount": 1,
+        "maxCount": 2
+      }
+    ],
+    "creature": [],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {},
+  "carvers": {},
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "aetherwastes:ether_crystal_ore",
+      "aetherwastes:star_iron_ore",
+      "minecraft:ore_coal_upper",
+      "minecraft:ore_iron_middle"
+    ],
+    [],
+    [],
+    [
+      "aetherwastes:bleeding_tree_underside",
+      "minecraft:patch_grass_plain"
+    ],
+    []
+  ]
+}

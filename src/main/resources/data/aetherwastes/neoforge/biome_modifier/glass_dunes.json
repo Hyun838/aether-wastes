@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": [
+    "minecraft:desert"
+  ],
+  "features": "aetherwastes:glass_spike",
+  "step": "vegetal_decoration"
+}

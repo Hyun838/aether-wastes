@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "aetherwastes:block/ritual_focus",
+    "bottom": "aetherwastes:block/ritual_focus_side",
+    "side": "aetherwastes:block/ritual_focus_side"
+  }
+}

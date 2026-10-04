@@ -1,0 +1,64 @@
+{
+  "has_precipitation": false,
+  "temperature": 0.5,
+  "downfall": 0.0,
+  "effects": {
+    "fog_color": 3158106,
+    "sky_color": 657952,
+    "water_color": 5263520,
+    "water_fog_color": 5263520,
+    "grass_color": 7372992,
+    "foliage_color": 7372992,
+    "particle": {
+      "options": {
+        "type": "minecraft:end_rod"
+      },
+      "probability": 0.006
+    }
+  },
+  "spawners": {
+    "monster": [
+      {
+        "type": "minecraft:enderman",
+        "weight": 60,
+        "minCount": 1,
+        "maxCount": 2
+      },
+      {
+        "type": "minecraft:phantom",
+        "weight": 20,
+        "minCount": 1,
+        "maxCount": 2
+      }
+    ],
+    "creature": [],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {},
+  "carvers": {},
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "aetherwastes:ether_crystal_ore",
+      "aetherwastes:star_iron_ore",
+      "minecraft:ore_coal_upper",
+      "minecraft:ore_iron_middle"
+    ],
+    [],
+    [],
+    [
+      "minecraft:patch_grass_plain"
+    ],
+    []
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "aetherwastes:block/forge_hearth"
+    },
+    "lit=true": {
+      "model": "aetherwastes:block/forge_hearth_on"
+    }
+  }
+}

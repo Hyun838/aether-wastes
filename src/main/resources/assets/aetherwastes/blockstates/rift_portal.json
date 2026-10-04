@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "exit=false": {
+      "model": "aetherwastes:block/rift_portal"
+    },
+    "exit=true": {
+      "model": "aetherwastes:block/rift_portal"
+    }
+  }
+}

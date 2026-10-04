@@ -1,0 +1,20 @@
+{
+  "type": "aetherwastes:underside",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "minecraft:floating_islands",
+    "biome_source": {
+      "type": "minecraft:checkerboard",
+      "biomes": [
+        "aetherwastes:ashen_wastes",
+        "aetherwastes:whisper_saltflats",
+        "aetherwastes:bleeding_grove",
+        "aetherwastes:glass_dunes",
+        "aetherwastes:fungal_hollows",
+        "aetherwastes:frozen_storm_fields",
+        "aetherwastes:star_shoals"
+      ],
+      "scale": 3
+    }
+  }
+}

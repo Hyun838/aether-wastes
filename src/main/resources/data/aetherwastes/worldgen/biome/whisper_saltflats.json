@@ -1,0 +1,53 @@
+{
+  "has_precipitation": false,
+  "temperature": 1.2,
+  "downfall": 0.0,
+  "effects": {
+    "fog_color": 14210248,
+    "sky_color": 3817301,
+    "water_color": 10471384,
+    "water_fog_color": 10471384,
+    "grass_color": 13157024,
+    "foliage_color": 13157024
+  },
+  "spawners": {
+    "monster": [
+      {
+        "type": "aetherwastes:salt_wraith",
+        "weight": 80,
+        "minCount": 1,
+        "maxCount": 3
+      }
+    ],
+    "creature": [],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {},
+  "carvers": {},
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "aetherwastes:ether_crystal_ore",
+      "aetherwastes:star_iron_ore",
+      "minecraft:ore_coal_upper",
+      "minecraft:ore_iron_middle"
+    ],
+    [],
+    [],
+    [
+      "aetherwastes:salt_flat_underside",
+      "minecraft:patch_grass_plain"
+    ],
+    []
+  ]
+}

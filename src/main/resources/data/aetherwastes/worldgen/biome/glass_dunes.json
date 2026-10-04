@@ -1,0 +1,59 @@
+{
+  "has_precipitation": false,
+  "temperature": 2.0,
+  "downfall": 0.0,
+  "effects": {
+    "fog_color": 15259824,
+    "sky_color": 4864608,
+    "water_color": 8440032,
+    "water_fog_color": 8440032,
+    "grass_color": 14207120,
+    "foliage_color": 14207120
+  },
+  "spawners": {
+    "monster": [
+      {
+        "type": "aetherwastes:glassman",
+        "weight": 80,
+        "minCount": 1,
+        "maxCount": 2
+      },
+      {
+        "type": "minecraft:husk",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 3
+      }
+    ],
+    "creature": [],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {},
+  "carvers": {},
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "aetherwastes:ether_crystal_ore",
+      "aetherwastes:star_iron_ore",
+      "minecraft:ore_coal_upper",
+      "minecraft:ore_iron_middle"
+    ],
+    [],
+    [],
+    [
+      "aetherwastes:glass_spike_underside",
+      "minecraft:patch_grass_plain"
+    ],
+    []
+  ]
+}

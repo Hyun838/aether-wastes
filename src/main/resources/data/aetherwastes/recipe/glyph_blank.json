@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "FSF"
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:flint"
+    },
+    "S": {
+      "item": "aetherwastes:ether_shard"
+    }
+  },
+  "result": {
+    "id": "aetherwastes:glyph_blank",
+    "count": 2
+  }
+}

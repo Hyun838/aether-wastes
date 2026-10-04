@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "tier=1": {
+      "model": "aetherwastes:block/anchor"
+    },
+    "tier=2": {
+      "model": "aetherwastes:block/anchor"
+    },
+    "tier=3": {
+      "model": "aetherwastes:block/anchor"
+    },
+    "tier=4": {
+      "model": "aetherwastes:block/anchor"
+    },
+    "tier=5": {
+      "model": "aetherwastes:block/anchor"
+    }
+  }
+}

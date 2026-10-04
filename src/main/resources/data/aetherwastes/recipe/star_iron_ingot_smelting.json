@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": {
+    "item": "aetherwastes:star_iron_ore"
+  },
+  "result": {
+    "id": "aetherwastes:star_iron_ingot"
+  },
+  "experience": 1.0,
+  "cookingtime": 200
+}

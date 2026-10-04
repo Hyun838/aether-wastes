@@ -1,13 +1,9 @@
 package com.aetherwastes.client;
 
 import com.aetherwastes.AetherWastes;
+import com.aetherwastes.client.AnimatedModel.Style;
+import com.aetherwastes.registry.ModBlockEntities;
 import com.aetherwastes.registry.ModEntities;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.entity.SkeletonRenderer;
-import net.minecraft.client.renderer.entity.ZombieRenderer;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.monster.AbstractSkeleton;
-import net.minecraft.world.entity.monster.Zombie;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -24,35 +20,34 @@ public final class ClientSetup {
     }
 
     @SubscribeEvent
-    public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ModEntities.SALT_WRAITH.get(), ctx -> zombie(ctx, "salt_wraith", 1f));
-        event.registerEntityRenderer(ModEntities.RESIN_WALKER.get(), ctx -> zombie(ctx, "resin_walker", 1.08f));
-        event.registerEntityRenderer(ModEntities.WANDERER_SPARK.get(), ctx -> zombie(ctx, "wanderer_spark", 1.3f));
-        event.registerEntityRenderer(ModEntities.WANDERER_RESONANCE.get(), ctx -> zombie(ctx, "wanderer_resonance", 1.3f));
-        event.registerEntityRenderer(ModEntities.WANDERER_CONVERGENCE.get(), ctx -> zombie(ctx, "wanderer_convergence", 1.3f));
-        event.registerEntityRenderer(ModEntities.WANDERER_HEART.get(), ctx -> zombie(ctx, "wanderer_heart", 1.45f));
-        event.registerEntityRenderer(ModEntities.GLASSMAN.get(), ctx -> new SkeletonRenderer(ctx) {
-            private final ResourceLocation tex = AetherWastes.id("textures/entity/glassman.png");
-
-            @Override
-            public ResourceLocation getTextureLocation(AbstractSkeleton entity) {
-                return tex;
-            }
-        });
+    public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(ModModels.SALT_WRAITH, ModModels::saltWraith);
+        event.registerLayerDefinition(ModModels.RESIN_WALKER, ModModels::resinWalker);
+        event.registerLayerDefinition(ModModels.GLASSMAN, ModModels::glassman);
+        event.registerLayerDefinition(ModModels.WANDERER_SPARK, ModModels::wandererSpark);
+        event.registerLayerDefinition(ModModels.WANDERER_RESONANCE, ModModels::wandererResonance);
+        event.registerLayerDefinition(ModModels.WANDERER_CONVERGENCE, ModModels::wandererConvergence);
+        event.registerLayerDefinition(ModModels.WANDERER_HEART, ModModels::wandererHeart);
     }
 
-    private static ZombieRenderer zombie(net.minecraft.client.renderer.entity.EntityRendererProvider.Context ctx, String name, float scale) {
-        ResourceLocation tex = AetherWastes.id("textures/entity/" + name + ".png");
-        return new ZombieRenderer(ctx) {
-            @Override
-            public ResourceLocation getTextureLocation(Zombie entity) {
-                return tex;
-            }
+    @SubscribeEvent
+    public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(ModEntities.SALT_WRAITH.get(),
+                ctx -> new SpecRenderer<>(ctx, ModModels.SALT_WRAITH, Style.FLOAT, "salt_wraith", 1.0f, 0.4f, false));
+        event.registerEntityRenderer(ModEntities.RESIN_WALKER.get(),
+                ctx -> new SpecRenderer<>(ctx, ModModels.RESIN_WALKER, Style.HEAVY, "resin_walker", 1.05f, 0.6f, false));
+        event.registerEntityRenderer(ModEntities.GLASSMAN.get(),
+                ctx -> new SpecRenderer<>(ctx, ModModels.GLASSMAN, Style.BIPED, "glassman", 1.0f, 0.4f, true));
+        event.registerEntityRenderer(ModEntities.WANDERER_SPARK.get(),
+                ctx -> new SpecRenderer<>(ctx, ModModels.WANDERER_SPARK, Style.CASTER, "wanderer_spark", 1.3f, 0.6f, false));
+        event.registerEntityRenderer(ModEntities.WANDERER_RESONANCE.get(),
+                ctx -> new SpecRenderer<>(ctx, ModModels.WANDERER_RESONANCE, Style.CASTER, "wanderer_resonance", 1.35f, 0.6f, false));
+        event.registerEntityRenderer(ModEntities.WANDERER_CONVERGENCE.get(),
+                ctx -> new SpecRenderer<>(ctx, ModModels.WANDERER_CONVERGENCE, Style.CASTER, "wanderer_convergence", 1.3f, 0.6f, false));
+        event.registerEntityRenderer(ModEntities.WANDERER_HEART.get(),
+                ctx -> new SpecRenderer<>(ctx, ModModels.WANDERER_HEART, Style.CASTER, "wanderer_heart", 1.45f, 0.7f, false));
 
-            @Override
-            protected void scale(Zombie entity, PoseStack poseStack, float partialTick) {
-                poseStack.scale(scale, scale, scale);
-            }
-        };
+        event.registerBlockEntityRenderer(ModBlockEntities.RITUAL_FOCUS.get(), ctx -> new HolderRenderer(ctx, 0.95f));
+        event.registerBlockEntityRenderer(ModBlockEntities.RITUAL_PEDESTAL.get(), ctx -> new HolderRenderer(ctx, 1.1f));
     }
 }

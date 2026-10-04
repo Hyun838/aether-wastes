@@ -29,12 +29,22 @@ public final class Sync {
     public static void stats(ServerPlayer p) {
         PlayerData d = Data.get(p);
         float pressure = EtherField.pressure(p.serverLevel(), p.blockPosition());
-        PacketDistributor.sendToPlayer(p, SyncStatsPayload.of(PlayerStats.vessel(p), PlayerStats.clarity(p),
+        send(p, SyncStatsPayload.of(PlayerStats.vessel(p), PlayerStats.clarity(p),
                 pressure, d.bodyTemp, d.noise, d.era, EtherField.isTide(p.level())));
     }
 
     public static void journal(ServerPlayer p) {
-        PacketDistributor.sendToPlayer(p, new SyncJournalPayload(build(p)));
+        send(p, new SyncJournalPayload(build(p)));
+    }
+
+    /** Отправить, только если клиент знает этот канал (защита от клиентов без мода и тестовых игроков). */
+    private static void send(ServerPlayer p, net.minecraft.network.protocol.common.custom.CustomPacketPayload payload) {
+        try {
+            if (p.connection == null || !p.connection.hasChannel(payload.type())) return;
+            PacketDistributor.sendToPlayer(p, payload);
+        } catch (RuntimeException e) {
+            // Клиент не готов принять пакет — пропускаем, следующий придёт через секунду.
+        }
     }
 
     public static CompoundTag build(ServerPlayer p) {

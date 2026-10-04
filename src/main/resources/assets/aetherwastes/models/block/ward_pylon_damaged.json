@@ -1,6 +1,159 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/block",
   "textures": {
-    "all": "aetherwastes:block/ward_pylon_damaged"
-  }
+    "d": "aetherwastes:block/polished_dark",
+    "p": "aetherwastes:block/pylon_damaged",
+    "c": "aetherwastes:block/ward_crystal",
+    "particle": "aetherwastes:block/pylon_damaged"
+  },
+  "elements": [
+    {
+      "from": [
+        3,
+        0,
+        3
+      ],
+      "to": [
+        13,
+        2,
+        13
+      ],
+      "faces": {
+        "up": {
+          "texture": "#d"
+        },
+        "down": {
+          "texture": "#d",
+          "cullface": "down"
+        },
+        "north": {
+          "texture": "#d"
+        },
+        "south": {
+          "texture": "#d"
+        },
+        "east": {
+          "texture": "#d"
+        },
+        "west": {
+          "texture": "#d"
+        }
+      }
+    },
+    {
+      "from": [
+        5,
+        2,
+        5
+      ],
+      "to": [
+        11,
+        11,
+        11
+      ],
+      "faces": {
+        "up": {
+          "texture": "#d"
+        },
+        "down": {
+          "texture": "#d"
+        },
+        "north": {
+          "texture": "#p"
+        },
+        "south": {
+          "texture": "#p"
+        },
+        "east": {
+          "texture": "#p"
+        },
+        "west": {
+          "texture": "#p"
+        }
+      }
+    },
+    {
+      "from": [
+        6,
+        11,
+        6
+      ],
+      "to": [
+        10,
+        14,
+        10
+      ],
+      "faces": {
+        "up": {
+          "texture": "#d"
+        },
+        "down": {
+          "texture": "#d"
+        },
+        "north": {
+          "texture": "#d"
+        },
+        "south": {
+          "texture": "#d"
+        },
+        "east": {
+          "texture": "#d"
+        },
+        "west": {
+          "texture": "#d"
+        }
+      },
+      "rotation": {
+        "origin": [
+          8,
+          11,
+          8
+        ],
+        "axis": "z",
+        "angle": 22.5
+      }
+    },
+    {
+      "from": [
+        10,
+        2,
+        2
+      ],
+      "to": [
+        12,
+        4,
+        4
+      ],
+      "faces": {
+        "up": {
+          "texture": "#c"
+        },
+        "down": {
+          "texture": "#c"
+        },
+        "north": {
+          "texture": "#c"
+        },
+        "south": {
+          "texture": "#c"
+        },
+        "east": {
+          "texture": "#c"
+        },
+        "west": {
+          "texture": "#c"
+        }
+      },
+      "rotation": {
+        "origin": [
+          11,
+          2,
+          3
+        ],
+        "axis": "y",
+        "angle": 22.5
+      }
+    }
+  ],
+  "render_type": "minecraft:cutout"
 }

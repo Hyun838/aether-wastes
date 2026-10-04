@@ -1,6 +1,192 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/block",
   "textures": {
-    "all": "aetherwastes:block/purifying_obelisk"
-  }
+    "q": "aetherwastes:block/quartz_base",
+    "o": "aetherwastes:block/obelisk",
+    "c": "aetherwastes:block/teal_crystal",
+    "particle": "aetherwastes:block/obelisk"
+  },
+  "elements": [
+    {
+      "from": [
+        2,
+        0,
+        2
+      ],
+      "to": [
+        14,
+        3,
+        14
+      ],
+      "faces": {
+        "up": {
+          "texture": "#q"
+        },
+        "down": {
+          "texture": "#q",
+          "cullface": "down"
+        },
+        "north": {
+          "texture": "#q"
+        },
+        "south": {
+          "texture": "#q"
+        },
+        "east": {
+          "texture": "#q"
+        },
+        "west": {
+          "texture": "#q"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        3,
+        4
+      ],
+      "to": [
+        12,
+        7,
+        12
+      ],
+      "faces": {
+        "up": {
+          "texture": "#q"
+        },
+        "down": {
+          "texture": "#q"
+        },
+        "north": {
+          "texture": "#q"
+        },
+        "south": {
+          "texture": "#q"
+        },
+        "east": {
+          "texture": "#q"
+        },
+        "west": {
+          "texture": "#q"
+        }
+      }
+    },
+    {
+      "from": [
+        5,
+        7,
+        5
+      ],
+      "to": [
+        11,
+        22,
+        11
+      ],
+      "faces": {
+        "up": {
+          "texture": "#q"
+        },
+        "down": {
+          "texture": "#q"
+        },
+        "north": {
+          "texture": "#o"
+        },
+        "south": {
+          "texture": "#o"
+        },
+        "east": {
+          "texture": "#o"
+        },
+        "west": {
+          "texture": "#o"
+        }
+      }
+    },
+    {
+      "from": [
+        6,
+        22,
+        6
+      ],
+      "to": [
+        10,
+        26,
+        10
+      ],
+      "faces": {
+        "up": {
+          "texture": "#q"
+        },
+        "down": {
+          "texture": "#q"
+        },
+        "north": {
+          "texture": "#q"
+        },
+        "south": {
+          "texture": "#q"
+        },
+        "east": {
+          "texture": "#q"
+        },
+        "west": {
+          "texture": "#q"
+        }
+      },
+      "rotation": {
+        "origin": [
+          8,
+          22,
+          8
+        ],
+        "axis": "y",
+        "angle": 45
+      }
+    },
+    {
+      "from": [
+        7,
+        27,
+        7
+      ],
+      "to": [
+        9,
+        31,
+        9
+      ],
+      "faces": {
+        "up": {
+          "texture": "#c"
+        },
+        "down": {
+          "texture": "#c"
+        },
+        "north": {
+          "texture": "#c"
+        },
+        "south": {
+          "texture": "#c"
+        },
+        "east": {
+          "texture": "#c"
+        },
+        "west": {
+          "texture": "#c"
+        }
+      },
+      "rotation": {
+        "origin": [
+          8,
+          27,
+          8
+        ],
+        "axis": "y",
+        "angle": 45
+      },
+      "shade": false
+    }
+  ],
+  "render_type": "minecraft:cutout"
 }

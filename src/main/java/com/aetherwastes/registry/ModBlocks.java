@@ -56,23 +56,23 @@ public final class ModBlocks {
 
     // --- База ---
     public static final DeferredBlock<AnchorBlock> ANCHOR = BLOCKS.register("anchor",
-            () -> new AnchorBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LODESTONE).strength(3.5f, 1200f)
+            () -> new AnchorBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LODESTONE).strength(3.5f, 1200f).noOcclusion()
                     .lightLevel(s -> 6 + s.getValue(AnchorBlock.TIER) * 2).sound(SoundType.LODESTONE)));
     public static final DeferredBlock<SlateBlock> SLATE = BLOCKS.register("slate",
-            () -> new SlateBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LECTERN).strength(2.5f).lightLevel(s -> 3)));
+            () -> new SlateBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LECTERN).strength(2.5f).lightLevel(s -> 3).noOcclusion()));
     public static final DeferredBlock<ForgeHearthBlock> FORGE_HEARTH = BLOCKS.register("forge_hearth",
-            () -> new ForgeHearthBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BLAST_FURNACE)
+            () -> new ForgeHearthBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BLAST_FURNACE).noOcclusion()
                     .lightLevel(s -> s.getValue(BlockStateProperties.LIT) ? 13 : 0)));
     public static final DeferredBlock<RitualBlock> RITUAL_FOCUS = BLOCKS.register("ritual_focus",
-            () -> new RitualBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.POLISHED_DEEPSLATE).lightLevel(s -> 7), true));
+            () -> new RitualBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.POLISHED_DEEPSLATE).lightLevel(s -> 7).noOcclusion(), true));
     public static final DeferredBlock<RitualBlock> RITUAL_PEDESTAL = BLOCKS.register("ritual_pedestal",
-            () -> new RitualBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS), false));
+            () -> new RitualBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS).noOcclusion(), false));
     public static final DeferredBlock<WardPylonBlock> WARD_PYLON = BLOCKS.register("ward_pylon",
-            () -> new WardPylonBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.POLISHED_DEEPSLATE).lightLevel(s -> 6)));
+            () -> new WardPylonBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.POLISHED_DEEPSLATE).lightLevel(s -> 6).noOcclusion()));
     public static final DeferredBlock<PurifyingObeliskBlock> PURIFYING_OBELISK = BLOCKS.register("purifying_obelisk",
-            () -> new PurifyingObeliskBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK).lightLevel(s -> 9)));
+            () -> new PurifyingObeliskBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.QUARTZ_BLOCK).lightLevel(s -> 9).noOcclusion()));
     public static final DeferredBlock<DeviceBlock> OBSERVATORY = BLOCKS.register("observatory",
-            () -> new DeviceBlock(Devices.OBSERVATORY, BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK)));
+            () -> new DeviceBlock(Devices.OBSERVATORY, BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion()));
     public static final DeferredBlock<JournalArchiveBlock> JOURNAL_ARCHIVE = BLOCKS.register("journal_archive",
             () -> new JournalArchiveBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BOOKSHELF)));
 
@@ -83,7 +83,7 @@ public final class ModBlocks {
     public static final DeferredBlock<Block> UNDERSIDE_PORTAL = BLOCKS.register("underside_portal",
             () -> new WorldBlocks.UndersidePortal(BlockBehaviour.Properties.ofFullCopy(Blocks.CRYING_OBSIDIAN).lightLevel(s -> 11)));
     public static final DeferredBlock<Block> HEART_OF_RIFT = BLOCKS.register("heart_of_rift",
-            () -> new WorldBlocks.HeartOfRift(BlockBehaviour.Properties.of().strength(-1f, 3600000f).lightLevel(s -> 15)
+            () -> new WorldBlocks.HeartOfRift(BlockBehaviour.Properties.of().strength(-1f, 3600000f).lightLevel(s -> 15).noOcclusion()
                     .noLootTable().mapColor(MapColor.COLOR_MAGENTA)));
     public static final DeferredBlock<RuneTrapBlock> RUNE_TRAP = BLOCKS.register("rune_trap",
             () -> new RuneTrapBlock(BlockBehaviour.Properties.of().noCollission().instabreak().lightLevel(s -> 5)

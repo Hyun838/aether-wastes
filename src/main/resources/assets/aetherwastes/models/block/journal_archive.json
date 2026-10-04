@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube_column",
   "textures": {
-    "all": "aetherwastes:block/journal_archive"
+    "end": "aetherwastes:block/dark_wood",
+    "side": "aetherwastes:block/journal_archive"
   }
 }

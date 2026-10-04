@@ -1,7 +1,190 @@
 {
-  "parent": "minecraft:block/cube_column",
+  "parent": "minecraft:block/block",
   "textures": {
-    "end": "aetherwastes:block/observatory_top",
-    "side": "aetherwastes:block/observatory_side"
-  }
+    "cu": "aetherwastes:block/copper_plate",
+    "br": "aetherwastes:block/brass_tube",
+    "lens": "aetherwastes:block/lens",
+    "particle": "aetherwastes:block/copper_plate"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        0,
+        1
+      ],
+      "to": [
+        15,
+        6,
+        15
+      ],
+      "faces": {
+        "up": {
+          "texture": "#cu"
+        },
+        "down": {
+          "texture": "#cu",
+          "cullface": "down"
+        },
+        "north": {
+          "texture": "#cu"
+        },
+        "south": {
+          "texture": "#cu"
+        },
+        "east": {
+          "texture": "#cu"
+        },
+        "west": {
+          "texture": "#cu"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        6,
+        0
+      ],
+      "to": [
+        16,
+        7,
+        16
+      ],
+      "faces": {
+        "up": {
+          "texture": "#cu"
+        },
+        "down": {
+          "texture": "#cu"
+        },
+        "north": {
+          "texture": "#cu"
+        },
+        "south": {
+          "texture": "#cu"
+        },
+        "east": {
+          "texture": "#cu"
+        },
+        "west": {
+          "texture": "#cu"
+        }
+      }
+    },
+    {
+      "from": [
+        6,
+        7,
+        6
+      ],
+      "to": [
+        10,
+        11,
+        10
+      ],
+      "faces": {
+        "up": {
+          "texture": "#br"
+        },
+        "down": {
+          "texture": "#br"
+        },
+        "north": {
+          "texture": "#br"
+        },
+        "south": {
+          "texture": "#br"
+        },
+        "east": {
+          "texture": "#br"
+        },
+        "west": {
+          "texture": "#br"
+        }
+      }
+    },
+    {
+      "from": [
+        6.5,
+        10,
+        1
+      ],
+      "to": [
+        9.5,
+        13,
+        15
+      ],
+      "faces": {
+        "up": {
+          "texture": "#br"
+        },
+        "down": {
+          "texture": "#br"
+        },
+        "north": {
+          "texture": "#lens"
+        },
+        "south": {
+          "texture": "#br"
+        },
+        "east": {
+          "texture": "#br"
+        },
+        "west": {
+          "texture": "#br"
+        }
+      },
+      "rotation": {
+        "origin": [
+          8,
+          11.5,
+          8
+        ],
+        "axis": "x",
+        "angle": -22.5
+      }
+    },
+    {
+      "from": [
+        6,
+        9.5,
+        0
+      ],
+      "to": [
+        10,
+        13.5,
+        2
+      ],
+      "faces": {
+        "up": {
+          "texture": "#br"
+        },
+        "down": {
+          "texture": "#br"
+        },
+        "north": {
+          "texture": "#lens"
+        },
+        "south": {
+          "texture": "#br"
+        },
+        "east": {
+          "texture": "#br"
+        },
+        "west": {
+          "texture": "#br"
+        }
+      },
+      "rotation": {
+        "origin": [
+          8,
+          11.5,
+          8
+        ],
+        "axis": "x",
+        "angle": -22.5
+      }
+    }
+  ]
 }

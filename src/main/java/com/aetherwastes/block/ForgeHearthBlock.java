@@ -47,10 +47,11 @@ import org.jetbrains.annotations.Nullable;
 public class ForgeHearthBlock extends BaseEntityBlock {
     public static final MapCodec<ForgeHearthBlock> CODEC = simpleCodec(ForgeHearthBlock::new);
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
+    public static final net.minecraft.world.level.block.state.properties.DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public ForgeHearthBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(LIT, false));
+        registerDefaultState(stateDefinition.any().setValue(LIT, false).setValue(FACING, net.minecraft.core.Direction.NORTH));
     }
 
     @Override
@@ -60,7 +61,12 @@ public class ForgeHearthBlock extends BaseEntityBlock {
 
     @Override
     public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(LIT);
+        builder.add(LIT, FACING);
+    }
+
+    @Override
+    public BlockState getStateForPlacement(net.minecraft.world.item.context.BlockPlaceContext ctx) {
+        return defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite());
     }
 
     @Override

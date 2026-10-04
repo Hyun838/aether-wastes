@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "aetherwastes:block/anchor_top",
-    "side": "aetherwastes:block/anchor_side"
-  }
-}

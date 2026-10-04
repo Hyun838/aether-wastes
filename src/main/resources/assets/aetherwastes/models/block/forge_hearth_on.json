@@ -1,8 +1,168 @@
 {
-  "parent": "minecraft:block/orientable",
+  "parent": "minecraft:block/block",
   "textures": {
-    "top": "aetherwastes:block/forge_hearth_top",
-    "front": "aetherwastes:block/forge_hearth_front_on",
-    "side": "aetherwastes:block/forge_hearth_side"
-  }
+    "b": "aetherwastes:block/forge_bricks",
+    "front": "aetherwastes:block/forge_front_on",
+    "coal": "aetherwastes:block/coals_lit",
+    "ch": "aetherwastes:block/chimney_bricks",
+    "lea": "aetherwastes:block/leather",
+    "particle": "aetherwastes:block/forge_bricks"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        11,
+        16
+      ],
+      "faces": {
+        "up": {
+          "texture": "#b"
+        },
+        "down": {
+          "texture": "#b",
+          "cullface": "down"
+        },
+        "north": {
+          "texture": "#front"
+        },
+        "south": {
+          "texture": "#b"
+        },
+        "east": {
+          "texture": "#b"
+        },
+        "west": {
+          "texture": "#b"
+        }
+      }
+    },
+    {
+      "from": [
+        1,
+        11,
+        1
+      ],
+      "to": [
+        15,
+        12,
+        9
+      ],
+      "faces": {
+        "up": {
+          "texture": "#coal"
+        },
+        "north": {
+          "texture": "#coal"
+        },
+        "east": {
+          "texture": "#coal"
+        },
+        "west": {
+          "texture": "#coal"
+        }
+      }
+    },
+    {
+      "from": [
+        10,
+        11,
+        10
+      ],
+      "to": [
+        15,
+        16,
+        15
+      ],
+      "faces": {
+        "up": {
+          "texture": "#ch"
+        },
+        "down": {
+          "texture": "#ch"
+        },
+        "north": {
+          "texture": "#ch"
+        },
+        "south": {
+          "texture": "#ch"
+        },
+        "east": {
+          "texture": "#ch"
+        },
+        "west": {
+          "texture": "#ch"
+        }
+      }
+    },
+    {
+      "from": [
+        9,
+        15,
+        9
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "up": {
+          "texture": "#ch"
+        },
+        "down": {
+          "texture": "#ch"
+        },
+        "north": {
+          "texture": "#ch"
+        },
+        "south": {
+          "texture": "#ch"
+        },
+        "east": {
+          "texture": "#ch"
+        },
+        "west": {
+          "texture": "#ch"
+        }
+      }
+    },
+    {
+      "from": [
+        1,
+        11,
+        10
+      ],
+      "to": [
+        8,
+        13,
+        15
+      ],
+      "faces": {
+        "up": {
+          "texture": "#lea"
+        },
+        "down": {
+          "texture": "#lea"
+        },
+        "north": {
+          "texture": "#lea"
+        },
+        "south": {
+          "texture": "#lea"
+        },
+        "east": {
+          "texture": "#lea"
+        },
+        "west": {
+          "texture": "#lea"
+        }
+      }
+    }
+  ]
 }

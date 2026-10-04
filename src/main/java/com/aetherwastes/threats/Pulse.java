@@ -89,13 +89,17 @@ public final class Pulse {
     @SuppressWarnings("unchecked")
     public static EntityType<? extends Mob>[] monsterPool(int ring) {
         return switch (ring) {
-            case 1 -> new EntityType[]{EntityType.ZOMBIE, EntityType.SKELETON, EntityType.SPIDER};
+            case 1 -> new EntityType[]{EntityType.ZOMBIE, EntityType.SKELETON, EntityType.SPIDER,
+                    com.aetherwastes.registry.ModEntities.ASH_HOUND.get()};
             case 2 -> new EntityType[]{EntityType.ZOMBIE, EntityType.SKELETON, EntityType.SPIDER, EntityType.CREEPER,
-                    com.aetherwastes.registry.ModEntities.SALT_WRAITH.get()};
+                    com.aetherwastes.registry.ModEntities.SALT_WRAITH.get(), com.aetherwastes.registry.ModEntities.ASH_HOUND.get(),
+                    com.aetherwastes.registry.ModEntities.ETHER_WISP.get()};
             case 3 -> new EntityType[]{EntityType.SKELETON, EntityType.CREEPER, EntityType.WITCH,
-                    com.aetherwastes.registry.ModEntities.RESIN_WALKER.get(), com.aetherwastes.registry.ModEntities.GLASSMAN.get()};
+                    com.aetherwastes.registry.ModEntities.RESIN_WALKER.get(), com.aetherwastes.registry.ModEntities.GLASSMAN.get(),
+                    com.aetherwastes.registry.ModEntities.ETHER_WISP.get(), com.aetherwastes.registry.ModEntities.SCAR_CRAWLER.get()};
             default -> new EntityType[]{EntityType.VINDICATOR, EntityType.WITCH, EntityType.CREEPER,
-                    com.aetherwastes.registry.ModEntities.GLASSMAN.get(), com.aetherwastes.registry.ModEntities.RESIN_WALKER.get()};
+                    com.aetherwastes.registry.ModEntities.GLASSMAN.get(), com.aetherwastes.registry.ModEntities.RESIN_WALKER.get(),
+                    com.aetherwastes.registry.ModEntities.SCAR_CRAWLER.get()};
         };
     }
 

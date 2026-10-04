@@ -17,6 +17,12 @@
         "weight": 80,
         "minCount": 1,
         "maxCount": 3
+      },
+      {
+        "type": "aetherwastes:ether_wisp",
+        "weight": 30,
+        "minCount": 1,
+        "maxCount": 2
       }
     ],
     "creature": [],

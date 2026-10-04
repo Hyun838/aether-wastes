@@ -33,6 +33,13 @@ public final class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<Glassman>> GLASSMAN = ENTITIES.register("glassman",
             () -> EntityType.Builder.<Glassman>of(Glassman::new, MobCategory.MONSTER).sized(0.6f, 1.99f).clientTrackingRange(8).build("glassman"));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<com.aetherwastes.entity.AshHound>> ASH_HOUND = ENTITIES.register("ash_hound",
+            () -> EntityType.Builder.<com.aetherwastes.entity.AshHound>of(com.aetherwastes.entity.AshHound::new, MobCategory.MONSTER).sized(0.7f, 0.9f).clientTrackingRange(10).build("ash_hound"));
+    public static final DeferredHolder<EntityType<?>, EntityType<com.aetherwastes.entity.EtherWisp>> ETHER_WISP = ENTITIES.register("ether_wisp",
+            () -> EntityType.Builder.<com.aetherwastes.entity.EtherWisp>of(com.aetherwastes.entity.EtherWisp::new, MobCategory.MONSTER).sized(0.5f, 0.8f).fireImmune().clientTrackingRange(8).build("ether_wisp"));
+    public static final DeferredHolder<EntityType<?>, EntityType<com.aetherwastes.entity.ScarCrawler>> SCAR_CRAWLER = ENTITIES.register("scar_crawler",
+            () -> EntityType.Builder.<com.aetherwastes.entity.ScarCrawler>of(com.aetherwastes.entity.ScarCrawler::new, MobCategory.MONSTER).sized(1.3f, 0.8f).clientTrackingRange(8).build("scar_crawler"));
+
     public static final DeferredHolder<EntityType<?>, EntityType<Wanderer>> WANDERER_SPARK = wanderer(EraManager.SPARK);
     public static final DeferredHolder<EntityType<?>, EntityType<Wanderer>> WANDERER_RESONANCE = wanderer(EraManager.RESONANCE);
     public static final DeferredHolder<EntityType<?>, EntityType<Wanderer>> WANDERER_CONVERGENCE = wanderer(EraManager.CONVERGENCE);
@@ -51,6 +58,9 @@ public final class ModEntities {
         event.put(RESIN_WALKER.get(), Zombie.createAttributes().add(Attributes.MAX_HEALTH, 30).add(Attributes.ATTACK_DAMAGE, 4)
                 .add(Attributes.SPAWN_REINFORCEMENTS_CHANCE, 0).build());
         event.put(GLASSMAN.get(), AbstractSkeleton.createAttributes().add(Attributes.MAX_HEALTH, 26).add(Attributes.ARMOR, 6).build());
+        event.put(ASH_HOUND.get(), com.aetherwastes.entity.AshHound.attributes().build());
+        event.put(ETHER_WISP.get(), com.aetherwastes.entity.EtherWisp.attributes().build());
+        event.put(SCAR_CRAWLER.get(), com.aetherwastes.entity.ScarCrawler.attributes().build());
         double[] hp = {200, 300, 450, 700};
         var types = new DeferredHolder[]{WANDERER_SPARK, WANDERER_RESONANCE, WANDERER_CONVERGENCE, WANDERER_HEART};
         for (int i = 0; i < 4; i++) {
@@ -73,6 +83,12 @@ public final class ModEntities {
         event.register(SALT_WRAITH.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(RESIN_WALKER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(ASH_HOUND.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(ETHER_WISP.get(), SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(SCAR_CRAWLER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(GLASSMAN.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);

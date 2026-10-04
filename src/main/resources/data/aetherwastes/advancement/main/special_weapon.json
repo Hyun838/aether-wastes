@@ -1,0 +1,79 @@
+{
+  "display": {
+    "icon": {
+      "id": "aetherwastes:ether_blade"
+    },
+    "title": {
+      "translate": "advancements.aetherwastes.special_weapon.title"
+    },
+    "description": {
+      "translate": "advancements.aetherwastes.special_weapon.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "aetherwastes:ether_blade"
+          }
+        ]
+      }
+    },
+    "has_1": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "aetherwastes:salt_scythe"
+          }
+        ]
+      }
+    },
+    "has_2": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "aetherwastes:ember_greataxe"
+          }
+        ]
+      }
+    },
+    "has_3": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "aetherwastes:prism_dagger"
+          }
+        ]
+      }
+    },
+    "has_4": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "aetherwastes:ether_bow"
+          }
+        ]
+      }
+    }
+  },
+  "parent": "aetherwastes:main/ether_steel",
+  "requirements": [
+    [
+      "has_0",
+      "has_1",
+      "has_2",
+      "has_3",
+      "has_4"
+    ]
+  ]
+}

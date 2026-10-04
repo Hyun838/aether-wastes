@@ -5,7 +5,7 @@ from texlib import *
 from PIL import Image, ImageDraw
 
 OUT = "/home/claude/aetherwastes/src/main/resources/assets/aetherwastes/textures/item"
-HERE = os.path.dirname(__file__)
+HERE = "/tmp/claude-0/-home-claude/6e7c1073-f517-50dd-916e-c96eb0f32376/scratchpad/art"
 ICONS = {}
 
 PURPLE = {"a": hexc("#3d1c6b"), "b": hexc("#5a2d9a"), "c": hexc("#7d45c9"), "d": hexc("#a06ae6"), "e": hexc("#d6b8ff"), "w": (255, 255, 255)}

@@ -62,6 +62,7 @@ public final class SurvivalEvents {
         Temperature.tick(p, d);
         Mutations.tick(p, d, pressure);
         Engraving.armorPassives(p);
+        com.aetherwastes.craft.ArmorSets.tick(p);
         EraManager.onTideState(p, tide);
         Pulse.tickPlayer(p, d, pressure, tide);
 
@@ -69,6 +70,9 @@ public final class SurvivalEvents {
             p.level().getBiome(p.blockPosition()).unwrapKey()
                     .ifPresent(k -> Insights.add(p, "land", k.location().toString()));
             Traits.scanInventory(p);
+            if (p.getInventory().contains(new net.minecraft.world.item.ItemStack(com.aetherwastes.registry.ModItems.ETHER_COMPASS.get()))) d.flags.add("compass");
+            if (com.aetherwastes.craft.ArmorSets.fullSet(p) != null) d.flags.add("armor_set");
+            Sync.journal(p);
             EraManager.check(p);
             if (p.isScoping() && !p.level().isDay() && p.level().canSeeSky(p.blockPosition().above())) {
                 Mastery.add(p, School.STAR, 3);
@@ -152,8 +156,14 @@ public final class SurvivalEvents {
         if (event.getEntity() instanceof ServerPlayer p) {
             Sync.all(p);
             PlayerData d = Data.get(p);
-            if (d.era == 1 && d.insights.isEmpty()) {
+            if (d.flags.add("starter")) {
                 Msg.chat(p, ChatFormatting.LIGHT_PURPLE, "message.aetherwastes.welcome");
+                net.minecraft.world.item.ItemStack[] kit = {
+                        new net.minecraft.world.item.ItemStack(com.aetherwastes.registry.ModItems.JOURNAL.get()),
+                        new net.minecraft.world.item.ItemStack(com.aetherwastes.registry.ModItems.ETHER_SHARD.get(), 4),
+                        new net.minecraft.world.item.ItemStack(com.aetherwastes.registry.ModItems.BANDAGE.get(), 2),
+                        new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.BREAD, 4)};
+                for (var s : kit) if (!p.addItem(s)) p.drop(s, false);
             }
         }
     }

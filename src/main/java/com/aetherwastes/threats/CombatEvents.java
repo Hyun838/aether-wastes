@@ -75,6 +75,15 @@ public final class CombatEvents {
 
         if (target instanceof ServerPlayer p) {
             PlayerData d = Data.get(p);
+            if (source.is(DamageTypeTags.IS_PROJECTILE) && com.aetherwastes.craft.ArmorSets.wearing(p, com.aetherwastes.craft.ArmorSets.PRISM)
+                    && p.getRandom().nextFloat() < 0.35f) {
+                if (source.getEntity() instanceof LivingEntity shooter && shooter != p) {
+                    shooter.hurt(p.damageSources().thorns(p), event.getAmount());
+                }
+                ((ServerLevel) p.level()).sendParticles(net.minecraft.core.particles.ParticleTypes.END_ROD, p.getX(), p.getY() + 1, p.getZ(), 15, 0.4, 0.5, 0.4, 0.05);
+                event.setCanceled(true);
+                return;
+            }
             if (d.mutations.contains(Mutations.GLASS_SKIN) && source.is(DamageTypeTags.IS_EXPLOSION)) {
                 event.setAmount(event.getAmount() * 2f);
             }
@@ -87,6 +96,9 @@ public final class CombatEvents {
         Entity attacker = source.getEntity();
         if (attacker instanceof ServerPlayer p && !(target instanceof Player)) {
             target.getPersistentData().putString(Nemesis.LAST_CAT, cat);
+            if (source.getDirectEntity() == p && p.getMainHandItem().getItem() instanceof com.aetherwastes.item.WastesWeapon w) {
+                event.setAmount(event.getAmount() * w.damageMultiplier(p, target));
+            }
             if (source.getDirectEntity() == p && cat.equals("melee")) {
                 if (Traits.has(p.getMainHandItem(), Traits.SHARP) > 0) event.setAmount(event.getAmount() * 1.15f);
                 Engraving.onWeaponHit(p, target, event.getAmount());
@@ -154,6 +166,14 @@ public final class CombatEvents {
     }
 
     @SubscribeEvent
+    public static void onPlaced(net.neoforged.neoforge.event.level.BlockEvent.EntityPlaceEvent event) {
+        if (event.getEntity() instanceof ServerPlayer p && event.getPlacedBlock().is(ModBlocks.ANCHOR.get())) {
+            Data.get(p).flags.add("anchor");
+            com.aetherwastes.network.Sync.journal(p);
+        }
+    }
+
+    @SubscribeEvent
     public static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
         if (Traits.has(event.getEntity().getMainHandItem(), Traits.LIGHT) > 0) {
             event.setNewSpeed(event.getNewSpeed() * 1.2f);
@@ -187,6 +207,19 @@ public final class CombatEvents {
     public static void onExplosion(ExplosionEvent.Detonate event) {
         for (Entity e : event.getAffectedEntities()) {
             if (e instanceof ServerPlayer p) Pulse.addNoise(p, 15f);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onArrow(EntityJoinLevelEvent event) {
+        if (event.loadedFromDisk() || event.getLevel().isClientSide()) return;
+        if (event.getEntity() instanceof net.minecraft.world.entity.projectile.AbstractArrow arrow
+                && arrow.getOwner() instanceof Player shooter
+                && (shooter.getMainHandItem().is(com.aetherwastes.registry.ModGear.ETHER_BOW.get())
+                || shooter.getOffhandItem().is(com.aetherwastes.registry.ModGear.ETHER_BOW.get()))) {
+            arrow.setBaseDamage(arrow.getBaseDamage() + 2.5);
+            arrow.setGlowingTag(true);
+            arrow.addTag("aw_ether_arrow");
         }
     }
 

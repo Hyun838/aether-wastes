@@ -22,6 +22,21 @@ public final class EtherHud {
         if (mc.screen != null) return;
 
         Font font = mc.font;
+        String objKey = ClientStatsCache.journal.getString("objective");
+        if (!objKey.isEmpty() && !mc.getDebugOverlay().showDebugScreen()) {
+            ListTag objArgs = ClientStatsCache.journal.getList("objArgs", Tag.TAG_STRING);
+            Object[] a = new Object[objArgs.size()];
+            for (int i = 0; i < a.length; i++) a[i] = objArgs.getString(i);
+            Component goal = Component.translatable("hud.aetherwastes.goal").withStyle(net.minecraft.ChatFormatting.GOLD)
+                    .append(Component.translatable(objKey, a).withStyle(net.minecraft.ChatFormatting.WHITE));
+            var lines = font.split(goal, 230);
+            int gy = 6;
+            g.fill(3, 3, 3 + 236, 5 + lines.size() * 10, 0x66000000);
+            for (var line : lines) {
+                g.drawString(font, line, 6, gy, 0xFFFFFFFF, true);
+                gy += 10;
+            }
+        }
         int x = 6;
         int y = g.guiHeight() - 66;
 

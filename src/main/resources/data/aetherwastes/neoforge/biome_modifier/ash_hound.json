@@ -1,0 +1,18 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": [
+    "minecraft:plains",
+    "minecraft:savanna",
+    "minecraft:taiga",
+    "minecraft:meadow",
+    "minecraft:snowy_plains"
+  ],
+  "spawners": [
+    {
+      "type": "aetherwastes:ash_hound",
+      "weight": 35,
+      "minCount": 2,
+      "maxCount": 4
+    }
+  ]
+}

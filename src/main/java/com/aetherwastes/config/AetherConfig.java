@@ -55,7 +55,7 @@ public final class AetherConfig {
 
     public static final ModConfigSpec.BooleanValue FREE_MAGIC = B
             .comment("Разрешить магию с Эпохи I (без ожидания первого Прилива).")
-            .define("freeMagic", false);
+            .define("freeMagic", true);
     public static final ModConfigSpec.BooleanValue DISABLE_ENCHANTING_TABLE = B
             .comment("Отключить ванильный стол зачарования (его заменяет Гравировка).")
             .define("disableEnchantingTable", true);

@@ -191,6 +191,41 @@ public class ModGameTests {
                 () -> Wanderers.spawnNear(p, EraManager.SPARK, 6), () -> com.aetherwastes.network.Sync.all(p),
                 () -> com.aetherwastes.item.JournalItem.show(p),
         };
+        // --- снаряжение: каждый комплект брони и каждое оружие ---
+        var sets = new net.neoforged.neoforge.registries.DeferredItem[][]{com.aetherwastes.registry.ModGear.ASHEN_SET,
+                com.aetherwastes.registry.ModGear.ETHER_STEEL_SET, com.aetherwastes.registry.ModGear.PRISM_SET,
+                com.aetherwastes.registry.ModGear.STAR_IRON_SET, com.aetherwastes.registry.ModGear.ARCHIVIST_SET};
+        net.minecraft.world.entity.EquipmentSlot[] slots = {net.minecraft.world.entity.EquipmentSlot.HEAD,
+                net.minecraft.world.entity.EquipmentSlot.CHEST, net.minecraft.world.entity.EquipmentSlot.LEGS,
+                net.minecraft.world.entity.EquipmentSlot.FEET};
+        for (var set : sets) {
+            try {
+                for (int k = 0; k < 4; k++) p.setItemSlot(slots[k], new net.minecraft.world.item.ItemStack((net.minecraft.world.item.Item) set[k].get()));
+                String name = com.aetherwastes.craft.ArmorSets.fullSet(p);
+                if (name == null) errors.add("set not detected: " + set[0].getId());
+                com.aetherwastes.craft.ArmorSets.tick(p);
+                AetherWastes.LOGGER.info("[aw-test] armor set {} -> {}", set[0].getId(), name);
+            } catch (Throwable t) {
+                errors.add(err("armor " + set[0].getId(), t));
+            }
+        }
+        for (var entry : ModItems.ITEMS.getEntries()) {
+            if (!(entry.get() instanceof com.aetherwastes.item.WastesWeapon weapon)) continue;
+            try {
+                var stack = new net.minecraft.world.item.ItemStack(weapon);
+                p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, stack);
+                PlayerStats.setVessel(p, 120f);
+                p.getCooldowns().removeCooldown(weapon);
+                weapon.use(helper.getLevel(), p, net.minecraft.world.InteractionHand.MAIN_HAND);
+                var target = helper.spawn(EntityType.ZOMBIE, new BlockPos(4, 1, 4));
+                target.setNoAi(true);
+                weapon.hurtEnemy(stack, target, p);
+                weapon.damageMultiplier(p, target);
+                p.attack(target);
+            } catch (Throwable t) {
+                errors.add(err("weapon " + entry.getId(), t));
+            }
+        }
         for (int k = 0; k < ticks.length; k++) {
             try {
                 ticks[k].run();

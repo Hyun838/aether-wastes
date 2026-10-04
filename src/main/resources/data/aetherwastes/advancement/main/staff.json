@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "id": "aetherwastes:ether_staff"
+    },
+    "title": {
+      "translate": "advancements.aetherwastes.staff.title"
+    },
+    "description": {
+      "translate": "advancements.aetherwastes.staff.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "aetherwastes:ether_staff"
+          }
+        ]
+      }
+    }
+  },
+  "parent": "aetherwastes:main/glyph"
+}

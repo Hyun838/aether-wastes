@@ -15,6 +15,18 @@ public final class ClientSetup {
     private ClientSetup() {}
 
     @SubscribeEvent
+    public static void clientSetup(net.neoforged.fml.event.lifecycle.FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+            var bow = com.aetherwastes.registry.ModGear.ETHER_BOW.get();
+            net.minecraft.client.renderer.item.ItemProperties.register(bow, net.minecraft.resources.ResourceLocation.withDefaultNamespace("pull"),
+                    (stack, level, entity, seed) -> entity == null || entity.getUseItem() != stack ? 0f
+                            : (stack.getUseDuration(entity) - entity.getUseItemRemainingTicks()) / 20f);
+            net.minecraft.client.renderer.item.ItemProperties.register(bow, net.minecraft.resources.ResourceLocation.withDefaultNamespace("pulling"),
+                    (stack, level, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1f : 0f);
+        });
+    }
+
+    @SubscribeEvent
     public static void registerGuiLayers(RegisterGuiLayersEvent event) {
         event.registerAboveAll(AetherWastes.id("ether_hud"), EtherHud::render);
     }
@@ -22,6 +34,9 @@ public final class ClientSetup {
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(ModModels.SALT_WRAITH, ModModels::saltWraith);
+        event.registerLayerDefinition(ModModels.ASH_HOUND, ModModels::ashHound);
+        event.registerLayerDefinition(ModModels.ETHER_WISP, ModModels::etherWisp);
+        event.registerLayerDefinition(ModModels.SCAR_CRAWLER, ModModels::scarCrawler);
         event.registerLayerDefinition(ModModels.RESIN_WALKER, ModModels::resinWalker);
         event.registerLayerDefinition(ModModels.GLASSMAN, ModModels::glassman);
         event.registerLayerDefinition(ModModels.WANDERER_SPARK, ModModels::wandererSpark);
@@ -46,6 +61,13 @@ public final class ClientSetup {
                 ctx -> new SpecRenderer<>(ctx, ModModels.WANDERER_CONVERGENCE, Style.CASTER, "wanderer_convergence", 1.3f, 0.6f, false));
         event.registerEntityRenderer(ModEntities.WANDERER_HEART.get(),
                 ctx -> new SpecRenderer<>(ctx, ModModels.WANDERER_HEART, Style.CASTER, "wanderer_heart", 1.45f, 0.7f, false));
+
+        event.registerEntityRenderer(ModEntities.ASH_HOUND.get(),
+                ctx -> new SpecRenderer<>(ctx, ModModels.ASH_HOUND, Style.QUAD, "ash_hound", 1.0f, 0.5f, false));
+        event.registerEntityRenderer(ModEntities.ETHER_WISP.get(),
+                ctx -> new SpecRenderer<>(ctx, ModModels.ETHER_WISP, Style.FLOAT, "ether_wisp", 0.8f, 0.2f, false));
+        event.registerEntityRenderer(ModEntities.SCAR_CRAWLER.get(),
+                ctx -> new SpecRenderer<>(ctx, ModModels.SCAR_CRAWLER, Style.SPIDER, "scar_crawler", 1.0f, 0.8f, false));
 
         event.registerBlockEntityRenderer(ModBlockEntities.RITUAL_FOCUS.get(), ctx -> new HolderRenderer(ctx, 0.95f));
         event.registerBlockEntityRenderer(ModBlockEntities.RITUAL_PEDESTAL.get(), ctx -> new HolderRenderer(ctx, 1.1f));

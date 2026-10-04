@@ -159,6 +159,7 @@ public class ForgeHearthBlock extends BaseEntityBlock {
                     Msg.chat(p, ChatFormatting.LIGHT_PURPLE, "forge.aetherwastes.tide_trait", Component.translatable("trait.aetherwastes." + t));
                 }
                 Mastery.add(p, School.FORGE, 5 + q * 5);
+                Data.get(p).flags.add("forged");
                 Msg.chat(p, Quality.color(q), "forge.aetherwastes.forged", w.getHoverName(),
                         Component.translatable("quality.aetherwastes." + q));
                 level.playSound(null, pos, SoundEvents.ANVIL_USE, SoundSource.BLOCKS, 1f, 0.9f);

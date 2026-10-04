@@ -88,6 +88,7 @@ public class SlateBlock extends BaseEntityBlock {
                             .withStyle(ChatFormatting.RED), true);
                 } else {
                     stack.set(ModComponents.SPELL.get(), spell);
+                    com.aetherwastes.core.Data.get(player).flags.add("inscribed");
                     level.playSound(null, pos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 1f, 1f);
                     ((ServerLevel) level).sendParticles(ParticleTypes.ENCHANT, pos.getX() + 0.5, pos.getY() + 1.1,
                             pos.getZ() + 0.5, 30, 0.4, 0.3, 0.4, 0.5);

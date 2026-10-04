@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "id": "aetherwastes:star_iron_ingot"
+    },
+    "title": {
+      "translate": "advancements.aetherwastes.star_iron.title"
+    },
+    "description": {
+      "translate": "advancements.aetherwastes.star_iron.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "aetherwastes:star_iron_ingot"
+          }
+        ]
+      }
+    }
+  },
+  "parent": "aetherwastes:main/ether_armor"
+}

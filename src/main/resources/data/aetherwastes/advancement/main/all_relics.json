@@ -1,0 +1,63 @@
+{
+  "display": {
+    "icon": {
+      "id": "aetherwastes:heart_blade"
+    },
+    "title": {
+      "translate": "advancements.aetherwastes.all_relics.title"
+    },
+    "description": {
+      "translate": "advancements.aetherwastes.all_relics.desc"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "aetherwastes:spark_scepter"
+          }
+        ]
+      }
+    },
+    "has_1": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "aetherwastes:resonance_maul"
+          }
+        ]
+      }
+    },
+    "has_2": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "aetherwastes:convergence_glaive"
+          }
+        ]
+      }
+    },
+    "has_3": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "aetherwastes:heart_blade"
+          }
+        ]
+      }
+    }
+  },
+  "parent": "aetherwastes:main/wanderer_heart",
+  "rewards": {
+    "experience": 500
+  }
+}

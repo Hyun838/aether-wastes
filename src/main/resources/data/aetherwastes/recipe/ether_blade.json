@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "  E",
+    "SE ",
+    "HS "
+  ],
+  "key": {
+    "E": {
+      "item": "aetherwastes:ether_steel_ingot"
+    },
+    "S": {
+      "item": "aetherwastes:ether_shard"
+    },
+    "H": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "id": "aetherwastes:ether_blade",
+    "count": 1
+  }
+}

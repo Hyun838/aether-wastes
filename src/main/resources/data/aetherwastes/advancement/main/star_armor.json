@@ -1,0 +1,63 @@
+{
+  "display": {
+    "icon": {
+      "id": "aetherwastes:star_iron_chestplate"
+    },
+    "title": {
+      "translate": "advancements.aetherwastes.star_armor.title"
+    },
+    "description": {
+      "translate": "advancements.aetherwastes.star_armor.desc"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "aetherwastes:star_iron_chestplate"
+          }
+        ]
+      }
+    },
+    "has_1": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "aetherwastes:star_iron_helmet"
+          }
+        ]
+      }
+    },
+    "has_2": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "aetherwastes:star_iron_leggings"
+          }
+        ]
+      }
+    },
+    "has_3": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "aetherwastes:star_iron_boots"
+          }
+        ]
+      }
+    }
+  },
+  "parent": "aetherwastes:main/star_iron",
+  "rewards": {
+    "experience": 100
+  }
+}

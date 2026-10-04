@@ -10,6 +10,9 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 
 /** Сгенерировано из описаний моделей (art/entityart.py). Не править вручную. */
 public final class ModModels {
+    public static final ModelLayerLocation ASH_HOUND = new ModelLayerLocation(AetherWastes.id("ash_hound"), "main");
+    public static final ModelLayerLocation ETHER_WISP = new ModelLayerLocation(AetherWastes.id("ether_wisp"), "main");
+    public static final ModelLayerLocation SCAR_CRAWLER = new ModelLayerLocation(AetherWastes.id("scar_crawler"), "main");
     public static final ModelLayerLocation SALT_WRAITH = new ModelLayerLocation(AetherWastes.id("salt_wraith"), "main");
     public static final ModelLayerLocation RESIN_WALKER = new ModelLayerLocation(AetherWastes.id("resin_walker"), "main");
     public static final ModelLayerLocation GLASSMAN = new ModelLayerLocation(AetherWastes.id("glassman"), "main");
@@ -17,6 +20,55 @@ public final class ModModels {
     public static final ModelLayerLocation WANDERER_RESONANCE = new ModelLayerLocation(AetherWastes.id("wanderer_resonance"), "main");
     public static final ModelLayerLocation WANDERER_CONVERGENCE = new ModelLayerLocation(AetherWastes.id("wanderer_convergence"), "main");
     public static final ModelLayerLocation WANDERER_HEART = new ModelLayerLocation(AetherWastes.id("wanderer_heart"), "main");
+
+    public static LayerDefinition ashHound() {
+        MeshDefinition mesh = new MeshDefinition();
+        PartDefinition root = mesh.getRoot();
+        PartDefinition p0 = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-3.0F, -3.0F, -6.0F, 6.0F, 6.0F, 12.0F), PartPose.offset(0.0F, 13.0F, 0.0F));
+        PartDefinition p1 = p0.addOrReplaceChild("d1", CubeListBuilder.create().texOffs(36, 0).addBox(-4.0F, -4.0F, -7.0F, 8.0F, 7.0F, 5.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
+        PartDefinition p2 = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 18).addBox(-3.0F, -3.0F, -5.0F, 6.0F, 6.0F, 5.0F), PartPose.offset(0.0F, 11.0F, -7.0F));
+        PartDefinition p3 = p2.addOrReplaceChild("d2", CubeListBuilder.create().texOffs(18, 29).addBox(-1.5000F, 0.0F, -8.0F, 3.0F, 3.0F, 3.0F).texOffs(38, 29).addBox(-1.5000F, 3.0F, -7.5000F, 3.0F, 1.0F, 2.0F).texOffs(48, 29).addBox(-3.0F, -5.0F, -3.0F, 2.0F, 2.0F, 1.0F).texOffs(54, 29).addBox(1.0F, -5.0F, -3.0F, 2.0F, 2.0F, 1.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
+        PartDefinition p4 = root.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(0, 29).addBox(-1.0F, -1.0F, 0.0F, 2.0F, 2.0F, 7.0F), PartPose.offsetAndRotation(0.0F, 11.0F, 6.0F, 0.6109F, 0.0F, 0.0F));
+        PartDefinition p5 = p4.addOrReplaceChild("d3", CubeListBuilder.create().texOffs(30, 29).addBox(-1.0F, -1.0F, 0.0F, 2.0F, 2.0F, 2.0F), PartPose.offset(0.0F, 0.0F, 7.0F));
+        PartDefinition p6 = root.addOrReplaceChild("leg_fr", CubeListBuilder.create().texOffs(22, 18).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 8.0F, 2.0F), PartPose.offset(-2.0F, 16.0F, -4.0F));
+        PartDefinition p7 = root.addOrReplaceChild("leg_fl", CubeListBuilder.create().texOffs(30, 18).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 8.0F, 2.0F), PartPose.offset(2.0F, 16.0F, -4.0F));
+        PartDefinition p8 = root.addOrReplaceChild("leg_br", CubeListBuilder.create().texOffs(38, 18).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 8.0F, 2.0F), PartPose.offset(-2.0F, 16.0F, 4.0F));
+        PartDefinition p9 = root.addOrReplaceChild("leg_bl", CubeListBuilder.create().texOffs(46, 18).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 8.0F, 2.0F), PartPose.offset(2.0F, 16.0F, 4.0F));
+        return LayerDefinition.create(mesh, 64, 64);
+    }
+
+    public static LayerDefinition etherWisp() {
+        MeshDefinition mesh = new MeshDefinition();
+        PartDefinition root = mesh.getRoot();
+        PartDefinition p0 = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F), PartPose.offset(0.0F, 14.0F, 0.0F));
+        PartDefinition p1 = p0.addOrReplaceChild("d1", CubeListBuilder.create().texOffs(40, 0).addBox(-1.0F, -6.0F, -1.0F, 2.0F, 3.0F, 2.0F).texOffs(48, 0).addBox(-1.0F, 3.0F, -1.0F, 2.0F, 3.0F, 2.0F), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.7854F, 0.7854F, 0.0F));
+        PartDefinition p2 = p0.addOrReplaceChild("d2", CubeListBuilder.create().texOffs(0, 12).addBox(-6.0F, -1.0F, -1.0F, 3.0F, 2.0F, 2.0F).texOffs(10, 12).addBox(3.0F, -1.0F, -1.0F, 3.0F, 2.0F, 2.0F), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.7854F, 0.7854F));
+        PartDefinition p3 = root.addOrReplaceChild("skirt", CubeListBuilder.create().texOffs(24, 0).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 3.0F, 4.0F).texOffs(56, 0).addBox(-1.0F, 3.0F, -1.0F, 2.0F, 3.0F, 2.0F), PartPose.offset(0.0F, 17.0F, 0.0F));
+        PartDefinition p4 = p3.addOrReplaceChild("d3", CubeListBuilder.create().texOffs(20, 12).addBox(-0.5000F, 0.0F, -0.5000F, 1.0F, 2.0F, 1.0F), PartPose.offset(0.0F, 6.0F, 0.0F));
+        PartDefinition p5 = root.addOrReplaceChild("orbit", CubeListBuilder.create().texOffs(24, 12).addBox(6.0F, -1.0F, -0.5000F, 1.0F, 1.0F, 1.0F).texOffs(28, 12).addBox(-7.0F, 1.0F, -0.5000F, 1.0F, 1.0F, 1.0F).texOffs(32, 12).addBox(-0.5000F, -2.0F, 6.0F, 1.0F, 1.0F, 1.0F), PartPose.offset(0.0F, 14.0F, 0.0F));
+        return LayerDefinition.create(mesh, 64, 32);
+    }
+
+    public static LayerDefinition scarCrawler() {
+        MeshDefinition mesh = new MeshDefinition();
+        PartDefinition root = mesh.getRoot();
+        PartDefinition p0 = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(76, 0).addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F), PartPose.offset(0.0F, 15.0F, 0.0F));
+        PartDefinition p1 = root.addOrReplaceChild("abdomen", CubeListBuilder.create().texOffs(0, 0).addBox(-5.0F, -4.0F, -6.0F, 10.0F, 8.0F, 12.0F), PartPose.offset(0.0F, 15.0F, 9.0F));
+        PartDefinition p2 = p1.addOrReplaceChild("d1", CubeListBuilder.create().texOffs(108, 0).addBox(-1.0F, -4.0F, -1.0F, 2.0F, 4.0F, 2.0F), PartPose.offsetAndRotation(0.0F, -4.0F, -2.0F, -0.3491F, 0.0F, 0.2618F));
+        PartDefinition p3 = p1.addOrReplaceChild("d2", CubeListBuilder.create().texOffs(116, 0).addBox(-1.0F, -3.0F, -1.0F, 2.0F, 3.0F, 2.0F), PartPose.offsetAndRotation(-2.0F, -4.0F, 2.0F, 0.2618F, 0.0F, -0.4363F));
+        PartDefinition p4 = p1.addOrReplaceChild("d3", CubeListBuilder.create().texOffs(100, 0).addBox(-1.0F, -5.0F, -1.0F, 2.0F, 5.0F, 2.0F), PartPose.offsetAndRotation(3.0F, -4.0F, 3.0F, 0.4363F, 0.0F, 0.3491F));
+        PartDefinition p5 = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(44, 0).addBox(-4.0F, -4.0F, -8.0F, 8.0F, 8.0F, 8.0F), PartPose.offset(0.0F, 15.0F, -3.0F));
+        PartDefinition p6 = p5.addOrReplaceChild("d4", CubeListBuilder.create().texOffs(0, 20).addBox(-3.0F, 0.0F, -2.0F, 2.0F, 3.0F, 2.0F).texOffs(8, 20).addBox(1.0F, 0.0F, -2.0F, 2.0F, 3.0F, 2.0F), PartPose.offset(0.0F, 2.0F, -8.0F));
+        PartDefinition p7 = root.addOrReplaceChild("leg0", CubeListBuilder.create().texOffs(16, 20).addBox(-15.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), PartPose.offsetAndRotation(-4.0F, 15.0F, 2.0F, 0.0F, 0.7854F, -0.7854F));
+        PartDefinition p8 = root.addOrReplaceChild("leg1", CubeListBuilder.create().texOffs(52, 20).addBox(-1.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), PartPose.offsetAndRotation(4.0F, 15.0F, 2.0F, 0.0F, -0.7854F, 0.7854F));
+        PartDefinition p9 = root.addOrReplaceChild("leg2", CubeListBuilder.create().texOffs(88, 20).addBox(-15.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), PartPose.offsetAndRotation(-4.0F, 15.0F, 1.0F, 0.0F, 0.3927F, -0.5760F));
+        PartDefinition p10 = root.addOrReplaceChild("leg3", CubeListBuilder.create().texOffs(0, 25).addBox(-1.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), PartPose.offsetAndRotation(4.0F, 15.0F, 1.0F, 0.0F, -0.3927F, 0.5760F));
+        PartDefinition p11 = root.addOrReplaceChild("leg4", CubeListBuilder.create().texOffs(36, 25).addBox(-15.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), PartPose.offsetAndRotation(-4.0F, 15.0F, 0.0F, 0.0F, -0.3927F, -0.5760F));
+        PartDefinition p12 = root.addOrReplaceChild("leg5", CubeListBuilder.create().texOffs(72, 25).addBox(-1.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), PartPose.offsetAndRotation(4.0F, 15.0F, 0.0F, 0.0F, 0.3927F, 0.5760F));
+        PartDefinition p13 = root.addOrReplaceChild("leg6", CubeListBuilder.create().texOffs(0, 29).addBox(-15.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), PartPose.offsetAndRotation(-4.0F, 15.0F, -1.0F, 0.0F, -0.7854F, -0.7854F));
+        PartDefinition p14 = root.addOrReplaceChild("leg7", CubeListBuilder.create().texOffs(36, 29).addBox(-1.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), PartPose.offsetAndRotation(4.0F, 15.0F, -1.0F, 0.0F, 0.7854F, 0.7854F));
+        return LayerDefinition.create(mesh, 128, 64);
+    }
 
     public static LayerDefinition saltWraith() {
         MeshDefinition mesh = new MeshDefinition();

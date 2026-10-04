@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "id": "aetherwastes:ether_steel_chestplate"
+    },
+    "title": {
+      "translate": "advancements.aetherwastes.ether_armor.title"
+    },
+    "description": {
+      "translate": "advancements.aetherwastes.ether_armor.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "aetherwastes:ether_steel_chestplate"
+          }
+        ]
+      }
+    }
+  },
+  "parent": "aetherwastes:main/ether_steel"
+}

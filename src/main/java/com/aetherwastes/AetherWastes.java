@@ -30,7 +30,9 @@ public class AetherWastes {
 
     public AetherWastes(IEventBus modEventBus, ModContainer container) {
         ModBlocks.BLOCKS.register(modEventBus);
+        com.aetherwastes.registry.ModGear.init();
         ModItems.ITEMS.register(modEventBus);
+        com.aetherwastes.registry.ModGear.ARMOR_MATERIALS.register(modEventBus);
         ModBlockEntities.BLOCK_ENTITIES.register(modEventBus);
         ModComponents.COMPONENTS.register(modEventBus);
         ModAttachments.ATTACHMENTS.register(modEventBus);

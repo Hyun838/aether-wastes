@@ -76,6 +76,7 @@ public final class Sync {
         t.putBoolean("reconciled", d.reconciled);
         t.putInt("secondAge", d.secondAge);
         t.putString("nemesis", d.nemesis.getString("name"));
+        com.aetherwastes.progression.Objectives.write(p, d, t);
         return t;
     }
 

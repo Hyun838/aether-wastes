@@ -1,0 +1,107 @@
+{
+  "display": {
+    "icon": {
+      "id": "aetherwastes:ash_pelt"
+    },
+    "title": {
+      "translate": "advancements.aetherwastes.hunter.title"
+    },
+    "description": {
+      "translate": "advancements.aetherwastes.hunter.desc"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "ash_hound": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aetherwastes:ash_hound"
+            }
+          }
+        ]
+      }
+    },
+    "salt_wraith": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aetherwastes:salt_wraith"
+            }
+          }
+        ]
+      }
+    },
+    "resin_walker": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aetherwastes:resin_walker"
+            }
+          }
+        ]
+      }
+    },
+    "glassman": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aetherwastes:glassman"
+            }
+          }
+        ]
+      }
+    },
+    "ether_wisp": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aetherwastes:ether_wisp"
+            }
+          }
+        ]
+      }
+    },
+    "scar_crawler": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aetherwastes:scar_crawler"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "parent": "aetherwastes:main/root",
+  "rewards": {
+    "experience": 150
+  }
+}

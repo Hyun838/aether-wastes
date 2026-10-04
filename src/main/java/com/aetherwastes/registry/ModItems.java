@@ -33,6 +33,10 @@ public final class ModItems {
     public static final DeferredItem<Item> RESIN = simple("resin");
     public static final DeferredItem<Item> CHARGED_SHARD = simple("charged_shard");
     public static final DeferredItem<Item> STAR_IRON_INGOT = ITEMS.register("star_iron_ingot", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
+    public static final DeferredItem<Item> ETHER_STEEL_INGOT = simple("ether_steel_ingot");
+    public static final DeferredItem<Item> PRISM_SHARD = simple("prism_shard");
+    public static final DeferredItem<Item> ASH_PELT = simple("ash_pelt");
+    public static final DeferredItem<Item> HEARTWOOD = simple("heartwood");
     public static final DeferredItem<Item> SOUL_ESSENCE = ITEMS.register("soul_essence", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
     public static final DeferredItem<Item> WANDERER_SHARD = ITEMS.register("wanderer_shard",
             () -> new SpecialItem(SpecialItem.Kind.PLAIN, "tooltip.aetherwastes.wanderer_shard", new Item.Properties().rarity(Rarity.RARE)));
@@ -75,6 +79,12 @@ public final class ModItems {
             () -> new DeferredSpawnEggItem(ModEntities.SALT_WRAITH, 0xE8E4D8, 0x9FB4C7, new Item.Properties()));
     public static final DeferredItem<Item> RESIN_WALKER_EGG = ITEMS.register("resin_walker_spawn_egg",
             () -> new DeferredSpawnEggItem(ModEntities.RESIN_WALKER, 0x6B1E1E, 0xC2702A, new Item.Properties()));
+    public static final DeferredItem<Item> ASH_HOUND_EGG = ITEMS.register("ash_hound_spawn_egg",
+            () -> new DeferredSpawnEggItem(ModEntities.ASH_HOUND, 0x3e3c3a, 0xff6a20, new Item.Properties()));
+    public static final DeferredItem<Item> ETHER_WISP_EGG = ITEMS.register("ether_wisp_spawn_egg",
+            () -> new DeferredSpawnEggItem(ModEntities.ETHER_WISP, 0x7d45c9, 0xefe0ff, new Item.Properties()));
+    public static final DeferredItem<Item> SCAR_CRAWLER_EGG = ITEMS.register("scar_crawler_spawn_egg",
+            () -> new DeferredSpawnEggItem(ModEntities.SCAR_CRAWLER, 0x2a0f3a, 0xe04aa8, new Item.Properties()));
     public static final DeferredItem<Item> GLASSMAN_EGG = ITEMS.register("glassman_spawn_egg",
             () -> new DeferredSpawnEggItem(ModEntities.GLASSMAN, 0xBFE8F0, 0x9B5DE5, new Item.Properties()));
 

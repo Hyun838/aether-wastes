@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "id": "aetherwastes:archivist_chestplate"
+    },
+    "title": {
+      "translate": "advancements.aetherwastes.archivist.title"
+    },
+    "description": {
+      "translate": "advancements.aetherwastes.archivist.desc"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "aetherwastes:archivist_chestplate"
+          }
+        ]
+      }
+    }
+  },
+  "parent": "aetherwastes:main/staff",
+  "rewards": {
+    "experience": 100
+  }
+}

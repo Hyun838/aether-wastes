@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "S S",
+    "W W"
+  ],
+  "key": {
+    "S": {
+      "item": "aetherwastes:soul_essence"
+    },
+    "W": {
+      "item": "minecraft:purple_wool"
+    }
+  },
+  "result": {
+    "id": "aetherwastes:archivist_boots",
+    "count": 1
+  }
+}

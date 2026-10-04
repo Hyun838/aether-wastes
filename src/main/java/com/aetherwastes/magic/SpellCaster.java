@@ -65,6 +65,7 @@ public final class SpellCaster {
         float pressure = EtherField.pressure(level, p.blockPosition());
         float cost = spell.baseCost();
         if (pressure <= EtherField.LOW) cost *= 2f;
+        cost *= com.aetherwastes.craft.ArmorSets.spellCostMultiplier(p);
 
         float etherCost = cost;
         float clarityCost = cost * 0.05f;
@@ -123,6 +124,7 @@ public final class SpellCaster {
             witherPlants(level, p.blockPosition());
             Msg.bar(p, ChatFormatting.DARK_GREEN, "message.aetherwastes.spell.root_overspend");
         }
+        Data.get(p).flags.add("cast");
         level.playSound(null, p.blockPosition(), com.aetherwastes.registry.ModSounds.SPELL_CAST.get(), SoundSource.PLAYERS, 0.8f,
                 0.9f + level.random.nextFloat() * 0.2f);
         Sync.stats(p);

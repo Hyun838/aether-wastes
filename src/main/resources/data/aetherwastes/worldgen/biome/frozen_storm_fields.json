@@ -23,6 +23,12 @@
         "weight": 70,
         "minCount": 1,
         "maxCount": 3
+      },
+      {
+        "type": "aetherwastes:ash_hound",
+        "weight": 30,
+        "minCount": 2,
+        "maxCount": 3
       }
     ],
     "creature": [],

@@ -32,6 +32,7 @@ public class PlayerData implements INBTSerializable<CompoundTag> {
     public boolean archivist = false;
     public boolean visitedUnderside = false;
     public int secondAge = 0;
+    public final Set<String> flags = new HashSet<>();
 
     // --- Выживание ---
     public final Set<String> mutations = new HashSet<>();
@@ -97,6 +98,7 @@ public class PlayerData implements INBTSerializable<CompoundTag> {
         t.putBoolean("archivist", archivist);
         t.putBoolean("visitedUnderside", visitedUnderside);
         t.putInt("secondAge", secondAge);
+        t.put("flags", writeSet(flags));
 
         t.put("mutations", writeSet(mutations));
         t.putFloat("exposure", exposure);
@@ -140,6 +142,7 @@ public class PlayerData implements INBTSerializable<CompoundTag> {
         archivist = t.getBoolean("archivist");
         visitedUnderside = t.getBoolean("visitedUnderside");
         secondAge = t.getInt("secondAge");
+        readSet(t, "flags", flags);
 
         readSet(t, "mutations", mutations);
         exposure = t.getFloat("exposure");

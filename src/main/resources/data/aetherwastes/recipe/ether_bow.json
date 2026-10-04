@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " HX",
+    "E X",
+    " HX"
+  ],
+  "key": {
+    "H": {
+      "item": "aetherwastes:heartwood"
+    },
+    "X": {
+      "item": "minecraft:string"
+    },
+    "E": {
+      "item": "aetherwastes:ether_shard"
+    }
+  },
+  "result": {
+    "id": "aetherwastes:ether_bow",
+    "count": 1
+  }
+}

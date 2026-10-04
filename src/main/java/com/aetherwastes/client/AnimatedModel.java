@@ -15,11 +15,13 @@ import java.util.NoSuchElementException;
  * right_leg, left_leg, skirt, halo, orbit, wing_left, wing_right, staff), анимация задаётся стилем.
  */
 public class AnimatedModel<T extends Mob> extends HierarchicalModel<T> implements ArmedModel {
-    public enum Style {BIPED, HEAVY, FLOAT, CASTER}
+    public enum Style {BIPED, HEAVY, FLOAT, CASTER, QUAD, SPIDER}
 
     private final ModelPart root;
     private final Style style;
-    private final ModelPart head, body, rightArm, leftArm, rightLeg, leftLeg, skirt, halo, orbit, wingLeft, wingRight;
+    private final ModelPart head, body, rightArm, leftArm, rightLeg, leftLeg, skirt, halo, orbit, wingLeft, wingRight, tail;
+    private final ModelPart[] quadLegs = new ModelPart[4];
+    private final ModelPart[] spiderLegs = new ModelPart[8];
 
     public AnimatedModel(ModelPart root, Style style) {
         this.root = root;
@@ -35,6 +37,10 @@ public class AnimatedModel<T extends Mob> extends HierarchicalModel<T> implement
         this.halo = head == null ? null : find(head, "halo");
         this.wingLeft = body == null ? null : find(body, "wing_left");
         this.wingRight = body == null ? null : find(body, "wing_right");
+        this.tail = find(root, "tail");
+        String[] q = {"leg_fr", "leg_fl", "leg_br", "leg_bl"};
+        for (int i = 0; i < 4; i++) quadLegs[i] = find(root, q[i]);
+        for (int i = 0; i < 8; i++) spiderLegs[i] = find(root, "leg" + i);
     }
 
     private static ModelPart find(ModelPart parent, String name) {
@@ -66,6 +72,28 @@ public class AnimatedModel<T extends Mob> extends HierarchicalModel<T> implement
         if (leftLeg != null) leftLeg.xRot = Mth.cos(walk + Mth.PI) * legAmp * limbSwingAmount;
 
         switch (style) {
+            case QUAD -> {
+                float amp = 1.2f * limbSwingAmount;
+                if (quadLegs[0] != null) quadLegs[0].xRot = Mth.cos(walk) * amp;
+                if (quadLegs[1] != null) quadLegs[1].xRot = Mth.cos(walk + Mth.PI) * amp;
+                if (quadLegs[2] != null) quadLegs[2].xRot = Mth.cos(walk + Mth.PI) * amp;
+                if (quadLegs[3] != null) quadLegs[3].xRot = Mth.cos(walk) * amp;
+                if (tail != null) {
+                    tail.yRot = Mth.sin(age * 0.3f) * 0.3f;
+                    tail.xRot += aggressive ? -0.4f : 0.1f * Mth.sin(age * 0.1f);
+                }
+                if (body != null) body.y += Mth.sin(walk * 2) * limbSwingAmount * 0.6f;
+            }
+            case SPIDER -> {
+                for (int i = 0; i < 8; i++) {
+                    ModelPart leg = spiderLegs[i];
+                    if (leg == null) continue;
+                    float phase = (i % 2 == 0 ? 0 : Mth.PI) + (i / 2) * 0.8f;
+                    float sign = i % 2 == 0 ? 1 : -1;
+                    leg.yRot += Mth.cos(walk * 2 + phase) * 0.35f * limbSwingAmount;
+                    leg.zRot += sign * Math.abs(Mth.sin(walk + phase)) * 0.35f * limbSwingAmount;
+                }
+            }
             case BIPED, HEAVY -> {
                 if (aggressive) {
                     reach(age, 0.08f);

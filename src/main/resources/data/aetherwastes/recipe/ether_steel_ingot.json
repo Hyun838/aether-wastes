@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "aetherwastes:ether_shard"
+    },
+    {
+      "item": "aetherwastes:ether_shard"
+    },
+    {
+      "tag": "minecraft:coals"
+    }
+  ],
+  "result": {
+    "id": "aetherwastes:ether_steel_ingot",
+    "count": 1
+  }
+}

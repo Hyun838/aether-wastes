@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " X ",
+    " X ",
+    " # "
+  ],
+  "key": {
+    "X": {
+      "item": "aetherwastes:ether_steel_ingot"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "id": "aetherwastes:ether_steel_sword",
+    "count": 1
+  }
+}

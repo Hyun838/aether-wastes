@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw
 
 ROOT = "/home/claude/aetherwastes/src/main/resources/assets/aetherwastes/textures/entity"
 JAVA = "/home/claude/aetherwastes/src/main/java/com/aetherwastes/client/ModModels.java"
-HERE = os.path.dirname(__file__)
+HERE = "/tmp/claude-0/-home-claude/6e7c1073-f517-50dd-916e-c96eb0f32376/scratchpad/art"
 R = math.radians
 
 
@@ -137,6 +137,22 @@ def mat_color(mat, face, i, j, w, h, pal):
         c = pick(1 + int(n * 3))
         if i == 0 or j == 0:
             c = pick(4)
+    elif kind == "fur":
+        c = pick(1 + (1 if (i * 7 + j * 3) % 5 == 0 else 0) + (1 if n > 0.75 else 0))
+        if arg == "embers" and n > 0.9:
+            c = pal["glow"][2]
+            glow = pal["glow"][2]
+        if arg == "dark":
+            c = pick(0 + (1 if n > 0.6 else 0))
+        if face == "up":
+            c = pick(3 if n > 0.5 else 2)
+    elif kind == "chitin":
+        c = pick(1 + (1 if n > 0.7 else 0))
+        if (i + j) % 4 == 0:
+            c = pick(3)
+        if arg == "runes" and face in ("up", "back") and (i % 4 == 1) and (j % 3 != 1):
+            c = pal["glow"][2]
+            glow = pal["glow"][2]
     elif kind == "flame":
         t = j / max(1, h - 1)
         c = mix(pal["glow"][3], pal["glow"][1], t)
@@ -188,6 +204,26 @@ def mat_color(mat, face, i, j, w, h, pal):
                 c = (16, 8, 6)
             if j == 6 and i in (3, 4):
                 c = (16, 8, 6)
+        elif style == "hound":
+            if j == 2 and i in (1, 4):
+                c = pal["glow"][3]
+                glow = pal["glow"][3]
+            if j == h - 1 and 1 <= i <= w - 2:
+                c = (20, 14, 12)
+        elif style == "wisp":
+            if j == 2 and i in (1, 4):
+                c = (30, 10, 50)
+                glow = None
+            elif j == 4 and i in (2, 3):
+                c = (60, 20, 90)
+                glow = None
+        elif style == "crawler":
+            for ex, ey in ((1, 2), (2, 1), (5, 1), (6, 2), (3, 3), (4, 3)):
+                if i == ex and j == ey:
+                    c = pal["glow"][3]
+                    glow = pal["glow"][3]
+            if j >= h - 2 and i in (2, 5):
+                c = (10, 6, 12)
         elif style == "glass":
             if j == 2 and i in (1, 4):
                 c = pal["glow"][3]
@@ -416,7 +452,73 @@ def wanderer(variant):
     return [head, body, skirt, ra, la, orbit], WANDERER_PAL[variant]
 
 
+def ash_hound():
+    Part._n = 0
+    body = P("body", (0, 13, 0), Cube((-3, -3, -6), (6, 6, 12), "fur:embers"),
+             children=[P(None, (0, 0, 0), Cube((-4, -4, -7), (8, 7, 5), "fur:dark"))])
+    head = P("head", (0, 11, -7), Cube((-3, -3, -5), (6, 6, 5), "fur:facehound"),
+             children=[P(None, (0, 0, 0), Cube((-1.5, 0, -8), (3, 3, 3), "fur"), Cube((-1.5, 3, -7.5), (3, 1, 2), "bone"),
+                         Cube((-3, -5, -3), (2, 2, 1), "fur:dark"), Cube((1, -5, -3), (2, 2, 1), "fur:dark"))])
+    legs = [P("leg_fr", (-2, 16, -4), Cube((-1, 0, -1), (2, 8, 2), "fur")),
+            P("leg_fl", (2, 16, -4), Cube((-1, 0, -1), (2, 8, 2), "fur")),
+            P("leg_br", (-2, 16, 4), Cube((-1, 0, -1), (2, 8, 2), "fur")),
+            P("leg_bl", (2, 16, 4), Cube((-1, 0, -1), (2, 8, 2), "fur"))]
+    tail = P("tail", (0, 11, 6, R(35), 0, 0), Cube((-1, -1, 0), (2, 2, 7), "fur"),
+             children=[P(None, (0, 0, 7), Cube((-1, -1, 0), (2, 2, 2), "flame"))])
+    pal = {"fur": ramp("#1e1c1a", "#2e2b28", "#423e3a", "#56514c", "#6a645e"),
+           "bone": ramp("#8a8070", "#b0a690", "#d8d0bc", "#f0eadc"),
+           "glow": ramp("#8a2a00", "#ff6a00", "#ffb020", "#fff0a0"),
+           "trim": ramp("#1e1c1a", "#2e2b28", "#423e3a", "#56514c"),
+           "robe": ramp("#1e1c1a", "#2e2b28", "#423e3a", "#56514c", "#6a645e")}
+    return [body, head, tail] + legs, pal
+
+
+def ether_wisp():
+    Part._n = 0
+    body = P("body", (0, 14, 0), Cube((-3, -3, -3), (6, 6, 6), "glowmat:facewisp"),
+             children=[P(None, (0, 0, 0, R(45), R(45), 0), Cube((-1, -6, -1), (2, 3, 2), "crystal"), Cube((-1, 3, -1), (2, 3, 2), "crystal")),
+                       P(None, (0, 0, 0, 0, R(45), R(45)), Cube((-6, -1, -1), (3, 2, 2), "crystal"), Cube((3, -1, -1), (3, 2, 2), "crystal"))])
+    skirt = P("skirt", (0, 17, 0), Cube((-2, 0, -2), (4, 3, 4), "glowmat"), Cube((-1, 3, -1), (2, 3, 2), "glowmat"),
+              children=[P(None, (0, 6, 0), Cube((-0.5, 0, -0.5), (1, 2, 1), "glowmat"))])
+    orbit = P("orbit", (0, 14, 0), Cube((6, -1, -0.5), (1, 1, 1), "glowmat"), Cube((-7, 1, -0.5), (1, 1, 1), "glowmat"),
+              Cube((-0.5, -2, 6), (1, 1, 1), "glowmat"))
+    pal = {"glow": ramp("#5a2d9a", "#a06ae6", "#d6b8ff", "#ffffff"),
+           "crystal": ramp("#3d1c6b", "#5a2d9a", "#7d45c9", "#a06ae6", "#c9a2ff"),
+           "trim": ramp("#3d1c6b", "#5a2d9a", "#7d45c9", "#a06ae6"),
+           "robe": ramp("#3d1c6b", "#5a2d9a", "#7d45c9", "#a06ae6", "#c9a2ff")}
+    return [body, skirt, orbit], pal
+
+
+def scar_crawler():
+    Part._n = 0
+    body = P("body", (0, 15, 0), Cube((-3, -3, -3), (6, 6, 6), "chitin"))
+    abdomen = P("abdomen", (0, 15, 9), Cube((-5, -4, -6), (10, 8, 12), "chitin:runes"),
+                children=[P(None, (0, -4, -2, R(-20), 0, R(15)), Cube((-1, -4, -1), (2, 4, 2), "crystal")),
+                          P(None, (-2, -4, 2, R(15), 0, R(-25)), Cube((-1, -3, -1), (2, 3, 2), "crystal")),
+                          P(None, (3, -4, 3, R(25), 0, R(20)), Cube((-1, -5, -1), (2, 5, 2), "crystal"))])
+    head = P("head", (0, 15, -3), Cube((-4, -4, -8), (8, 8, 8), "chitin:facecrawler"),
+             children=[P(None, (0, 2, -8), Cube((-3, 0, -2), (2, 3, 2), "bone"), Cube((1, 0, -2), (2, 3, 2), "bone"))])
+    legs = []
+    yr = [R(45), R(-45), R(22.5), R(-22.5), R(-22.5), R(22.5), R(-45), R(45)]
+    zs = [2, 2, 1, 1, 0, 0, -1, -1]
+    for i in range(8):
+        right = i % 2 == 0
+        zr = R(-45 if i in (0, 6) else -33) if right else R(45 if i in (1, 7) else 33)
+        x0 = -15 if right else -1
+        legs.append(P(f"leg{i}", (-4 if right else 4, 15, zs[i], 0, yr[i], zr), Cube((x0, -1, -1), (16, 2, 2), "chitin")))
+    pal = {"chitin": ramp("#120814", "#1e0e22", "#2c1532", "#3d1f44", "#4e2a56"),
+           "crystal": ramp("#4a0a36", "#7a1458", "#b0207e", "#e04aa8", "#ff9ad8"),
+           "bone": ramp("#4a3a40", "#6a5660", "#8a7480", "#a8909c"),
+           "glow": ramp("#8a0a5a", "#ff3aa8", "#ff9ad8", "#fff0fa"),
+           "trim": ramp("#120814", "#1e0e22", "#2c1532", "#3d1f44"),
+           "robe": ramp("#120814", "#1e0e22", "#2c1532", "#3d1f44", "#4e2a56")}
+    return [body, abdomen, head] + legs, pal
+
+
 MODELS = [
+    ("ash_hound", "ashHound", ash_hound, 64),
+    ("ether_wisp", "etherWisp", ether_wisp, 64),
+    ("scar_crawler", "scarCrawler", scar_crawler, 128),
     ("salt_wraith", "saltWraith", salt_wraith, 64),
     ("resin_walker", "resinWalker", resin_walker, 64),
     ("glassman", "glassman", glassman, 64),
@@ -462,7 +564,7 @@ public final class ModModels {
     with open(JAVA, "w", encoding="utf-8") as f:
         f.write(java)
     cell = 300
-    sheet = Image.new("RGBA", (cell * 4, cell * 4), (52, 56, 64, 255))
+    sheet = Image.new("RGBA", (cell * 4, cell * ((len(previews) + 1) // 2)), (52, 56, 64, 255))
     d = ImageDraw.Draw(sheet)
     for k, (name, a, b) in enumerate(previews):
         x, y = (k % 2) * cell * 2, (k // 2) * cell

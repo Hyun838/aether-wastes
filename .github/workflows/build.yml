@@ -31,3 +31,6 @@ jobs:
           git add .
           git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -q -m "AetherWastes.jar from ${GITHUB_SHA}"
           git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" dist
+      - name: Launch test (server loads the mod and its worlds)
+        timeout-minutes: 15
+        run: ./gradlew runGameTestServer --no-daemon 2>&1 | tee gametest.log; grep -E "ERROR|Exception|Caused by|Failed to|All .* tests|passed|Missing" gametest.log | head -150 || true

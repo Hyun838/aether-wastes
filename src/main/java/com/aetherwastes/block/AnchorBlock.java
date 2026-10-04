@@ -80,7 +80,7 @@ public class AnchorBlock extends Block {
         }
         level.setBlock(pos, state.setValue(TIER, tier + 1), Block.UPDATE_ALL);
         if (!player.getAbilities().instabuild) stack.shrink(need);
-        level.playSound(null, pos, SoundEvents.BEACON_POWER_SELECT, SoundSource.BLOCKS, 1f, 1.2f);
+        level.playSound(null, pos, com.aetherwastes.registry.ModSounds.ANCHOR_HUM.get(), SoundSource.BLOCKS, 1.5f, 1f);
         ((ServerLevel) level).sendParticles(ParticleTypes.END_ROD, pos.getX() + 0.5, pos.getY() + 1.2, pos.getZ() + 0.5, 40, 0.6, 0.6, 0.6, 0.05);
         player.displayClientMessage(Component.translatable("message.aetherwastes.anchor.upgraded",
                 tier + 1, EtherField.anchorRadius(tier + 1)).withStyle(ChatFormatting.LIGHT_PURPLE), false);

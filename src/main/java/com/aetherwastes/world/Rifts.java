@@ -80,7 +80,7 @@ public final class Rifts {
         ws.rifts.add(r);
         ws.setDirty();
         level.setBlockAndUpdate(pos, ModBlocks.RIFT_PORTAL.get().defaultBlockState());
-        level.playSound(null, pos, SoundEvents.END_PORTAL_SPAWN, SoundSource.BLOCKS, 0.7f, 1.5f);
+        level.playSound(null, pos, com.aetherwastes.registry.ModSounds.RIFT_OPEN.get(), SoundSource.BLOCKS, 2f, 1f);
     }
 
     private static BlockPos arena(int id) {

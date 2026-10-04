@@ -126,7 +126,7 @@ public final class SurvivalEvents {
         if (p.isCreative() || mult <= 0f) return;
 
         if (clarity < 40f && rng.nextFloat() < 0.12f) {
-            SoundEvent s = WHISPERS[rng.nextInt(WHISPERS.length)];
+            SoundEvent s = rng.nextBoolean() ? com.aetherwastes.registry.ModSounds.WHISPER.get() : WHISPERS[rng.nextInt(WHISPERS.length)];
             p.playNotifySound(s, SoundSource.HOSTILE, 0.8f, 0.7f + rng.nextFloat() * 0.5f);
         }
         if (clarity < 15f && AetherConfig.PHANTOM_DAMAGE.get() && rng.nextFloat() < 0.10f) {

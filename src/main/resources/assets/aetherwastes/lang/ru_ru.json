@@ -440,5 +440,13 @@
   "tooltip.aetherwastes.traits": "Свойства:",
   "tooltip.aetherwastes.treats": "Лечит: %s",
   "tooltip.aetherwastes.underside_key": "ПКМ — открыть испытание-Разлом (раз в 5 минут).",
-  "tooltip.aetherwastes.wanderer_shard": "Нужен для Портального камня Изнанки."
+  "tooltip.aetherwastes.wanderer_shard": "Нужен для Портального камня Изнанки.",
+  "subtitles.aetherwastes.spell_cast": "Заклинание",
+  "subtitles.aetherwastes.whisper": "Шёпот",
+  "subtitles.aetherwastes.boss_roar": "Рёв Скитальца",
+  "subtitles.aetherwastes.rift_open": "Разлом открылся",
+  "subtitles.aetherwastes.ritual": "Ритуал свершён",
+  "subtitles.aetherwastes.tide": "Прилив Эфира",
+  "subtitles.aetherwastes.anchor_hum": "Гул Якоря",
+  "message.aetherwastes.tide_begins": "Эфир поднимается: начался Прилив!"
 }

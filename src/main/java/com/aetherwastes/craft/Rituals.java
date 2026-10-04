@@ -97,7 +97,7 @@ public final class Rituals {
         }
         Vec3 c = Vec3.atCenterOf(focusPos);
         level.sendParticles(ParticleTypes.END_ROD, c.x, c.y + 1, c.z, 60, 0.4, 0.8, 0.4, 0.05);
-        level.playSound(null, focusPos, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 1f, 0.8f);
+        level.playSound(null, focusPos, com.aetherwastes.registry.ModSounds.RITUAL.get(), SoundSource.BLOCKS, 1.5f, 1f);
         Msg.chat(p, ChatFormatting.LIGHT_PURPLE, "ritual.aetherwastes.done." + match.id);
         Sync.journal(p);
     }

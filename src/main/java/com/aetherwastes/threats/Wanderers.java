@@ -73,7 +73,7 @@ public final class Wanderers {
         w.addTag("aw_spawned");
         if (target != null) w.setTarget(target);
         level.addFreshEntity(w);
-        level.playSound(null, pos, SoundEvents.WITHER_SPAWN, SoundSource.HOSTILE, 0.7f, 1.3f);
+        level.playSound(null, pos, com.aetherwastes.registry.ModSounds.BOSS_ROAR.get(), SoundSource.HOSTILE, 2.5f, 1.0f);
         if (target != null) {
             Msg.title(target, Component.translatable("entity.aetherwastes.wanderer_" + variant).withStyle(ChatFormatting.DARK_PURPLE),
                     Component.translatable("wanderer.aetherwastes.arrived"));

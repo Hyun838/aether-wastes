@@ -1,0 +1,49 @@
+{
+  "spell_cast": {
+    "sounds": [
+      "aetherwastes:spell_cast1",
+      "aetherwastes:spell_cast2",
+      "aetherwastes:spell_cast3"
+    ],
+    "subtitle": "subtitles.aetherwastes.spell_cast"
+  },
+  "whisper": {
+    "sounds": [
+      "aetherwastes:whisper1",
+      "aetherwastes:whisper2",
+      "aetherwastes:whisper3"
+    ],
+    "subtitle": "subtitles.aetherwastes.whisper"
+  },
+  "boss_roar": {
+    "sounds": [
+      "aetherwastes:boss_roar1",
+      "aetherwastes:boss_roar2"
+    ],
+    "subtitle": "subtitles.aetherwastes.boss_roar"
+  },
+  "rift_open": {
+    "sounds": [
+      "aetherwastes:rift_open"
+    ],
+    "subtitle": "subtitles.aetherwastes.rift_open"
+  },
+  "ritual": {
+    "sounds": [
+      "aetherwastes:ritual"
+    ],
+    "subtitle": "subtitles.aetherwastes.ritual"
+  },
+  "tide": {
+    "sounds": [
+      "aetherwastes:tide"
+    ],
+    "subtitle": "subtitles.aetherwastes.tide"
+  },
+  "anchor_hum": {
+    "sounds": [
+      "aetherwastes:anchor_hum"
+    ],
+    "subtitle": "subtitles.aetherwastes.anchor_hum"
+  }
+}

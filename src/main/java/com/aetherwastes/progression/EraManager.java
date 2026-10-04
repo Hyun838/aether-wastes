@@ -60,6 +60,10 @@ public final class EraManager {
     /** Ворота I→II: Прилив закончился, а игрок жив. */
     public static void onTideState(ServerPlayer p, boolean tide) {
         PlayerData d = Data.get(p);
+        if (!d.wasInTide && tide) {
+            p.playNotifySound(com.aetherwastes.registry.ModSounds.TIDE.get(), SoundSource.AMBIENT, 1f, 1f);
+            Msg.bar(p, ChatFormatting.GOLD, "message.aetherwastes.tide_begins");
+        }
         if (d.wasInTide && !tide) {
             Insights.add(p, "ether", "tide_" + (p.level().getDayTime() / 24000L));
             if (d.era == 1) advance(p, 2);

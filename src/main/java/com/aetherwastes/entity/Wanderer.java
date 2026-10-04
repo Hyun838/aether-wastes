@@ -85,6 +85,7 @@ public class Wanderer extends Zombie {
 
     private void secondary(LivingEntity target) {
         ServerLevel level = (ServerLevel) level();
+        level.playSound(null, blockPosition(), com.aetherwastes.registry.ModSounds.BOSS_ROAR.get(), SoundSource.HOSTILE, 2f, 0.9f + random.nextFloat() * 0.2f);
         switch (variant) {
             case EraManager.SPARK -> {
                 for (Player p : level.getEntitiesOfClass(Player.class, getBoundingBox().inflate(6))) p.igniteForSeconds(4f);

@@ -123,6 +123,8 @@ public final class SpellCaster {
             witherPlants(level, p.blockPosition());
             Msg.bar(p, ChatFormatting.DARK_GREEN, "message.aetherwastes.spell.root_overspend");
         }
+        level.playSound(null, p.blockPosition(), com.aetherwastes.registry.ModSounds.SPELL_CAST.get(), SoundSource.PLAYERS, 0.8f,
+                0.9f + level.random.nextFloat() * 0.2f);
         Sync.stats(p);
         return true;
     }

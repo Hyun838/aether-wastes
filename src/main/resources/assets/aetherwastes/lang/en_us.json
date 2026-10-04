@@ -440,5 +440,13 @@
   "tooltip.aetherwastes.traits": "Traits:",
   "tooltip.aetherwastes.treats": "Treats: %s",
   "tooltip.aetherwastes.underside_key": "Use to open a Rift trial (every 5 minutes).",
-  "tooltip.aetherwastes.wanderer_shard": "Needed for the Underside Portal Stone."
+  "tooltip.aetherwastes.wanderer_shard": "Needed for the Underside Portal Stone.",
+  "subtitles.aetherwastes.spell_cast": "Spell cast",
+  "subtitles.aetherwastes.whisper": "Whispers",
+  "subtitles.aetherwastes.boss_roar": "Wanderer roars",
+  "subtitles.aetherwastes.rift_open": "Rift opens",
+  "subtitles.aetherwastes.ritual": "Ritual completes",
+  "subtitles.aetherwastes.tide": "Aether Tide",
+  "subtitles.aetherwastes.anchor_hum": "Anchor hums",
+  "message.aetherwastes.tide_begins": "The Aether rises: the Tide has begun!"
 }

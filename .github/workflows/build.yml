@@ -16,21 +16,24 @@ jobs:
           java-version: 21
       - uses: gradle/actions/setup-gradle@v4
       - name: Build
-        run: chmod +x gradlew && ./gradlew build --no-daemon --stacktrace
+        run: chmod +x gradlew && ./gradlew build --no-daemon --stacktrace 2>&1 | tee build.log; test ${PIPESTATUS[0]} -eq 0
+      - name: Launch test (server loads the mod and its worlds)
+        timeout-minutes: 15
+        continue-on-error: true
+        run: ./gradlew runGameTestServer --no-daemon > gametest.log 2>&1; echo "exit=$?" >> gametest.log
       - uses: actions/upload-artifact@v4
         with:
           name: AetherWastes
           path: build/libs/*.jar
-      - name: Publish jar to dist branch
+      - name: Publish jar and logs to dist branch
+        if: always()
         run: |
-          mkdir out
+          mkdir -p out
           for f in build/libs/*.jar; do case "$f" in *sources*) ;; *) cp "$f" out/AetherWastes.jar;; esac; done
+          cp build.log gametest.log out/ 2>/dev/null || true
           cd out
           git init -q
           git checkout -q -b dist
           git add .
-          git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -q -m "AetherWastes.jar from ${GITHUB_SHA}"
+          git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -q -m "build ${GITHUB_SHA}"
           git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" dist
-      - name: Launch test (server loads the mod and its worlds)
-        timeout-minutes: 15
-        run: ./gradlew runGameTestServer --no-daemon 2>&1 | tee gametest.log; grep -E "ERROR|Exception|Caused by|Failed to|All .* tests|passed|Missing" gametest.log | head -150 || true

@@ -84,6 +84,8 @@ public class AshColossus extends DungeonBoss {
                     c.x, c.y + 0.1, c.z, 200, r / 2, 0.2, r / 2, 0.2);
             level.sendParticles(ParticleTypes.EXPLOSION, c.x, c.y + 0.5, c.z, 6, r / 3, 0.2, r / 3, 0);
             level.sendParticles(ModParticles.ASH_EMBER.get(), c.x, c.y + 0.5, c.z, 80, r / 2, 0.5, r / 2, 0.15);
+            ModParticles.shockwave(level, c.x, c.y + 0.05, c.z, r, 1);
+            level.sendParticles(ModParticles.EMBER_SHARD.get(), c.x, c.y + 0.4, c.z, 40, r / 4, 0.2, r / 4, 0.4);
             level.playSound(null, BlockPos.containing(c), ModSounds.BOSS_SLAM.get(), SoundSource.HOSTILE, 3f, 0.8f);
         });
     }

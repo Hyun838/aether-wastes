@@ -1,6 +1,24 @@
 {
-  "parent": "minecraft:item/handheld",
+  "loader": "neoforge:separate_transforms",
+  "gui_light": "front",
   "textures": {
-    "layer0": "aetherwastes:item/star_iron_shovel"
+    "particle": "aetherwastes:item/star_iron_shovel"
+  },
+  "base": {
+    "parent": "aetherwastes:item/3d/star_iron_shovel"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "minecraft:item/handheld",
+      "textures": {
+        "layer0": "aetherwastes:item/star_iron_shovel"
+      }
+    },
+    "fixed": {
+      "parent": "minecraft:item/handheld",
+      "textures": {
+        "layer0": "aetherwastes:item/star_iron_shovel"
+      }
+    }
   }
 }

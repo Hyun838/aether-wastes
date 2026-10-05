@@ -132,6 +132,13 @@ public class WastesWeapon extends SwordItem {
                 level.sendParticles(com.aetherwastes.registry.ModParticles.ASH_EMBER.get(), target.getX(), target.getY() + 1, target.getZ(), 12, 0.3, 0.5, 0.3, 0.06);
             }
         }
+        // Осколки при ударе: объёмные кристаллики разлетаются и отскакивают от земли.
+        var shard = switch (ability) {
+            case EMBER, ERUPTION, FIREBOLT -> com.aetherwastes.registry.ModParticles.EMBER_SHARD.get();
+            case PHASE_DASH, BLINK, HEART -> com.aetherwastes.registry.ModParticles.PHANTOM_SHARD.get();
+            default -> com.aetherwastes.registry.ModParticles.ETHER_SHARD.get();
+        };
+        level.sendParticles(shard, target.getX(), target.getY() + target.getBbHeight() * 0.6, target.getZ(), 4, 0.15, 0.2, 0.15, 0.22);
         return r;
     }
 
@@ -194,6 +201,8 @@ public class WastesWeapon extends SwordItem {
         level.sendParticles(new net.minecraft.core.particles.BlockParticleOption(ParticleTypes.BLOCK, level.getBlockState(below)),
                 p.getX(), p.getY() + 0.1, p.getZ(), 120, r / 2, 0.1, r / 2, 0.15);
         level.sendParticles(ParticleTypes.EXPLOSION, p.getX(), p.getY() + 0.3, p.getZ(), 3, 1.5, 0.1, 1.5, 0);
+        com.aetherwastes.registry.ModParticles.shockwave(level, p.getX(), p.getY() + 0.05, p.getZ(), r, 0);
+        level.sendParticles(com.aetherwastes.registry.ModParticles.ETHER_SHARD.get(), p.getX(), p.getY() + 0.4, p.getZ(), 24, 0.6, 0.2, 0.6, 0.35);
         level.playSound(null, p.blockPosition(), SoundEvents.GENERIC_EXPLODE.value(), SoundSource.PLAYERS, 0.8f, 0.7f);
         return true;
     }
@@ -275,6 +284,8 @@ public class WastesWeapon extends SwordItem {
             }
         }
         level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, p.getX(), p.getY() + 0.5, p.getZ(), 1, 0, 0, 0, 0);
+        com.aetherwastes.registry.ModParticles.shockwave(level, p.getX(), p.getY() + 0.05, p.getZ(), r, 1);
+        level.sendParticles(com.aetherwastes.registry.ModParticles.EMBER_SHARD.get(), p.getX(), p.getY() + 0.5, p.getZ(), 30, 0.8, 0.3, 0.8, 0.4);
         level.playSound(null, p.blockPosition(), SoundEvents.GENERIC_EXPLODE.value(), SoundSource.PLAYERS, 1.0f, 0.6f);
         return true;
     }

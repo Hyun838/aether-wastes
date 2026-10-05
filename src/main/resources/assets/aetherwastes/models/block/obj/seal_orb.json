@@ -1,0 +1,12 @@
+{
+  "loader": "neoforge:obj",
+  "model": "aetherwastes:models/block/obj/seal_orb.obj",
+  "flip_v": true,
+  "automatic_culling": false,
+  "shade_quads": true,
+  "emissive_ambient": true,
+  "textures": {
+    "orb": "aetherwastes:block/obj/seal_orb",
+    "particle": "aetherwastes:block/obj/seal_orb"
+  }
+}

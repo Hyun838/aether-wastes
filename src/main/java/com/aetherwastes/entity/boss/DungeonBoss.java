@@ -195,6 +195,8 @@ public abstract class DungeonBoss extends Monster {
         if (level() instanceof ServerLevel level) {
             level.sendParticles(ModParticles.RUNE.get(), getX(), getY() + 1.5, getZ(), 120, 2, 2, 2, 0.1);
             level.sendParticles(ModParticles.ETHER_SPARK.get(), getX(), getY() + 1.5, getZ(), 200, 1.5, 2, 1.5, 0.3);
+            level.sendParticles(ModParticles.ETHER_SHARD.get(), getX(), getY() + 1.5, getZ(), 60, 0.8, 1.2, 0.8, 0.45);
+            ModParticles.shockwave(level, getX(), getY() + 0.05, getZ(), 9, 0);
             for (Player p : level.getEntitiesOfClass(Player.class, getBoundingBox().inflate(40))) {
                 if (p instanceof ServerPlayer sp) {
                     Data.get(sp).flags.add("boss_" + dungeonKind());

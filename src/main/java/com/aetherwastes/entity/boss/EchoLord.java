@@ -100,6 +100,8 @@ public class EchoLord extends DungeonBoss {
             }
             level.sendParticles(ParticleTypes.SOUL, c.x, c.y + 0.5, c.z, 120, r / 2, 0.4, r / 2, 0.05);
             level.sendParticles(ModParticles.PHANTOM_WISP.get(), c.x, c.y + 1, c.z, 80, r / 2, 1, r / 2, 0.08);
+            ModParticles.shockwave(level, c.x, c.y + 0.05, c.z, r, 2);
+            level.sendParticles(ModParticles.PHANTOM_SHARD.get(), c.x, c.y + 0.6, c.z, 24, r / 4, 0.3, r / 4, 0.3);
             level.playSound(null, BlockPos.containing(c), ModSounds.BOSS_SLAM.get(), SoundSource.HOSTILE, 2f, 1.2f);
         });
     }

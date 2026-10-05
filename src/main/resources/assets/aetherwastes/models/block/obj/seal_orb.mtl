@@ -1,0 +1,5 @@
+newmtl orb
+Ka 0.8 0.8 0.8
+Kd 1 1 1
+map_Kd #orb
+d 1

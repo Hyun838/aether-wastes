@@ -63,7 +63,10 @@ public final class AetherCommand {
                 .then(Commands.literal("gallery").requires(s -> s.hasPermission(2))
                         .then(Commands.literal("gear").executes(ctx -> com.aetherwastes.world.dungeon.Gallery.gear(ctx.getSource().getPlayerOrException()) ? 1 : 0))
                         .then(Commands.literal("mobs").executes(ctx -> com.aetherwastes.world.dungeon.Gallery.mobs(ctx.getSource().getPlayerOrException()) ? 1 : 0))
-                        .then(Commands.literal("bosses").executes(ctx -> com.aetherwastes.world.dungeon.Gallery.bosses(ctx.getSource().getPlayerOrException()) ? 1 : 0)))
+                        .then(Commands.literal("bosses").executes(ctx -> com.aetherwastes.world.dungeon.Gallery.bosses(ctx.getSource().getPlayerOrException()) ? 1 : 0))
+                        .then(Commands.literal("weapons").executes(ctx -> com.aetherwastes.world.dungeon.Gallery.weapons(ctx.getSource().getPlayerOrException()) ? 1 : 0))
+                        .then(Commands.literal("arcane").executes(ctx -> com.aetherwastes.world.dungeon.Gallery.arcane(ctx.getSource().getPlayerOrException()) ? 1 : 0))
+                        .then(Commands.literal("fx").executes(ctx -> com.aetherwastes.world.dungeon.Gallery.fx(ctx.getSource().getPlayerOrException()) ? 1 : 0)))
                 .then(Commands.literal("phase").requires(s -> s.hasPermission(2)).executes(ctx -> {
                     ServerPlayer p = ctx.getSource().getPlayerOrException();
                     var set = com.aetherwastes.registry.ModGear.PHANTOM_SET;

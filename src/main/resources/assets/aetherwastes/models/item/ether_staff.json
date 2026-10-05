@@ -1,6 +1,24 @@
 {
-  "parent": "minecraft:item/handheld",
+  "loader": "neoforge:separate_transforms",
+  "gui_light": "front",
   "textures": {
-    "layer0": "aetherwastes:item/ether_staff"
+    "particle": "aetherwastes:item/ether_staff"
+  },
+  "base": {
+    "parent": "aetherwastes:item/3d/ether_staff"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "minecraft:item/handheld",
+      "textures": {
+        "layer0": "aetherwastes:item/ether_staff"
+      }
+    },
+    "fixed": {
+      "parent": "minecraft:item/handheld",
+      "textures": {
+        "layer0": "aetherwastes:item/ether_staff"
+      }
+    }
   }
 }

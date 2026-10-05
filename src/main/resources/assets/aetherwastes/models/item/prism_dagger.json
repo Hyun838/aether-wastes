@@ -1,6 +1,24 @@
 {
-  "parent": "minecraft:item/handheld",
+  "loader": "neoforge:separate_transforms",
+  "gui_light": "front",
   "textures": {
-    "layer0": "aetherwastes:item/prism_dagger"
+    "particle": "aetherwastes:item/prism_dagger"
+  },
+  "base": {
+    "parent": "aetherwastes:item/3d/prism_dagger"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "minecraft:item/handheld",
+      "textures": {
+        "layer0": "aetherwastes:item/prism_dagger"
+      }
+    },
+    "fixed": {
+      "parent": "minecraft:item/handheld",
+      "textures": {
+        "layer0": "aetherwastes:item/prism_dagger"
+      }
+    }
   }
 }

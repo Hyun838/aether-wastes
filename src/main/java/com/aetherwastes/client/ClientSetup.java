@@ -37,6 +37,10 @@ public final class ClientSetup {
         event.registerSpriteSet(com.aetherwastes.registry.ModParticles.PHANTOM_WISP.get(), s -> new WastesParticle.Provider(s, WastesParticle.Kind.WISP));
         event.registerSpriteSet(com.aetherwastes.registry.ModParticles.RUNE.get(), s -> new WastesParticle.Provider(s, WastesParticle.Kind.RUNE));
         event.registerSpriteSet(com.aetherwastes.registry.ModParticles.ASH_EMBER.get(), s -> new WastesParticle.Provider(s, WastesParticle.Kind.EMBER));
+        event.registerSpriteSet(com.aetherwastes.registry.ModParticles.ETHER_SHARD.get(), s -> new com.aetherwastes.client.fx.ShardParticle.Provider(s, 0.55f, 0.92f, 1f, true));
+        event.registerSpriteSet(com.aetherwastes.registry.ModParticles.EMBER_SHARD.get(), s -> new com.aetherwastes.client.fx.ShardParticle.Provider(s, 0.55f, 0.42f, 0.38f, false));
+        event.registerSpriteSet(com.aetherwastes.registry.ModParticles.PHANTOM_SHARD.get(), s -> new com.aetherwastes.client.fx.ShardParticle.Provider(s, 0.78f, 0.6f, 1f, true));
+        event.registerSpriteSet(com.aetherwastes.registry.ModParticles.SHOCKWAVE.get(), com.aetherwastes.client.fx.ShockwaveParticle.Provider::new);
     }
 
     @SubscribeEvent
@@ -92,7 +96,9 @@ public final class ClientSetup {
         event.registerEntityRenderer(ModEntities.ASH_COLOSSUS.get(),
                 ctx -> new SpecRenderer<>(ctx, ModModels.ASH_COLOSSUS, Style.HEAVY, "ash_colossus", 1.55f, 1.2f, false));
 
-        event.registerBlockEntityRenderer(ModBlockEntities.RITUAL_FOCUS.get(), ctx -> new HolderRenderer(ctx, 0.95f));
+        event.registerBlockEntityRenderer(ModBlockEntities.RITUAL_FOCUS.get(), ctx -> new HolderRenderer(ctx, 0.95f, true));
+        event.registerBlockEntityRenderer(ModBlockEntities.PURIFYING_OBELISK.get(), com.aetherwastes.client.fx.ArcaneRenderers.Obelisk::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.GUARDIAN_SEAL.get(), com.aetherwastes.client.fx.ArcaneRenderers.Seal::new);
         event.registerBlockEntityRenderer(ModBlockEntities.RITUAL_PEDESTAL.get(), ctx -> new HolderRenderer(ctx, 1.1f));
     }
 }

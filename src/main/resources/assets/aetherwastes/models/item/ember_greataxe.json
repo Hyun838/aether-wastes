@@ -1,6 +1,24 @@
 {
-  "parent": "minecraft:item/handheld",
+  "loader": "neoforge:separate_transforms",
+  "gui_light": "front",
   "textures": {
-    "layer0": "aetherwastes:item/ember_greataxe"
+    "particle": "aetherwastes:item/ember_greataxe"
+  },
+  "base": {
+    "parent": "aetherwastes:item/3d/ember_greataxe"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "minecraft:item/handheld",
+      "textures": {
+        "layer0": "aetherwastes:item/ember_greataxe"
+      }
+    },
+    "fixed": {
+      "parent": "minecraft:item/handheld",
+      "textures": {
+        "layer0": "aetherwastes:item/ember_greataxe"
+      }
+    }
   }
 }

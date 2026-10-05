@@ -76,6 +76,27 @@ public final class AutoShots {
             SCRIPT.add(new Step(20, () -> shot("gallery_mobs")));
             SCRIPT.add(new Step(160, () -> cmd("aether gallery bosses")));
             SCRIPT.add(new Step(20, () -> shot("gallery_bosses")));
+            // 1.3: 3D-оружие крупным планом, OBJ-кристаллы, эффекты с физикой, оружие в руке
+            SCRIPT.add(new Step(160, () -> cmd("aether gallery weapons")));
+            SCRIPT.add(new Step(20, () -> shot("weapons_3d")));
+            SCRIPT.add(new Step(160, () -> cmd("aether gallery arcane")));
+            SCRIPT.add(new Step(20, () -> shot("arcane_obj")));
+            SCRIPT.add(new Step(160, () -> cmd("aether gallery fx")));
+            SCRIPT.add(new Step(7, () -> cmd("aether gallery fx")));
+            SCRIPT.add(new Step(20, () -> shot("fx_particles")));
+            SCRIPT.add(new Step(30, () -> {
+                gui(true); // при скрытом интерфейсе Minecraft не рисует и руку
+                cmd("item replace entity @s weapon.mainhand with aetherwastes:echo_reaper");
+                cmd("aether gallery arcane");
+            }));
+            SCRIPT.add(new Step(10, () -> shot("hand_first")));
+            SCRIPT.add(new Step(30, () -> camera(CameraType.THIRD_PERSON_FRONT)));
+            SCRIPT.add(new Step(10, () -> shot("hand_third")));
+            SCRIPT.add(new Step(10, () -> {
+                camera(CameraType.FIRST_PERSON);
+                gui(false);
+                cmd("item replace entity @s weapon.mainhand with air");
+            }));
             // Пепельная цитадель снаружи и внутри
             SCRIPT.add(new Step(420, () -> cmd("aether dungeon citadel outside")));
             SCRIPT.add(new Step(20, () -> shot("citadel_outside")));

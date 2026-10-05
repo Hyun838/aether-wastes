@@ -1,0 +1,12 @@
+{
+  "loader": "neoforge:obj",
+  "model": "aetherwastes:models/block/obj/rune_ring.obj",
+  "flip_v": true,
+  "automatic_culling": false,
+  "shade_quads": true,
+  "emissive_ambient": true,
+  "textures": {
+    "runes": "aetherwastes:block/obj/rune_ring",
+    "particle": "aetherwastes:block/obj/rune_ring"
+  }
+}

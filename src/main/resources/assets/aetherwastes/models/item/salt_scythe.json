@@ -1,6 +1,24 @@
 {
-  "parent": "minecraft:item/handheld",
+  "loader": "neoforge:separate_transforms",
+  "gui_light": "front",
   "textures": {
-    "layer0": "aetherwastes:item/salt_scythe"
+    "particle": "aetherwastes:item/salt_scythe"
+  },
+  "base": {
+    "parent": "aetherwastes:item/3d/salt_scythe"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "minecraft:item/handheld",
+      "textures": {
+        "layer0": "aetherwastes:item/salt_scythe"
+      }
+    },
+    "fixed": {
+      "parent": "minecraft:item/handheld",
+      "textures": {
+        "layer0": "aetherwastes:item/salt_scythe"
+      }
+    }
   }
 }

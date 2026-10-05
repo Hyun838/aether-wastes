@@ -1,6 +1,24 @@
 {
-  "parent": "minecraft:item/handheld",
+  "loader": "neoforge:separate_transforms",
+  "gui_light": "front",
   "textures": {
-    "layer0": "aetherwastes:item/convergence_glaive"
+    "particle": "aetherwastes:item/convergence_glaive"
+  },
+  "base": {
+    "parent": "aetherwastes:item/3d/convergence_glaive"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "minecraft:item/handheld",
+      "textures": {
+        "layer0": "aetherwastes:item/convergence_glaive"
+      }
+    },
+    "fixed": {
+      "parent": "minecraft:item/handheld",
+      "textures": {
+        "layer0": "aetherwastes:item/convergence_glaive"
+      }
+    }
   }
 }

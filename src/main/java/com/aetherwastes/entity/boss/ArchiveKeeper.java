@@ -88,6 +88,8 @@ public class ArchiveKeeper extends DungeonBoss {
             for (int k = 0; k < 36; k += 6) schedule(k, () -> telegraph(level, at, 2.0, ModParticles.RUNE.get()));
             schedule(40, () -> {
                 level.sendParticles(ModParticles.ETHER_SPARK.get(), at.x, at.y + 0.3, at.z, 60, 0.8, 0.4, 0.8, 0.25);
+                level.sendParticles(ModParticles.ETHER_SHARD.get(), at.x, at.y + 0.3, at.z, 12, 0.3, 0.2, 0.3, 0.35);
+                ModParticles.shockwave(level, at.x, at.y + 0.05, at.z, 2.5, 0);
                 level.sendParticles(ParticleTypes.FLASH, at.x, at.y + 0.5, at.z, 1, 0, 0, 0, 0);
                 level.playSound(null, BlockPos.containing(at), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.HOSTILE, 2f, 0.5f);
                 for (Player p : level.getEntitiesOfClass(Player.class, new AABB(BlockPos.containing(at)).inflate(2.2),

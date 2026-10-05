@@ -29,7 +29,14 @@ public final class Gallery {
 
     private static BlockPos platform(ServerLevel level, BlockPos near, int dx, int width, int depth) {
         int x0 = near.getX() + dx, z0 = near.getZ() - 40;
-        int y = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x0, z0) + 6;
+        int y = 0;
+        for (int x = -6; x < width + 6; x += 2) {
+            for (int z = -14; z < depth + 4; z += 2) {
+                level.getChunk((x0 + x) >> 4, (z0 + z) >> 4);
+                y = Math.max(y, level.getHeight(Heightmap.Types.MOTION_BLOCKING, x0 + x, z0 + z));
+            }
+        }
+        y += 3;
         BlockState floor = Blocks.POLISHED_DEEPSLATE.defaultBlockState();
         BlockState rim = Blocks.CHISELED_DEEPSLATE.defaultBlockState();
         for (int x = -2; x < width + 2; x++) {

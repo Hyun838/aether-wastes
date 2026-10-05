@@ -3,7 +3,14 @@
   "minVersion": "0.8",
   "package": "com.aetherwastes.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": ["EntityMixin"],
-  "client": ["LocalPlayerMixin"],
-  "injectors": {"defaultRequire": 1}
+  "mixins": [
+    "EntityMixin",
+    "WorldDimensionsMixin"
+  ],
+  "client": [
+    "LocalPlayerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
 }

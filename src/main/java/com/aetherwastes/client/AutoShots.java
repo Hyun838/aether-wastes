@@ -107,6 +107,17 @@ public final class AutoShots {
             mc.execute(() -> mc.setScreen(new TitleScreen(false)));
             return;
         }
+        if (event.getScreen() instanceof net.minecraft.client.gui.screens.ConfirmScreen confirm && worldRequested) {
+            // «Экспериментальные настройки» и подобные вопросы при создании мира — соглашаемся.
+            for (var child : confirm.children()) {
+                if (child instanceof Button b && b.getMessage().getContents() instanceof TranslatableContents tc
+                        && (tc.getKey().equals("gui.yes") || tc.getKey().equals("gui.proceed"))) {
+                    AetherWastes.LOGGER.info("[aw-shot] confirm screen accepted");
+                    mc.execute(b::onPress);
+                    return;
+                }
+            }
+        }
         if (event.getScreen() instanceof TitleScreen && !worldRequested) {
             worldRequested = true;
             mc.options.pauseOnLostFocus = false;

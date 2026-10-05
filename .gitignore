@@ -6,3 +6,5 @@ build/
 run/
 build-log.txt
 AetherWastes.jar
+
+javac.*.args

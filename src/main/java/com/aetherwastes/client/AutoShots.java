@@ -48,6 +48,10 @@ public final class AutoShots {
                 msg -> AetherWastes.LOGGER.info("[aw-shot] {} -> {}", name, msg.getString()));
     }
 
+    private static void gui(boolean visible) {
+        Minecraft.getInstance().options.hideGui = !visible;
+    }
+
     private static void camera(CameraType type) {
         Minecraft.getInstance().options.setCameraType(type);
     }
@@ -62,12 +66,23 @@ public final class AutoShots {
                 cmd("time set 1000");
                 cmd("weather clear");
             }));
-            SCRIPT.add(new Step(40, () -> shot("hud")));
+            // Витрины: броня с оружием, существа, боссы (без интерфейса, как на чистом скриншоте)
+            SCRIPT.add(new Step(160, () -> {
+                gui(false);
+                cmd("aether gallery gear");
+            }));
+            SCRIPT.add(new Step(20, () -> shot("gallery_gear")));
+            SCRIPT.add(new Step(160, () -> cmd("aether gallery mobs")));
+            SCRIPT.add(new Step(20, () -> shot("gallery_mobs")));
+            SCRIPT.add(new Step(160, () -> cmd("aether gallery bosses")));
+            SCRIPT.add(new Step(20, () -> shot("gallery_bosses")));
             // Пепельная цитадель снаружи и внутри
             SCRIPT.add(new Step(420, () -> cmd("aether dungeon citadel outside")));
             SCRIPT.add(new Step(20, () -> shot("citadel_outside")));
             SCRIPT.add(new Step(260, () -> cmd("aether dungeon citadel boss")));
             SCRIPT.add(new Step(20, () -> shot("citadel_boss")));
+            SCRIPT.add(new Step(200, () -> cmd("aether dungeon citadel room")));
+            SCRIPT.add(new Step(20, () -> shot("citadel_room")));
             // Склеп Эха
             SCRIPT.add(new Step(420, () -> cmd("aether dungeon crypt boss")));
             SCRIPT.add(new Step(20, () -> shot("crypt_boss")));
@@ -78,8 +93,9 @@ public final class AutoShots {
             SCRIPT.add(new Step(20, () -> shot("archive_boss")));
             SCRIPT.add(new Step(200, () -> cmd("aether dungeon archive room")));
             SCRIPT.add(new Step(20, () -> shot("archive_room")));
-            // Призрачная броня: вид со стороны и сквозь стену
+            // Призрачная броня: вид со стороны и сквозь стену (с интерфейсом — видно таймер способности)
             SCRIPT.add(new Step(200, () -> {
+                gui(true);
                 cmd("aether dungeon crypt boss");
                 camera(CameraType.THIRD_PERSON_FRONT);
             }));
@@ -87,8 +103,7 @@ public final class AutoShots {
             SCRIPT.add(new Step(20, () -> shot("phantom_third")));
             SCRIPT.add(new Step(10, () -> {
                 camera(CameraType.FIRST_PERSON);
-                Minecraft mc = Minecraft.getInstance();
-                if (mc.player != null) cmd("tp @s ~-4 ~-2.5 ~8 -90 8");
+                cmd("tp @s ~ ~-3.5 ~-2.2");
             }));
             SCRIPT.add(new Step(60, () -> shot("phantom_wall")));
             SCRIPT.add(new Step(60, () -> {

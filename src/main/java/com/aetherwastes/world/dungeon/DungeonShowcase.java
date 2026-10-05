@@ -68,17 +68,20 @@ public final class DungeonShowcase {
                 DungeonPiece boss = find(pieces, DungeonPiece.Role.BOSS);
                 BoundingBox b = boss.getBoundingBox();
                 int fy = b.minY();
-                cam = new Vec3(b.minX() + 4.5, fy + 5.5, b.minZ() + 4.5);
-                look = new Vec3(b.minX() + 13, fy + 2.5, b.minZ() + 13);
+                // Между колоннами у северной стены, взгляд на помост с Печатью
+                cam = new Vec3(b.minX() + 8.5, fy + 6.5, b.minZ() + 1.6);
+                look = new Vec3(b.minX() + 12.5, fy + 3.5, b.minZ() + 12.5);
                 BlockPos seal = new BlockPos(b.minX() + 12, fy + 2, b.minZ() + 12);
                 if (level.getBlockState(seal).is(ModBlocks.GUARDIAN_SEAL.get())
                         && level.getBlockState(seal).getValue(com.aetherwastes.block.GuardianSealBlock.ACTIVE)) {
                     DungeonBoss e = GuardianSealBlockEntity.awaken(level, seal, level.getBlockState(seal));
                     if (e != null) {
                         e.setNoAi(true);
-                        e.moveTo(seal.getX() + 0.5, seal.getY() + 1, seal.getZ() + 0.5, 135f, 0f);
-                        e.setYHeadRot(135f);
-                        e.setYBodyRot(135f);
+                        double fx = cam.x - (seal.getX() + 0.5), fz = cam.z - (seal.getZ() + 0.5);
+                        float face = (float) Math.toDegrees(Math.atan2(-fx, fz));
+                        e.moveTo(seal.getX() + 0.5, seal.getY() + 1, seal.getZ() + 0.5, face, 0f);
+                        e.setYHeadRot(face);
+                        e.setYBodyRot(face);
                     }
                 }
             }
@@ -93,7 +96,8 @@ public final class DungeonShowcase {
             }
             default -> {
                 BoundingBox all = BoundingBox.encapsulatingBoxes(pieces.stream().map(StructurePiece::getBoundingBox).toList()).orElseThrow();
-                cam = new Vec3(all.minX() - 22, all.maxY() + 14, all.minZ() - 22);
+                int cxz = level.getHeight(Heightmap.Types.MOTION_BLOCKING, all.minX() - 22, all.minZ() - 22);
+                cam = new Vec3(all.minX() - 22, Math.max(all.maxY() + 14, cxz + 12), all.minZ() - 22);
                 look = new Vec3((all.minX() + all.maxX()) / 2.0, all.minY() + 4, (all.minZ() + all.maxZ()) / 2.0);
             }
         }

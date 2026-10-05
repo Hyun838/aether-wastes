@@ -55,7 +55,7 @@ class Mesh:
     def write(self, name):
         os.makedirs(OBJ_DIR, exist_ok=True)
         with open(os.path.join(OBJ_DIR, name + '.mtl'), 'w') as m:
-            m.write(f'newmtl {self.material}\nKa 0.8 0.8 0.8\nKd 1 1 1\nmap_Kd #{self.material}\nd 1\n')
+            m.write(f'newmtl {self.material}\nKa 0.8 0.8 0.8\nKd 1 1 1\nneoforge_TintIndex 0\nmap_Kd #{self.material}\nd 1\n')
         with open(os.path.join(OBJ_DIR, name + '.obj'), 'w') as o:
             o.write(f'# Aether Wastes 1.3 — {name}, {len(self.f)} faces\n')
             o.write(f'mtllib {name}.mtl\no {name}\n')

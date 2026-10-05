@@ -1,0 +1,63 @@
+{
+  "parent": "aetherwastes:main/boss_crypt",
+  "display": {
+    "icon": {
+      "id": "aetherwastes:phantom_chestplate"
+    },
+    "title": {
+      "translate": "advancements.aetherwastes.phantom_set.title"
+    },
+    "description": {
+      "translate": "advancements.aetherwastes.phantom_set.desc"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "phantom_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "aetherwastes:phantom_helmet"
+          }
+        ]
+      }
+    },
+    "phantom_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "aetherwastes:phantom_chestplate"
+          }
+        ]
+      }
+    },
+    "phantom_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "aetherwastes:phantom_leggings"
+          }
+        ]
+      }
+    },
+    "phantom_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "aetherwastes:phantom_boots"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 500
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "BM",
+    "MB"
+  ],
+  "key": {
+    "B": {
+      "item": "aetherwastes:ash_bricks"
+    },
+    "M": {
+      "item": "minecraft:magma_block"
+    }
+  },
+  "result": {
+    "id": "aetherwastes:ember_bricks",
+    "count": 2
+  }
+}

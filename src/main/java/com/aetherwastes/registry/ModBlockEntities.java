@@ -31,6 +31,8 @@ public final class ModBlockEntities {
             BLOCK_ENTITIES.register("journal_archive", () -> BlockEntityType.Builder.of(JournalArchiveBlock.Entity::new, ModBlocks.JOURNAL_ARCHIVE.get()).build(null));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<RuneTrapBlockEntity>> RUNE_TRAP =
             BLOCK_ENTITIES.register("rune_trap", () -> BlockEntityType.Builder.of(RuneTrapBlockEntity::new, ModBlocks.RUNE_TRAP.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<com.aetherwastes.block.GuardianSealBlockEntity>> GUARDIAN_SEAL =
+            BLOCK_ENTITIES.register("guardian_seal", () -> BlockEntityType.Builder.of(com.aetherwastes.block.GuardianSealBlockEntity::new, ModBlocks.GUARDIAN_SEAL.get()).build(null));
 
     private ModBlockEntities() {}
 }

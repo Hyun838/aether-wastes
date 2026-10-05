@@ -40,6 +40,17 @@ public final class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<com.aetherwastes.entity.ScarCrawler>> SCAR_CRAWLER = ENTITIES.register("scar_crawler",
             () -> EntityType.Builder.<com.aetherwastes.entity.ScarCrawler>of(com.aetherwastes.entity.ScarCrawler::new, MobCategory.MONSTER).sized(1.3f, 0.8f).clientTrackingRange(8).build("scar_crawler"));
 
+    // --- Хозяева подземелий ---
+    public static final DeferredHolder<EntityType<?>, EntityType<com.aetherwastes.entity.boss.ArchiveKeeper>> ARCHIVE_KEEPER = ENTITIES.register("archive_keeper",
+            () -> EntityType.Builder.<com.aetherwastes.entity.boss.ArchiveKeeper>of(com.aetherwastes.entity.boss.ArchiveKeeper::new, MobCategory.MONSTER)
+                    .sized(0.9f, 2.9f).fireImmune().clientTrackingRange(10).build("archive_keeper"));
+    public static final DeferredHolder<EntityType<?>, EntityType<com.aetherwastes.entity.boss.EchoLord>> ECHO_LORD = ENTITIES.register("echo_lord",
+            () -> EntityType.Builder.<com.aetherwastes.entity.boss.EchoLord>of(com.aetherwastes.entity.boss.EchoLord::new, MobCategory.MONSTER)
+                    .sized(0.9f, 2.8f).clientTrackingRange(10).build("echo_lord"));
+    public static final DeferredHolder<EntityType<?>, EntityType<com.aetherwastes.entity.boss.AshColossus>> ASH_COLOSSUS = ENTITIES.register("ash_colossus",
+            () -> EntityType.Builder.<com.aetherwastes.entity.boss.AshColossus>of(com.aetherwastes.entity.boss.AshColossus::new, MobCategory.MONSTER)
+                    .sized(1.8f, 3.6f).fireImmune().clientTrackingRange(10).build("ash_colossus"));
+
     public static final DeferredHolder<EntityType<?>, EntityType<Wanderer>> WANDERER_SPARK = wanderer(EraManager.SPARK);
     public static final DeferredHolder<EntityType<?>, EntityType<Wanderer>> WANDERER_RESONANCE = wanderer(EraManager.RESONANCE);
     public static final DeferredHolder<EntityType<?>, EntityType<Wanderer>> WANDERER_CONVERGENCE = wanderer(EraManager.CONVERGENCE);
@@ -61,6 +72,9 @@ public final class ModEntities {
         event.put(ASH_HOUND.get(), com.aetherwastes.entity.AshHound.attributes().build());
         event.put(ETHER_WISP.get(), com.aetherwastes.entity.EtherWisp.attributes().build());
         event.put(SCAR_CRAWLER.get(), com.aetherwastes.entity.ScarCrawler.attributes().build());
+        event.put(ARCHIVE_KEEPER.get(), com.aetherwastes.entity.boss.ArchiveKeeper.attributes().build());
+        event.put(ECHO_LORD.get(), com.aetherwastes.entity.boss.EchoLord.attributes().build());
+        event.put(ASH_COLOSSUS.get(), com.aetherwastes.entity.boss.AshColossus.attributes().build());
         double[] hp = {200, 300, 450, 700};
         var types = new DeferredHolder[]{WANDERER_SPARK, WANDERER_RESONANCE, WANDERER_CONVERGENCE, WANDERER_HEART};
         for (int i = 0; i < 4; i++) {

@@ -32,6 +32,11 @@ public final class ClientEvents {
         ItemStack stack = event.getItemStack();
         List<Component> tip = event.getToolTip();
 
+        if (stack.getItem() instanceof net.minecraft.world.item.ArmorItem armor
+                && armor.getMaterial().is(com.aetherwastes.registry.ModGear.PHANTOM.getKey())) {
+            tip.add(Component.translatable("tooltip.aetherwastes.phantom_set", PhaseClient.PHASE_KEY.getTranslatedKeyMessage())
+                    .withStyle(ChatFormatting.AQUA));
+        }
         int q = Quality.get(stack);
         if (q >= 0) {
             tip.add(Component.translatable("quality.aetherwastes." + q).withStyle(Quality.color(q)));

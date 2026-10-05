@@ -1,0 +1,8 @@
+{
+  "type": "aetherwastes:dungeon",
+  "kind": "archive",
+  "biomes": "#aetherwastes:has_structure/lost_archive",
+  "step": "underground_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none"
+}

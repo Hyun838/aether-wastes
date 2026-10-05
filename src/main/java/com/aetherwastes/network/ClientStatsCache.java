@@ -15,6 +15,10 @@ public final class ClientStatsCache {
     public static volatile int era = 1;
     public static volatile boolean tide = false;
     public static volatile boolean received = false;
+    /** Призрачный шаг: активен ли (решает сервер), остаток и перезарядка в тиках (отсчитывает клиент). */
+    public static volatile boolean phaseActive = false;
+    public static volatile int phaseTicks = 0;
+    public static volatile int phaseCooldown = 0;
     public static volatile CompoundTag journal = new CompoundTag();
 
     private ClientStatsCache() {}

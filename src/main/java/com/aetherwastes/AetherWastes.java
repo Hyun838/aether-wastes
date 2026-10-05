@@ -40,6 +40,9 @@ public class AetherWastes {
         ModFeatures.FEATURES.register(modEventBus);
         ModRecipes.SERIALIZERS.register(modEventBus);
         com.aetherwastes.registry.ModSounds.SOUNDS.register(modEventBus);
+        com.aetherwastes.registry.ModParticles.PARTICLES.register(modEventBus);
+        com.aetherwastes.registry.ModStructures.STRUCTURE_TYPES.register(modEventBus);
+        com.aetherwastes.registry.ModStructures.PIECE_TYPES.register(modEventBus);
         ModCreativeTabs.TABS.register(modEventBus);
 
         modEventBus.addListener(ModNetwork::register);

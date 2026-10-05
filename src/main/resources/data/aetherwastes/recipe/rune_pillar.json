@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "R",
+    "R"
+  ],
+  "key": {
+    "R": {
+      "item": "aetherwastes:rune_bricks"
+    }
+  },
+  "result": {
+    "id": "aetherwastes:rune_pillar",
+    "count": 2
+  }
+}

@@ -32,17 +32,20 @@ jobs:
         timeout-minutes: 15
         continue-on-error: true
         run: ./gradlew runGameTestServer --no-daemon > gametest.log 2>&1; echo "exit=$?" >> gametest.log
-      - name: Client launch test (virtual screen)
-        timeout-minutes: 15
+      - name: Client launch and in-game screenshots (virtual screen)
+        timeout-minutes: 40
         continue-on-error: true
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq xvfb libgl1-mesa-dri imagemagick > /dev/null
           export LIBGL_ALWAYS_SOFTWARE=1
+          export AW_AUTOSHOTS=true
           xvfb-run -a -s "-screen 0 1280x720x24" bash -c '
             ./gradlew runClient --no-daemon > client.log 2>&1 &
-            for i in $(seq 1 60); do sleep 5; grep -q "Created:.*textures/atlas/blocks.png" client.log && break; done
-            sleep 25; import -window root client.png || true
-            pkill -f "net.neoforged" || true; pkill -f java || true' || true
+            for i in $(seq 1 420); do sleep 5; grep -q "\[aw-shot\] done" client.log && break; grep -q "Stopping!" client.log && break; done
+            import -window root client.png || true
+            sleep 10; pkill -f java || true' || true
+          mkdir -p shots && cp run/screenshots/aw_*.png shots/ 2>/dev/null || true
+          ls -la shots || true
       - uses: actions/upload-artifact@v4
         with:
           name: AetherWastes
@@ -53,6 +56,7 @@ jobs:
           mkdir -p out
           for f in build/libs/*.jar; do case "$f" in *sources*) ;; *) cp "$f" out/AetherWastes.jar;; esac; done
           cp build.log gametest.log client.log client.png out/ 2>/dev/null || true
+          mkdir -p out/shots && cp shots/*.png out/shots/ 2>/dev/null || true
           cd out
           git init -q
           git checkout -q -b dist

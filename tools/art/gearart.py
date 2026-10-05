@@ -17,6 +17,7 @@ MATS = {
     "prism": {"r": ramp("#3a6f80", "#5fa0b4", "#8fd0e0", "#c4f0f8", "#f4ffff"), "a": ramp("#7d45c9", "#ffffff")},
     "star_iron": {"r": ramp("#141a36", "#222c58", "#34437e", "#4d60a6", "#7a8ed0"), "a": ramp("#bf8a24", "#fff0a8")},
     "archivist": {"r": ramp("#1a0a2a", "#2c1446", "#42205e", "#5a2e7a", "#744096"), "a": ramp("#bf8a24", "#ffe080")},
+    "phantom": {"r": ramp("#081014", "#122228", "#1f3a44", "#3a6672", "#9adce6"), "a": ramp("#22c8f0", "#e6ffff")},
 }
 HANDLE = {"h": hexc("#3b2516"), "H": hexc("#6e4a2c")}
 
@@ -307,6 +308,34 @@ def weapons():
         (blade(9, 23, 29, 3, 3.0), HEART, [(11, 21), (27, 5)]),
         (circle(9, 23, 1.6, 8), ramp("#ff3aa8", "#ff9ad8", "#fff0fa", "#ffffff"), None),
     ])
+    GHOST = MATS["phantom"]["r"]
+    CYAN = ramp("#0a6a8a", "#30c8f0", "#9af0ff", "#f0ffff", "#ffffff")
+    ARCANE = ramp("#2a1c5a", "#4a2e9a", "#8a5aff", "#d0b0ff", "#ffffff")
+    W["echo_reaper"] = shaded_parts([
+        (bar(4, 30, 21, 6, 1.1), DARKIRON, None),
+        ([(18, 7), (22, 2), (29, 3), (31, 9), (29, 16), (26, 10), (21, 9)], GHOST, [(23, 3), (30, 7)]),
+        ([(24, 6), (28, 6), (27, 11)], CYAN, None),
+        (circle(20, 7.5, 1.7, 8), CYAN, None),
+        (circle(4, 30, 1.4, 6), CYAN, None),
+        (bar(9, 22, 12, 19, 1.5), GHOST, None),
+    ])
+    W["chronicle_blade"] = shaded_parts([
+        (bar(4, 28, 9, 23, 1.6), LEATHER, None),
+        (circle(3.5, 28.5, 1.9, 8), GOLDR, None),
+        ([(5, 19), (13, 27), (14, 24), (8, 18)], GOLDR, None),
+        (blade(9, 23, 29, 3, 2.7), ARCANE, [(11, 21), (27, 5)]),
+        (circle(15, 17, 1.1, 6), GOLDR, None),
+        (circle(21, 11, 1.1, 6), GOLDR, None),
+        (circle(9.5, 22.5, 1.6, 8), ramp("#8a45ff", "#c9a2ff", "#efe0ff", "#ffffff"), None),
+    ])
+    W["colossus_hammer"] = shaded_parts([
+        (bar(3, 30, 18, 15, 1.5), DARKIRON, None),
+        ([(11, 9), (19, 1), (31, 13), (23, 21)], ramp("#141212", "#221e1c", "#332d2a", "#463e3a", "#5a504a"), [(12, 9), (19, 2)]),
+        ([(16, 9), (20, 6), (26, 12), (22, 15)], EMBER, None),
+        ([(13, 13), (15, 12), (17, 17), (15, 18)], EMBER, None),
+        (bar(14, 15, 17, 18, 1.7), GOLDR, None),
+        (circle(3, 30, 1.5, 6), EMBER, None),
+    ])
     return W
 
 
@@ -370,6 +399,20 @@ def materials():
         "..234r4rr4r432..", "..23r44rr44r32..", "..233r444r3332..", "...2333333332...",
         "....22222222....", "................", "................", "................",
     ], {"2": hexc("#2a0e0c"), "3": hexc("#541e19"), "4": hexc("#94583e"), "r": hexc("#c42a1a")}), OUTLINE)
+    G = MATS["phantom"]["r"]
+    M["phantom_essence"] = outline_sprite(sprite([
+        "................", ".......44.......", "......4554......", ".....455554.....",
+        "....45566554....", "....45677654....", "...4567cc7654...", "...456cWWc654...",
+        "...4567cc7654...", "....45677654....", ".....456654.....", "......4554......",
+        ".....4.44.4.....", "....4..4...4....", "........4.......", "................",
+    ], {"4": G[1], "5": G[2], "6": G[3], "7": G[4], "c": hexc("#30c8f0"), "W": hexc("#ffffff")}), OUTLINE)
+    PAPER = ramp("#6a5a3a", "#a08a60", "#d0bc8c", "#efe2bc")
+    M["dungeon_map"] = outline_sprite(sprite([
+        "................", "..222222222222..", ".23333333333332.", ".23443333344332.",
+        ".2343xx3333x332.", ".23433x33334x32.", ".234333xx3343x2.", ".2333334333xx32.",
+        ".23rr33x433x332.", ".233rr3343xx332.", ".23rr3r33443332.", ".23333rr3333332.",
+        ".23344333333432.", ".23333333333332.", "..222222222222..", "................",
+    ], {"2": PAPER[0], "3": PAPER[2], "4": PAPER[1], "x": hexc("#5a3a20"), "r": hexc("#c41e1e")}), OUTLINE)
     return M
 
 
@@ -411,6 +454,25 @@ def armor_pixel(setn, face, i, j, w, h, part):
             c = a[0]
     if part in ("arm",) and j < 4 and setn in ("star_iron", "ether_steel", "archivist"):
         c = a[0] if j == 3 else r[3]
+    if setn == "phantom":
+        # Бледные пластины с призрачными швами и мерцающими прожилками
+        c = r[2] if (i + j) % 6 else r[3]
+        if j % 5 == 4 and part != "head":
+            c = a[0]
+        if (i * 3 + j * 7) % 17 == 0:
+            c = a[1]
+        if i == 0 or j == 0:
+            c = r[4]
+        if i == w - 1 or j == h - 1:
+            c = r[1]
+        if part == "head" and face == "front":
+            c = r[1] if 2 <= j <= 5 else c
+            if j == 3 and i in (1, 2, w - 3, w - 2):
+                c = a[1]
+            if j == 4 and i in (2, w - 3):
+                c = a[0]
+        if part == "body" and face == "front" and abs(i - (w - 1) / 2) <= 1.5 and 3 <= j <= 6:
+            c = a[1] if (i + j) % 2 else a[0]
     if face == "up":
         c = r[3]
     return c

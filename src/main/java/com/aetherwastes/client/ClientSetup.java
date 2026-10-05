@@ -27,6 +27,19 @@ public final class ClientSetup {
     }
 
     @SubscribeEvent
+    public static void registerKeys(net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent event) {
+        event.register(PhaseClient.PHASE_KEY);
+    }
+
+    @SubscribeEvent
+    public static void registerParticles(net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(com.aetherwastes.registry.ModParticles.ETHER_SPARK.get(), s -> new WastesParticle.Provider(s, WastesParticle.Kind.SPARK));
+        event.registerSpriteSet(com.aetherwastes.registry.ModParticles.PHANTOM_WISP.get(), s -> new WastesParticle.Provider(s, WastesParticle.Kind.WISP));
+        event.registerSpriteSet(com.aetherwastes.registry.ModParticles.RUNE.get(), s -> new WastesParticle.Provider(s, WastesParticle.Kind.RUNE));
+        event.registerSpriteSet(com.aetherwastes.registry.ModParticles.ASH_EMBER.get(), s -> new WastesParticle.Provider(s, WastesParticle.Kind.EMBER));
+    }
+
+    @SubscribeEvent
     public static void registerGuiLayers(RegisterGuiLayersEvent event) {
         event.registerAboveAll(AetherWastes.id("ether_hud"), EtherHud::render);
     }
@@ -34,6 +47,9 @@ public final class ClientSetup {
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(ModModels.SALT_WRAITH, ModModels::saltWraith);
+        event.registerLayerDefinition(ModModels.ECHO_LORD, ModModels::echoLord);
+        event.registerLayerDefinition(ModModels.ARCHIVE_KEEPER, ModModels::archiveKeeper);
+        event.registerLayerDefinition(ModModels.ASH_COLOSSUS, ModModels::ashColossus);
         event.registerLayerDefinition(ModModels.ASH_HOUND, ModModels::ashHound);
         event.registerLayerDefinition(ModModels.ETHER_WISP, ModModels::etherWisp);
         event.registerLayerDefinition(ModModels.SCAR_CRAWLER, ModModels::scarCrawler);
@@ -68,6 +84,13 @@ public final class ClientSetup {
                 ctx -> new SpecRenderer<>(ctx, ModModels.ETHER_WISP, Style.FLOAT, "ether_wisp", 0.8f, 0.2f, false));
         event.registerEntityRenderer(ModEntities.SCAR_CRAWLER.get(),
                 ctx -> new SpecRenderer<>(ctx, ModModels.SCAR_CRAWLER, Style.SPIDER, "scar_crawler", 1.0f, 0.8f, false));
+
+        event.registerEntityRenderer(ModEntities.ECHO_LORD.get(),
+                ctx -> new SpecRenderer<>(ctx, ModModels.ECHO_LORD, Style.CASTER, "echo_lord", 1.45f, 0.7f, false));
+        event.registerEntityRenderer(ModEntities.ARCHIVE_KEEPER.get(),
+                ctx -> new SpecRenderer<>(ctx, ModModels.ARCHIVE_KEEPER, Style.CASTER, "archive_keeper", 1.45f, 0.7f, false));
+        event.registerEntityRenderer(ModEntities.ASH_COLOSSUS.get(),
+                ctx -> new SpecRenderer<>(ctx, ModModels.ASH_COLOSSUS, Style.HEAVY, "ash_colossus", 1.55f, 1.2f, false));
 
         event.registerBlockEntityRenderer(ModBlockEntities.RITUAL_FOCUS.get(), ctx -> new HolderRenderer(ctx, 0.95f));
         event.registerBlockEntityRenderer(ModBlockEntities.RITUAL_PEDESTAL.get(), ctx -> new HolderRenderer(ctx, 1.1f));

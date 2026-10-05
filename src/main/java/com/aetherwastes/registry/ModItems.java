@@ -37,6 +37,10 @@ public final class ModItems {
     public static final DeferredItem<Item> PRISM_SHARD = simple("prism_shard");
     public static final DeferredItem<Item> ASH_PELT = simple("ash_pelt");
     public static final DeferredItem<Item> HEARTWOOD = simple("heartwood");
+    public static final DeferredItem<Item> PHANTOM_ESSENCE = ITEMS.register("phantom_essence",
+            () -> new Item(new Item.Properties().rarity(net.minecraft.world.item.Rarity.RARE)));
+    public static final DeferredItem<Item> DUNGEON_MAP = ITEMS.register("dungeon_map",
+            () -> new com.aetherwastes.item.DungeonMapItem(new Item.Properties().stacksTo(16).rarity(net.minecraft.world.item.Rarity.UNCOMMON)));
     public static final DeferredItem<Item> SOUL_ESSENCE = ITEMS.register("soul_essence", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
     public static final DeferredItem<Item> WANDERER_SHARD = ITEMS.register("wanderer_shard",
             () -> new SpecialItem(SpecialItem.Kind.PLAIN, "tooltip.aetherwastes.wanderer_shard", new Item.Properties().rarity(Rarity.RARE)));
@@ -98,6 +102,16 @@ public final class ModItems {
     public static final DeferredItem<BlockItem> GLOWCAP_BLOCK = ITEMS.registerSimpleBlockItem(ModBlocks.GLOWCAP_BLOCK);
     public static final DeferredItem<BlockItem> CHARGED_CRYSTAL = ITEMS.registerSimpleBlockItem(ModBlocks.CHARGED_CRYSTAL);
     public static final DeferredItem<BlockItem> BLEEDING_LOG = ITEMS.registerSimpleBlockItem(ModBlocks.BLEEDING_LOG);
+    public static final DeferredItem<BlockItem> RUNE_BRICKS = ITEMS.registerSimpleBlockItem(ModBlocks.RUNE_BRICKS);
+    public static final DeferredItem<BlockItem> CRACKED_RUNE_BRICKS = ITEMS.registerSimpleBlockItem(ModBlocks.CRACKED_RUNE_BRICKS);
+    public static final DeferredItem<BlockItem> RUNE_PILLAR = ITEMS.registerSimpleBlockItem(ModBlocks.RUNE_PILLAR);
+    public static final DeferredItem<BlockItem> PHANTOM_LANTERN = ITEMS.registerSimpleBlockItem(ModBlocks.PHANTOM_LANTERN);
+    public static final DeferredItem<BlockItem> PHANTOM_GLASS = ITEMS.registerSimpleBlockItem(ModBlocks.PHANTOM_GLASS);
+    public static final DeferredItem<BlockItem> ASH_BRICKS = ITEMS.registerSimpleBlockItem(ModBlocks.ASH_BRICKS);
+    public static final DeferredItem<BlockItem> EMBER_BRICKS = ITEMS.registerSimpleBlockItem(ModBlocks.EMBER_BRICKS);
+    public static final DeferredItem<BlockItem> ARCHIVE_SHELF = ITEMS.registerSimpleBlockItem(ModBlocks.ARCHIVE_SHELF);
+    public static final DeferredItem<BlockItem> DUNGEON_TRAP = ITEMS.registerSimpleBlockItem(ModBlocks.DUNGEON_TRAP);
+    public static final DeferredItem<BlockItem> GUARDIAN_SEAL = ITEMS.registerSimpleBlockItem(ModBlocks.GUARDIAN_SEAL);
     public static final DeferredItem<BlockItem> LIVING_WALL = ITEMS.registerSimpleBlockItem(ModBlocks.LIVING_WALL);
     public static final DeferredItem<BlockItem> AETHER_SCAR = ITEMS.registerSimpleBlockItem(ModBlocks.AETHER_SCAR);
     public static final DeferredItem<BlockItem> ANCHOR = ITEMS.registerSimpleBlockItem(ModBlocks.ANCHOR);

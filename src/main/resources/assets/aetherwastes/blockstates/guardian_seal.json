@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "active=true,kind=0": {
+      "model": "aetherwastes:block/guardian_seal_archive"
+    },
+    "active=false,kind=0": {
+      "model": "aetherwastes:block/guardian_seal_archive_dormant"
+    },
+    "active=true,kind=1": {
+      "model": "aetherwastes:block/guardian_seal_crypt"
+    },
+    "active=false,kind=1": {
+      "model": "aetherwastes:block/guardian_seal_crypt_dormant"
+    },
+    "active=true,kind=2": {
+      "model": "aetherwastes:block/guardian_seal_citadel"
+    },
+    "active=false,kind=2": {
+      "model": "aetherwastes:block/guardian_seal_citadel_dormant"
+    }
+  }
+}

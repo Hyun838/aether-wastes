@@ -60,6 +60,11 @@ public class PlayerData implements INBTSerializable<CompoundTag> {
     public CompoundTag returnMark = new CompoundTag();
     public CompoundTag riftReturn = new CompoundTag();
 
+    // --- Призрачный шаг (комплект Призрака) ---
+    public int phaseTicks = 0;
+    public int phaseCooldown = 0;
+    public int phaseGrace = 0;
+
     public boolean knows(String school) {
         return archivist || schools.contains(school);
     }
@@ -125,6 +130,8 @@ public class PlayerData implements INBTSerializable<CompoundTag> {
         t.putLong("lastRiftTp", lastRiftTp);
         t.put("returnMark", returnMark.copy());
         t.put("riftReturn", riftReturn.copy());
+        t.putInt("phaseTicks", phaseTicks);
+        t.putInt("phaseCooldown", phaseCooldown);
         return t;
     }
 
@@ -169,6 +176,8 @@ public class PlayerData implements INBTSerializable<CompoundTag> {
         lastRiftTp = t.getLong("lastRiftTp");
         returnMark = t.getCompound("returnMark");
         riftReturn = t.getCompound("riftReturn");
+        phaseTicks = t.getInt("phaseTicks");
+        phaseCooldown = t.getInt("phaseCooldown");
     }
 
     private static ListTag writeSet(Set<String> set) {

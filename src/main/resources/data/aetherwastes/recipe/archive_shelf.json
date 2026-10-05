@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "PPP",
+    "BSB",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "B": {
+      "item": "minecraft:book"
+    },
+    "S": {
+      "item": "aetherwastes:soul_essence"
+    }
+  },
+  "result": {
+    "id": "aetherwastes:archive_shelf",
+    "count": 1
+  }
+}

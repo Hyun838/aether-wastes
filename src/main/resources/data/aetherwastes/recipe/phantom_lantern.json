@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "GSG",
+    "SPS",
+    "GSG"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "S": {
+      "item": "aetherwastes:ether_shard"
+    },
+    "P": {
+      "item": "aetherwastes:phantom_essence"
+    }
+  },
+  "result": {
+    "id": "aetherwastes:phantom_lantern",
+    "count": 4
+  }
+}

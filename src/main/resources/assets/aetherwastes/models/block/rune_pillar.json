@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "aetherwastes:block/rune_pillar",
+    "end": "aetherwastes:block/rune_pillar_top"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "aetherwastes:block/archive_shelf",
+    "end": "minecraft:block/dark_oak_planks"
+  }
+}

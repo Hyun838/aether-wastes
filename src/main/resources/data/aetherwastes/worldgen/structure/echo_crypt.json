@@ -1,0 +1,8 @@
+{
+  "type": "aetherwastes:dungeon",
+  "kind": "crypt",
+  "biomes": "#aetherwastes:has_structure/echo_crypt",
+  "step": "underground_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none"
+}

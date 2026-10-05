@@ -42,7 +42,8 @@ import java.util.List;
 public class WastesWeapon extends SwordItem {
     public enum Ability {
         ETHER_DRAIN(0, 0), SWEEP(0, 0), EMBER(0, 0), BACKSTAB(0, 0), NIGHTFALL(0, 0),
-        FIREBOLT(6, 16), SLAM(18, 80), BLINK(12, 50), HEART(30, 600);
+        FIREBOLT(6, 16), SLAM(18, 80), BLINK(12, 50), HEART(30, 600),
+        PHASE_DASH(14, 60), TIMESTOP(20, 240), ERUPTION(22, 140);
 
         public final int cost;
         public final int cooldown;
@@ -118,6 +119,18 @@ public class WastesWeapon extends SwordItem {
             }
             case BLINK -> target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, 2));
             case HEART -> p.heal(Math.max(1f, target.getMaxHealth() * 0.04f));
+            case PHASE_DASH -> {
+                target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 80, 0));
+                level.sendParticles(com.aetherwastes.registry.ModParticles.PHANTOM_WISP.get(), target.getX(), target.getY() + 1, target.getZ(), 10, 0.3, 0.5, 0.3, 0.03);
+            }
+            case TIMESTOP -> {
+                target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 1));
+                level.sendParticles(com.aetherwastes.registry.ModParticles.RUNE.get(), target.getX(), target.getY() + 1, target.getZ(), 4, 0.4, 0.5, 0.4, 0.01);
+            }
+            case ERUPTION -> {
+                target.igniteForSeconds(4f);
+                level.sendParticles(com.aetherwastes.registry.ModParticles.ASH_EMBER.get(), target.getX(), target.getY() + 1, target.getZ(), 12, 0.3, 0.5, 0.3, 0.06);
+            }
         }
         return r;
     }
@@ -142,6 +155,9 @@ public class WastesWeapon extends SwordItem {
                 Summons.spawnAlly(p, Component.translatable("entity.aetherwastes.heart_guardian"), 20 * 45, School.FORGE, School.STAR);
                 yield true;
             }
+            case PHASE_DASH -> phaseDash(server, p);
+            case TIMESTOP -> timestop(server, p);
+            case ERUPTION -> eruption(server, p);
             default -> false;
         };
         if (!done) return InteractionResultHolder.fail(stack);
@@ -196,6 +212,70 @@ public class WastesWeapon extends SwordItem {
         p.teleportTo(level, target.x, p.getY(), target.z, p.getYRot(), p.getXRot());
         p.fallDistance = 0;
         level.playSound(null, p.blockPosition(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1f, 1.4f);
+        return true;
+    }
+
+    /** Коса Эха: рывок сквозь врагов и даже стены на 10 блоков. */
+    private static boolean phaseDash(ServerLevel level, ServerPlayer p) {
+        Vec3 start = p.position();
+        Vec3 dir = p.getLookAngle().multiply(1, 0, 1).normalize();
+        Vec3 end = start.add(dir.scale(10));
+        for (LivingEntity e : level.getEntitiesOfClass(LivingEntity.class, new AABB(start, end).inflate(1.5).expandTowards(0, 2, 0),
+                e -> e != p && e.isAlive() && !SpellEffects.isAlly(p, e))) {
+            e.hurt(p.damageSources().playerAttack(p), 10f);
+            e.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 1));
+        }
+        SpellEffects.trail(level, start.add(0, 1, 0), end.add(0, 1, 0), com.aetherwastes.registry.ModParticles.PHANTOM_WISP.get());
+        p.teleportTo(level, end.x, p.getY(), end.z, p.getYRot(), p.getXRot());
+        com.aetherwastes.ability.Phase.eject(p);
+        p.fallDistance = 0;
+        level.playSound(null, p.blockPosition(), com.aetherwastes.registry.ModSounds.PHANTOM_PHASE.get(), SoundSource.PLAYERS, 0.9f, 1.5f);
+        return true;
+    }
+
+    /** Клинок Летописца: время вокруг замирает — враги почти останавливаются. */
+    private static boolean timestop(ServerLevel level, ServerPlayer p) {
+        double r = 9;
+        int n = 0;
+        for (LivingEntity e : level.getEntitiesOfClass(LivingEntity.class, p.getBoundingBox().inflate(r),
+                e -> e != p && e.isAlive() && !SpellEffects.isAlly(p, e) && e.distanceTo(p) <= r)) {
+            e.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 120, 5));
+            e.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 120, 2));
+            e.addEffect(new MobEffectInstance(MobEffects.GLOWING, 120, 0));
+            e.setDeltaMovement(Vec3.ZERO);
+            e.hurtMarked = true;
+            n++;
+        }
+        for (int i = 0; i < 48; i++) {
+            double a = i * Math.PI * 2 / 48;
+            level.sendParticles(com.aetherwastes.registry.ModParticles.RUNE.get(), p.getX() + Math.cos(a) * r, p.getY() + 0.3, p.getZ() + Math.sin(a) * r, 1, 0, 0.2, 0, 0);
+        }
+        level.playSound(null, p.blockPosition(), SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 1.2f, 0.6f);
+        return true;
+    }
+
+    /** Молот Колосса: огненное кольцо вокруг игрока. */
+    private static boolean eruption(ServerLevel level, ServerPlayer p) {
+        double r = 6;
+        for (LivingEntity e : level.getEntitiesOfClass(LivingEntity.class, p.getBoundingBox().inflate(r),
+                e -> e != p && e.isAlive() && !SpellEffects.isAlly(p, e) && e.distanceTo(p) <= r)) {
+            e.hurt(p.damageSources().playerAttack(p), 11f);
+            e.igniteForSeconds(6f);
+            Vec3 away = e.position().subtract(p.position()).normalize().scale(1.3);
+            e.push(away.x, 0.9, away.z);
+            e.hurtMarked = true;
+        }
+        for (int k = 1; k <= 3; k++) {
+            int n = 16 * k;
+            for (int i = 0; i < n; i++) {
+                double a = i * Math.PI * 2 / n;
+                double rr = r * k / 3.0;
+                level.sendParticles(ParticleTypes.FLAME, p.getX() + Math.cos(a) * rr, p.getY() + 0.2, p.getZ() + Math.sin(a) * rr, 2, 0.1, 0.3, 0.1, 0.02);
+                level.sendParticles(com.aetherwastes.registry.ModParticles.ASH_EMBER.get(), p.getX() + Math.cos(a) * rr, p.getY() + 0.5, p.getZ() + Math.sin(a) * rr, 1, 0.1, 0.5, 0.1, 0.05);
+            }
+        }
+        level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, p.getX(), p.getY() + 0.5, p.getZ(), 1, 0, 0, 0, 0);
+        level.playSound(null, p.blockPosition(), SoundEvents.GENERIC_EXPLODE.value(), SoundSource.PLAYERS, 1.0f, 0.6f);
         return true;
     }
 

@@ -17,6 +17,11 @@ public final class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> RITUAL = reg("ritual");
     public static final DeferredHolder<SoundEvent, SoundEvent> TIDE = reg("tide");
     public static final DeferredHolder<SoundEvent, SoundEvent> ANCHOR_HUM = reg("anchor_hum");
+    public static final DeferredHolder<SoundEvent, SoundEvent> PHANTOM_PHASE = reg("phantom_phase");
+    public static final DeferredHolder<SoundEvent, SoundEvent> PHANTOM_RETURN = reg("phantom_return");
+    public static final DeferredHolder<SoundEvent, SoundEvent> DUNGEON_AMBIENT = reg("dungeon_ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BOSS_SLAM = reg("boss_slam");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SEAL_BREAK = reg("seal_break");
 
     private static DeferredHolder<SoundEvent, SoundEvent> reg(String name) {
         return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(AetherWastes.id(name)));

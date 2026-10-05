@@ -89,5 +89,31 @@ public final class ModBlocks {
             () -> new RuneTrapBlock(BlockBehaviour.Properties.of().noCollission().instabreak().lightLevel(s -> 5)
                     .noLootTable().noOcclusion().mapColor(MapColor.COLOR_PURPLE)));
 
+    // --- Подземелья ---
+    public static final DeferredBlock<Block> RUNE_BRICKS = BLOCKS.register("rune_bricks",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_BRICKS).lightLevel(s -> 3).mapColor(MapColor.COLOR_CYAN)));
+    public static final DeferredBlock<Block> CRACKED_RUNE_BRICKS = BLOCKS.register("cracked_rune_bricks",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.CRACKED_DEEPSLATE_BRICKS).lightLevel(s -> 2).mapColor(MapColor.COLOR_CYAN)));
+    public static final DeferredBlock<net.minecraft.world.level.block.RotatedPillarBlock> RUNE_PILLAR = BLOCKS.register("rune_pillar",
+            () -> new net.minecraft.world.level.block.RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.POLISHED_DEEPSLATE).lightLevel(s -> 4)));
+    public static final DeferredBlock<Block> PHANTOM_LANTERN = BLOCKS.register("phantom_lantern",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).lightLevel(s -> 14).mapColor(MapColor.COLOR_LIGHT_BLUE)));
+    public static final DeferredBlock<Block> PHANTOM_GLASS = BLOCKS.register("phantom_glass",
+            () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).lightLevel(s -> 6)));
+    public static final DeferredBlock<Block> ASH_BRICKS = BLOCKS.register("ash_bricks",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.POLISHED_BLACKSTONE_BRICKS).mapColor(MapColor.COLOR_GRAY)));
+    public static final DeferredBlock<Block> EMBER_BRICKS = BLOCKS.register("ember_bricks",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.POLISHED_BLACKSTONE_BRICKS).lightLevel(s -> 8).mapColor(MapColor.COLOR_ORANGE)));
+    public static final DeferredBlock<Block> ARCHIVE_SHELF = BLOCKS.register("archive_shelf",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BOOKSHELF).lightLevel(s -> 3).mapColor(MapColor.COLOR_PURPLE)));
+    public static final DeferredBlock<com.aetherwastes.block.DungeonTrapBlock> DUNGEON_TRAP = BLOCKS.register("dungeon_trap",
+            () -> new com.aetherwastes.block.DungeonTrapBlock(BlockBehaviour.Properties.of().noCollission().strength(50f, 1200f)
+                    .lightLevel(s -> s.getValue(com.aetherwastes.block.DungeonTrapBlock.ARMED) ? 3 : 0).noOcclusion().noLootTable()
+                    .pushReaction(PushReaction.BLOCK).mapColor(MapColor.COLOR_PURPLE)));
+    public static final DeferredBlock<com.aetherwastes.block.GuardianSealBlock> GUARDIAN_SEAL = BLOCKS.register("guardian_seal",
+            () -> new com.aetherwastes.block.GuardianSealBlock(BlockBehaviour.Properties.of().strength(-1f, 3600000f).noLootTable()
+                    .lightLevel(s -> s.getValue(com.aetherwastes.block.GuardianSealBlock.ACTIVE) ? 13 : 4)
+                    .pushReaction(PushReaction.BLOCK).mapColor(MapColor.COLOR_PURPLE).sound(SoundType.LODESTONE)));
+
     private ModBlocks() {}
 }

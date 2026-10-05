@@ -13,6 +13,11 @@
     "aetherwastes:ward_pylon",
     "aetherwastes:purifying_obelisk",
     "aetherwastes:observatory",
-    "aetherwastes:underside_portal"
+    "aetherwastes:underside_portal",
+    "aetherwastes:rune_bricks",
+    "aetherwastes:cracked_rune_bricks",
+    "aetherwastes:rune_pillar",
+    "aetherwastes:ash_bricks",
+    "aetherwastes:ember_bricks"
   ]
 }

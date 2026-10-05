@@ -22,6 +22,7 @@ neoForge {
         client {
             client()
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            systemProperty 'aetherwastes.autoshots', providers.environmentVariable('AW_AUTOSHOTS').orElse('false').get()
         }
         gameTestServer {
             type = "gameTestServer"

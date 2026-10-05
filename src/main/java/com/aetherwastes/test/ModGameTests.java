@@ -194,7 +194,8 @@ public class ModGameTests {
         // --- снаряжение: каждый комплект брони и каждое оружие ---
         var sets = new net.neoforged.neoforge.registries.DeferredItem[][]{com.aetherwastes.registry.ModGear.ASHEN_SET,
                 com.aetherwastes.registry.ModGear.ETHER_STEEL_SET, com.aetherwastes.registry.ModGear.PRISM_SET,
-                com.aetherwastes.registry.ModGear.STAR_IRON_SET, com.aetherwastes.registry.ModGear.ARCHIVIST_SET};
+                com.aetherwastes.registry.ModGear.STAR_IRON_SET, com.aetherwastes.registry.ModGear.ARCHIVIST_SET,
+                com.aetherwastes.registry.ModGear.PHANTOM_SET};
         net.minecraft.world.entity.EquipmentSlot[] slots = {net.minecraft.world.entity.EquipmentSlot.HEAD,
                 net.minecraft.world.entity.EquipmentSlot.CHEST, net.minecraft.world.entity.EquipmentSlot.LEGS,
                 net.minecraft.world.entity.EquipmentSlot.FEET};
@@ -234,5 +235,120 @@ public class ModGameTests {
             }
         }
         report(helper, "player(" + casts + " casts)", errors);
+    }
+
+    /** Призрачный шаг: полный комплект, активация, полёт сквозь стену, перезарядка, безопасный выход. */
+    @GameTest(template = "empty", batch = "phase", timeoutTicks = 400)
+    public static void phantomPhase(GameTestHelper helper) {
+        List<String> errors = new ArrayList<>();
+        ServerPlayer p;
+        try {
+            p = helper.makeMockServerPlayerInLevel();
+        } catch (Throwable t) {
+            errors.add(err("mock player", t));
+            report(helper, "phase", errors);
+            return;
+        }
+        try {
+            p.setGameMode(net.minecraft.world.level.GameType.SURVIVAL);
+            for (int x = -2; x <= 8; x++)
+                for (int z = -2; z <= 8; z++) helper.setBlock(new BlockPos(x, 0, z), Blocks.STONE);
+            // Стена 3 блока толщиной
+            for (int x = -2; x <= 8; x++)
+                for (int y = 1; y <= 4; y++)
+                    for (int z = 4; z <= 6; z++) helper.setBlock(new BlockPos(x, y, z), Blocks.STONE);
+            BlockPos start = helper.absolutePos(new BlockPos(3, 1, 2));
+            p.teleportTo(helper.getLevel(), start.getX() + 0.5, start.getY(), start.getZ() + 0.5, 0, 0);
+            var set = com.aetherwastes.registry.ModGear.PHANTOM_SET;
+            net.minecraft.world.entity.EquipmentSlot[] slots = {net.minecraft.world.entity.EquipmentSlot.HEAD,
+                    net.minecraft.world.entity.EquipmentSlot.CHEST, net.minecraft.world.entity.EquipmentSlot.LEGS,
+                    net.minecraft.world.entity.EquipmentSlot.FEET};
+            com.aetherwastes.ability.Phase.request(p);
+            if (Data.get(p).phaseTicks > 0) errors.add("phase started without the set");
+            for (int k = 0; k < 4; k++) p.setItemSlot(slots[k], new net.minecraft.world.item.ItemStack(set[k].get()));
+            if (!com.aetherwastes.craft.ArmorSets.wearing(p, com.aetherwastes.craft.ArmorSets.PHANTOM)) errors.add("set not detected");
+            com.aetherwastes.ability.Phase.request(p);
+            PlayerData d = Data.get(p);
+            if (d.phaseTicks != com.aetherwastes.ability.Phase.DURATION) errors.add("phase did not start: " + d.phaseTicks);
+            if (!p.getAbilities().flying) errors.add("not flying");
+            // Движение сквозь стену: move() не должен упираться
+            double z0 = p.getZ();
+            p.move(net.minecraft.world.entity.MoverType.SELF, new net.minecraft.world.phys.Vec3(0, 0, 3.0));
+            if (p.getZ() - z0 < 2.9) errors.add("blocked by wall: moved " + (p.getZ() - z0));
+            if (!com.aetherwastes.ability.Phase.isPhasing(p)) errors.add("isPhasing false");
+            // Конец фазы внутри стены — должен вытолкнуть в свободное место
+            com.aetherwastes.ability.Phase.end(p, d);
+            if (!helper.getLevel().noCollision(p, p.getBoundingBox())) errors.add("still stuck in wall after eject at " + p.blockPosition());
+            if (d.phaseCooldown != com.aetherwastes.ability.Phase.COOLDOWN) errors.add("cooldown " + d.phaseCooldown);
+            com.aetherwastes.ability.Phase.request(p);
+            if (d.phaseTicks > 0) errors.add("phase restarted during cooldown");
+            AetherWastes.LOGGER.info("[aw-test] phase: ejected to {}", p.blockPosition());
+        } catch (Throwable t) {
+            errors.add(err("phase", t));
+        }
+        report(helper, "phase", errors);
+    }
+
+    /** Все три подземелья строятся целиком, в зале босса есть Печать, и она пробуждает хозяина. */
+    @GameTest(template = "empty", batch = "dungeons", timeoutTicks = 1200)
+    public static void dungeonsBuild(GameTestHelper helper) {
+        List<String> errors = new ArrayList<>();
+        ServerLevel level = helper.getLevel();
+        BlockPos base = helper.absolutePos(new BlockPos(0, 0, 0)).offset(1200, 0, 1200);
+        int n = 0;
+        int totalPieces = 0;
+        for (var kind : com.aetherwastes.world.dungeon.DungeonKind.values()) {
+            int ox = base.getX() + n * 200, oz = base.getZ();
+            int y0 = kind.surface ? base.getY() + 4 : base.getY() - 30;
+            if (y0 < level.getMinBuildHeight() + 8) y0 = level.getMinBuildHeight() + 8;
+            int fy0 = y0;
+            try {
+                var pieces = com.aetherwastes.world.dungeon.DungeonStructure.layout(kind,
+                        net.minecraft.util.RandomSource.create(42 + n), ox, y0, oz, (x, z) -> fy0 + 40);
+                totalPieces += pieces.size();
+                var all = net.minecraft.world.level.levelgen.structure.BoundingBox.encapsulatingBoxes(
+                        pieces.stream().map(net.minecraft.world.level.levelgen.structure.StructurePiece::getBoundingBox).toList()).orElseThrow();
+                int seals = 0;
+                BlockPos sealPos = null;
+                for (int cx = all.minX() >> 4; cx <= all.maxX() >> 4; cx++) {
+                    for (int cz = all.minZ() >> 4; cz <= all.maxZ() >> 4; cz++) {
+                        var cp = new net.minecraft.world.level.ChunkPos(cx, cz);
+                        var chunkBox = new net.minecraft.world.level.levelgen.structure.BoundingBox(cp.getMinBlockX(), level.getMinBuildHeight(),
+                                cp.getMinBlockZ(), cp.getMaxBlockX(), level.getMaxBuildHeight() - 1, cp.getMaxBlockZ());
+                        for (var piece : pieces) {
+                            if (!piece.getBoundingBox().intersects(chunkBox)) continue;
+                            piece.postProcess(level, level.structureManager(), level.getChunkSource().getGenerator(), level.random,
+                                    chunkBox, cp, BlockPos.ZERO);
+                        }
+                    }
+                }
+                for (var piece : pieces) {
+                    if (piece.role() != com.aetherwastes.world.dungeon.DungeonPiece.Role.BOSS) continue;
+                    var bb = piece.getBoundingBox();
+                    for (BlockPos p : BlockPos.betweenClosed(bb.minX(), bb.minY(), bb.minZ(), bb.maxX(), bb.minY() + 3, bb.maxZ())) {
+                        if (level.getBlockState(p).is(ModBlocks.GUARDIAN_SEAL.get())) {
+                            seals++;
+                            sealPos = p.immutable();
+                        }
+                    }
+                }
+                if (seals != 1) errors.add(kind + ": seals=" + seals);
+                if (sealPos != null) {
+                    var boss = com.aetherwastes.block.GuardianSealBlockEntity.awaken(level, sealPos, level.getBlockState(sealPos));
+                    if (boss == null) errors.add(kind + ": boss not spawned");
+                    else {
+                        boss.setNoAi(false);
+                        for (int t = 0; t < 40; t++) boss.tick();
+                        AetherWastes.LOGGER.info("[aw-test] dungeon {}: {} pieces, boss {} at {}", kind, pieces.size(),
+                                boss.getType().toShortString(), boss.blockPosition());
+                        boss.discard();
+                    }
+                }
+            } catch (Throwable t) {
+                errors.add(err("dungeon " + kind, t));
+            }
+            n++;
+        }
+        report(helper, "dungeons(" + totalPieces + " pieces)", errors);
     }
 }

@@ -18,7 +18,8 @@ import net.minecraft.world.item.ItemStack;
  * Бонусы полных комплектов брони.
  * Пепельный — тепло и стойкость рассудка; Эфирная сталь — Сосуд наполняется быстрее, стойкость к отбрасыванию;
  * Призматический — отражает снаряды; Звёздное железо — ночью скорость и сила;
- * Облачение Архивариуса — заклинания дешевле на 30%.
+ * Облачение Архивариуса — заклинания дешевле на 30%;
+ * Призрачная броня — Призрачный шаг (клавиша V): 10 с полёта сквозь стены, перезарядка 60 с.
  */
 public final class ArmorSets {
     public static final String ASHEN = "ashen";
@@ -26,6 +27,7 @@ public final class ArmorSets {
     public static final String PRISM = "prism";
     public static final String STAR_IRON = "star_iron";
     public static final String ARCHIVIST = "archivist";
+    public static final String PHANTOM = "phantom";
 
     private ArmorSets() {}
 
@@ -44,6 +46,7 @@ public final class ArmorSets {
         if (mat.is(ModGear.PRISM.getKey())) return PRISM;
         if (mat.is(ModGear.STAR_IRON.getKey())) return STAR_IRON;
         if (mat.is(ModGear.ARCHIVIST.getKey())) return ARCHIVIST;
+        if (mat.is(ModGear.PHANTOM.getKey())) return PHANTOM;
         return null;
     }
 
@@ -69,6 +72,12 @@ public final class ArmorSets {
                 }
             }
             case ARCHIVIST -> PlayerStats.setClarity(p, PlayerStats.clarity(p) + 0.05f);
+            case PHANTOM -> {
+                // Призрак не боится тьмы.
+                p.removeEffect(MobEffects.BLINDNESS);
+                p.removeEffect(MobEffects.DARKNESS);
+                PlayerStats.setClarity(p, PlayerStats.clarity(p) + 0.04f);
+            }
             default -> {
             }
         }

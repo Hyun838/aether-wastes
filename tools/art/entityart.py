@@ -153,6 +153,23 @@ def mat_color(mat, face, i, j, w, h, pal):
         if arg == "runes" and face in ("up", "back") and (i % 4 == 1) and (j % 3 != 1):
             c = pal["glow"][2]
             glow = pal["glow"][2]
+    elif kind == "rock":
+        c = pick(1 + (1 if n > 0.6 else 0) + (1 if n > 0.92 else 0))
+        if (i + 2 * j) % 7 == 0 or (2 * i - j) % 9 == 0:
+            c = pick(0)
+        if arg == "magma" and face != "down":
+            crack = ((i * 3 + j * 5) % 11 == 0) or ((i + j * 2) % 13 == 1) or (i % 6 == 3 and j % 4 != 0)
+            if crack and n > 0.25:
+                c = pal["glow"][2 if n > 0.6 else 1]
+                glow = pal["glow"][3 if n > 0.75 else 2]
+        if face == "up":
+            c = pick(3)
+    elif kind == "page":
+        c = pick(3 if n > 0.2 else 2)
+        if face in ("front", "back") and j % 2 == 1 and 1 <= i < w - 1:
+            c = pick(1)
+        if face == "up":
+            c = pick(4)
     elif kind == "flame":
         t = j / max(1, h - 1)
         c = mix(pal["glow"][3], pal["glow"][1], t)
@@ -515,7 +532,124 @@ def scar_crawler():
     return [body, abdomen, head] + legs, pal
 
 
+# ---------------- Хозяева подземелий ----------------
+def echo_lord():
+    Part._n = 0
+    head = P("head", (0, 0, 0), Cube((-4, -8, -4), (8, 8, 8), "skin:facehollow"),
+             children=[P(None, (0, 0, 0), Cube((-5, -10, -5), (10, 2, 10), "hood"), Cube((-5, -8, 4), (10, 10, 1), "hood"),
+                         Cube((-5, -8, -5), (1, 10, 9), "hood"), Cube((4, -8, -5), (1, 10, 9), "hood"),
+                         Cube((-1, -12, -2), (2, 3, 4), "hood")),
+                       P("halo", (0, -13, 0), Cube((-6, 0, -6), (12, 1, 1), "trim"), Cube((-6, 0, 5), (12, 1, 1), "trim"),
+                         Cube((-6, 0, -5), (1, 1, 10), "trim"), Cube((5, 0, -5), (1, 1, 10), "trim"),
+                         children=[P(None, (x + 0.5, -1, z + 0.5, 0, R(45), 0), Cube((-1, -1, -1), (2, 2, 2), "glowmat"))
+                                   for x, z in ((-6, -6), (5, -6), (-6, 5), (5, 5))])])
+    body = P("body", (0, 0, 0), Cube((-5, 0, -3), (10, 13, 6), "robe:runes"),
+             children=[P(None, (0, 0, 0), Cube((-5.5, 9, -3.5), (11, 1, 7), "trim")),
+                       P(None, (-6, 0, 0, 0, 0, R(-15)), Cube((-4, -3, -4), (5, 4, 8), "metal"),
+                         Cube((-4, -5, -1), (1, 3, 1), "metal"), Cube((-2, -6, -1), (1, 4, 1), "metal")),
+                       P(None, (6, 0, 0, 0, 0, R(15)), Cube((-1, -3, -4), (5, 4, 8), "metal"),
+                         Cube((3, -5, -1), (1, 3, 1), "metal"), Cube((1, -6, -1), (1, 4, 1), "metal")),
+                       P(None, (0, 2, 3, R(12), 0, 0), Cube((-6, 0, 0), (12, 18, 1), "cloth"))])
+    skirt = P("skirt", (0, 13, 0), Cube((-6, 0, -4), (12, 10, 8), "skirt"), Cube((-5, 10, -3), (10, 4, 6), "skirt"),
+              children=[P(None, (-4, 14, -1, R(8), 0, 0), Cube((-1, 0, -1), (2, 4, 2), "skirt")),
+                        P(None, (3, 14, 1, R(-10), 0, 0), Cube((-1, 0, -1), (2, 3, 2), "skirt")),
+                        P(None, (0, 14, -2), Cube((-1, 0, -1), (2, 5, 2), "glowmat"))])
+    blade = P(None, (0, -30, 0), Cube((-0.5, -1, -1), (1, 2, 2), "metal"),
+              children=[P(None, (0, 0, -1, R(-15), 0, 0), Cube((-0.5, -1, -14), (1, 3, 13), "glass")),
+                        P(None, (0, 2, -1, R(-15), 0, 0), Cube((-0.5, -1, -12), (1, 1, 11), "glowmat"))])
+    staff = P("staff", (0, 10, 0), Cube((-0.5, -30, -0.5), (1, 38, 1), "metal"),
+              children=[blade, P(None, (0, -24, 0), Cube((-1, 0, -1), (2, 1, 2), "trim"), Cube((-1, 10, -1), (2, 1, 2), "trim"))])
+    ra = P("right_arm", (-7, 2, 0), Cube((-2, -2, -2), (4, 11, 4), "robe"),
+           children=[P(None, (0, 9, 0), Cube((-1.5, 0, -1.5), (3, 4, 3), "skin")), staff])
+    la = P("left_arm", (7, 2, 0), Cube((-2, -2, -2), (4, 11, 4), "robe"),
+           children=[P(None, (0, 9, 0), Cube((-1.5, 0, -1.5), (3, 4, 3), "skin"),
+                       Cube((-1, 4, -2), (1, 3, 1), "skin"), Cube((1, 4, -2), (1, 3, 1), "skin"))])
+    orbit = P("orbit", (0, 6, 0), Cube((10, -2, -1), (2, 4, 2), "glowmat"), Cube((-12, 0, -1), (2, 4, 2), "glowmat"),
+              Cube((-1, 2, 10), (2, 3, 2), "glowmat"), Cube((-1, -3, -12), (2, 3, 2), "glowmat"))
+    pal = {"robe": ramp("#0a1416", "#122024", "#1a2e34", "#243e46", "#2e4e58"), "hood": ramp("#060c0e", "#0c1618", "#142226"),
+           "cloth": ramp("#0a1416", "#101c20", "#18282e", "#203640", "#284450"),
+           "skirt": ramp("#081012", "#0e1a1e", "#16262c", "#1e343c", "#26424c"),
+           "trim": ramp("#4a5a60", "#6a8088", "#9ab4bc", "#d0eef4"), "mask": ramp("#30505a", "#4a7a86", "#7ab8c4", "#c4f4ff"),
+           "metal": ramp("#1a2226", "#2a363c", "#3e4e56", "#56686f", "#728890"), "skin": ramp("#5a7a80", "#7a9ca2", "#a0c4c8", "#c8eef0"),
+           "glass": ramp("#2a5a66", "#4a8a96", "#7ac4d0", "#b8f0f8", "#f0ffff"),
+           "glow": ramp("#0a6a8a", "#30c8f0", "#9af0ff", "#f0ffff")}
+    return [head, body, skirt, ra, la, orbit], pal
+
+
+def archive_keeper():
+    Part._n = 0
+    books = []
+    for k in range(6):
+        a = k * math.pi * 2 / 6
+        x, z = math.cos(a) * 8, math.sin(a) * 8
+        books.append(P(None, (x, -1 - (k % 2) * 2, z, R(10 * (k % 3)), -a, R(15)),
+                       Cube((-1.5, -2, -1), (3, 4, 2), "page")))
+    head = P("head", (0, 0, 0), Cube((-4, -8, -4), (8, 8, 8), "robe:facemask"),
+             children=[P(None, (0, 0, 0), Cube((-5, -9, -5), (10, 1, 10), "hood"), Cube((-5, -8, 4), (10, 9, 1), "hood"),
+                         Cube((-5, -8, -5), (1, 9, 9), "hood"), Cube((4, -8, -5), (1, 9, 9), "hood"),
+                         Cube((-3, -12, -3), (6, 3, 6), "trim"), Cube((-2, -14, -2), (4, 2, 4), "glowmat")),
+                       P("halo", (0, -16, 0), *[], children=books)])
+    body = P("body", (0, 0, 0), Cube((-4.5, 0, -2.5), (9, 12, 5), "robe:runes"),
+             children=[P(None, (0, 0, 0), Cube((-5, 8, -3), (10, 1, 6), "trim"), Cube((-1, 0, -3), (2, 8, 1), "trim")),
+                       P(None, (-5, 0, 0, 0, 0, R(-10)), Cube((-4, -2, -3.5), (5, 3, 7), "trim")),
+                       P(None, (5, 0, 0, 0, 0, R(10)), Cube((-1, -2, -3.5), (5, 3, 7), "trim")),
+                       P(None, (0, 3, 3, R(20), 0, 0), Cube((-3, 0, 0), (6, 8, 2), "page"))])
+    skirt = P("skirt", (0, 12, 0), Cube((-5.5, 0, -3.5), (11, 12, 7), "skirt"),
+              children=[P(None, (0, 0, -3.5), Cube((-1, 0, -0.5), (2, 11, 1), "trim"))])
+    staff = P("staff", (0, 10, 0), Cube((-0.5, -28, -0.5), (1, 36, 1), "metal"),
+              children=[P(None, (0, -30, 0, 0, R(45), 0), Cube((-2.5, -2.5, -2.5), (5, 5, 5), "glowmat")),
+                        P(None, (0, -27, 0), Cube((-3, -1, -0.5), (1, 4, 1), "trim"), Cube((2, -1, -0.5), (1, 4, 1), "trim"),
+                          Cube((-0.5, -1, -3), (1, 4, 1), "trim"), Cube((-0.5, -1, 2), (1, 4, 1), "trim"))])
+    ra = P("right_arm", (-6.5, 2, 0), Cube((-2, -2, -2), (4, 10, 4), "robe"),
+           children=[P(None, (0, 8, 0), Cube((-1.5, 0, -1.5), (3, 4, 3), "skin")), staff])
+    tome = P(None, (0, 11, -3, R(-60), 0, 0), Cube((-3, -0.5, -2), (6, 1, 5), "trim"), Cube((-2.5, -1, -1.5), (5, 1, 4), "page"))
+    la = P("left_arm", (6.5, 2, 0), Cube((-2, -2, -2), (4, 10, 4), "robe"),
+           children=[P(None, (0, 8, 0), Cube((-1.5, 0, -1.5), (3, 4, 3), "skin")), tome])
+    orbit = P("orbit", (0, 2, 0), Cube((11, -1, -1), (2, 2, 2), "glowmat"), Cube((-13, 1, -1), (2, 2, 2), "glowmat"),
+              Cube((-1, -2, 11), (2, 2, 2), "glowmat"), Cube((-1, 3, -13), (2, 2, 2), "glowmat"),
+              Cube((8, 4, 8), (1, 1, 1), "glowmat"), Cube((-9, -3, 8), (1, 1, 1), "glowmat"))
+    pal = {"robe": ramp("#140c2c", "#1e1442", "#2a1c5a", "#382672", "#46308a"), "hood": ramp("#0c0820", "#140e30", "#1c1440"),
+           "skirt": ramp("#120a28", "#1c123c", "#281a52", "#342268", "#402a7e"),
+           "trim": ramp("#5c3d0a", "#8a5e14", "#bf8a24", "#ffe080"), "mask": ramp("#5a4a20", "#8a7430", "#c0a448", "#f0d880"),
+           "metal": ramp("#2a1e0a", "#4a3414", "#6e4e20", "#94682c", "#bc8838"), "skin": ramp("#4a3a5a", "#5e4a72", "#76608c", "#8e76a4"),
+           "page": ramp("#8a7a5a", "#b0a07c", "#d8caa4", "#efe4c4", "#fffaf0"),
+           "glow": ramp("#4a1a9a", "#9a5aff", "#d0b0ff", "#ffffff")}
+    return [head, body, skirt, ra, la, orbit], pal
+
+
+def ash_colossus():
+    Part._n = 0
+    head = P("head", (0, -6, -3), Cube((-5, -8, -5), (10, 8, 9), "rock:facehound"),
+             children=[P(None, (0, 0, 0), Cube((-6, -10, -2), (2, 5, 2), "rock"), Cube((4, -10, -2), (2, 5, 2), "rock"),
+                         Cube((-7, -13, -1), (2, 4, 2), "rock:magma"), Cube((5, -13, -1), (2, 4, 2), "rock:magma"),
+                         Cube((-3, -2, -6), (6, 2, 1), "rock:magma"))])
+    body = P("body", (0, -6, 0), Cube((-10, 0, -6), (20, 16, 12), "rock:magma"),
+             children=[P(None, (0, 0, 0), Cube((-11, -2, -7), (8, 6, 14), "rock"), Cube((3, -2, -7), (8, 6, 14), "rock"),
+                         Cube((-3, 2, -7), (6, 8, 1), "glowmat"), Cube((-7, 14, -6.5), (14, 4, 11), "rock")),
+                       P(None, (-7, -3, 0, 0, 0, R(-20)), Cube((-1.5, -5, -1.5), (3, 5, 3), "rock:magma")),
+                       P(None, (7, -3, 0, 0, 0, R(20)), Cube((-1.5, -5, -1.5), (3, 5, 3), "rock:magma")),
+                       P(None, (0, -3, 5, R(-25), 0, 0), Cube((-1.5, -6, -1.5), (3, 6, 3), "rock:magma"))])
+    ra = P("right_arm", (-12, -4, 0), Cube((-7, -2, -4), (7, 18, 8), "rock:magma"),
+           children=[P(None, (-3.5, 16, 0), Cube((-5, 0, -5), (9, 9, 10), "rock"),
+                       Cube((-4, 8, -4), (2, 2, 2), "rock"), Cube((0, 8, -4), (2, 2, 2), "rock"))])
+    la = P("left_arm", (12, -4, 0), Cube((0, -2, -4), (7, 18, 8), "rock:magma"),
+           children=[P(None, (3.5, 16, 0), Cube((-4, 0, -5), (9, 9, 10), "rock"),
+                       Cube((-2, 8, -4), (2, 2, 2), "rock"), Cube((2, 8, -4), (2, 2, 2), "rock"))])
+    rl = P("right_leg", (-5, 10, 0), Cube((-4, 0, -4), (8, 14, 8), "rock"),
+           children=[P(None, (0, 11, -2), Cube((-4.5, 0, -3), (9, 3, 3), "rock:magma"))])
+    ll = P("left_leg", (5, 10, 0), Cube((-4, 0, -4), (8, 14, 8), "rock"),
+           children=[P(None, (0, 11, -2), Cube((-4.5, 0, -3), (9, 3, 3), "rock:magma"))])
+    pal = {"rock": ramp("#141212", "#221e1c", "#332d2a", "#463e3a", "#5a504a"),
+           "glow": ramp("#8a2000", "#ff5a00", "#ffb020", "#fff4b0"),
+           "trim": ramp("#221e1c", "#332d2a", "#463e3a", "#5a504a"),
+           "robe": ramp("#141212", "#221e1c", "#332d2a", "#463e3a", "#5a504a")}
+    return [head, body, ra, la, rl, ll], pal
+
+
 MODELS = [
+    ("echo_lord", "echoLord", echo_lord, 128),
+    ("archive_keeper", "archiveKeeper", archive_keeper, 128),
+    ("ash_colossus", "ashColossus", ash_colossus, 128),
     ("ash_hound", "ashHound", ash_hound, 64),
     ("ether_wisp", "etherWisp", ether_wisp, 64),
     ("scar_crawler", "scarCrawler", scar_crawler, 128),

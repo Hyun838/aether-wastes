@@ -1,0 +1,65 @@
+{
+  "parent": "aetherwastes:main/boss_crypt",
+  "display": {
+    "icon": {
+      "id": "aetherwastes:guardian_seal"
+    },
+    "title": {
+      "translate": "advancements.aetherwastes.all_bosses.title"
+    },
+    "description": {
+      "translate": "advancements.aetherwastes.all_bosses.desc"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "a": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aetherwastes:archive_keeper"
+            }
+          }
+        ]
+      }
+    },
+    "c": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aetherwastes:echo_lord"
+            }
+          }
+        ]
+      }
+    },
+    "z": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aetherwastes:ash_colossus"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 800
+  }
+}

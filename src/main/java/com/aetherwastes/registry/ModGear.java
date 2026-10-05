@@ -51,6 +51,8 @@ public final class ModGear {
             () -> Ingredient.of(ModItems.STAR_IRON_INGOT.get()), SoundEvents.ARMOR_EQUIP_NETHERITE);
     public static final DeferredHolder<ArmorMaterial, ArmorMaterial> ARCHIVIST = armor("archivist", new int[]{2, 5, 6, 3}, 25, 1.5f, 0f,
             () -> Ingredient.of(ModItems.SOUL_ESSENCE.get()), SoundEvents.ARMOR_EQUIP_ELYTRA);
+    public static final DeferredHolder<ArmorMaterial, ArmorMaterial> PHANTOM = armor("phantom", new int[]{3, 6, 8, 3}, 24, 2f, 0f,
+            () -> Ingredient.of(ModItems.PHANTOM_ESSENCE.get()), SoundEvents.ARMOR_EQUIP_CHAIN);
 
     private static DeferredHolder<ArmorMaterial, ArmorMaterial> armor(String name, int[] def, int ench, float tough, float kb,
                                                                       java.util.function.Supplier<Ingredient> repair,
@@ -72,6 +74,7 @@ public final class ModGear {
     public static final DeferredItem<ArmorItem>[] PRISM_SET = set("prism", PRISM, 18);
     public static final DeferredItem<ArmorItem>[] STAR_IRON_SET = set("star_iron", STAR_IRON, 38);
     public static final DeferredItem<ArmorItem>[] ARCHIVIST_SET = set("archivist", ARCHIVIST, 30);
+    public static final DeferredItem<ArmorItem>[] PHANTOM_SET = set("phantom", PHANTOM, 34);
 
     @SuppressWarnings("unchecked")
     private static DeferredItem<ArmorItem>[] set(String name, DeferredHolder<ArmorMaterial, ArmorMaterial> mat, int durability) {
@@ -80,7 +83,7 @@ public final class ModGear {
         DeferredItem<ArmorItem>[] out = new DeferredItem[4];
         for (int i = 0; i < 4; i++) {
             ArmorItem.Type type = types[i];
-            Rarity rarity = name.equals("star_iron") || name.equals("archivist") ? Rarity.RARE : Rarity.COMMON;
+            Rarity rarity = name.equals("phantom") ? Rarity.EPIC : name.equals("star_iron") || name.equals("archivist") ? Rarity.RARE : Rarity.COMMON;
             out[i] = ModItems.ITEMS.register(name + "_" + suffix[i],
                     () -> new ArmorItem(mat, type, new Item.Properties().durability(type.getDurability(durability)).rarity(rarity)));
         }
@@ -115,6 +118,11 @@ public final class ModGear {
     public static final DeferredItem<Item> RESONANCE_MAUL = weapon("resonance_maul", RELIC_TIER, 9, -3.4f, Ability.SLAM, Rarity.EPIC);
     public static final DeferredItem<Item> CONVERGENCE_GLAIVE = weapon("convergence_glaive", RELIC_TIER, 6, -2.8f, Ability.BLINK, Rarity.EPIC);
     public static final DeferredItem<Item> HEART_BLADE = weapon("heart_blade", RELIC_TIER, 7, -2.4f, Ability.HEART, Rarity.EPIC);
+
+    // Трофеи подземелий
+    public static final DeferredItem<Item> ECHO_REAPER = weapon("echo_reaper", RELIC_TIER, 8, -2.7f, Ability.PHASE_DASH, Rarity.EPIC);
+    public static final DeferredItem<Item> CHRONICLE_BLADE = weapon("chronicle_blade", RELIC_TIER, 6, -2.3f, Ability.TIMESTOP, Rarity.EPIC);
+    public static final DeferredItem<Item> COLOSSUS_HAMMER = weapon("colossus_hammer", RELIC_TIER, 10, -3.3f, Ability.ERUPTION, Rarity.EPIC);
 
     public static final DeferredItem<Item> ETHER_BOW = ModItems.ITEMS.register("ether_bow",
             () -> new BowItem(new Item.Properties().durability(640).rarity(Rarity.UNCOMMON)));

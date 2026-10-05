@@ -1,0 +1,75 @@
+{
+  "parent": "aetherwastes:main/root",
+  "display": {
+    "icon": {
+      "id": "aetherwastes:rune_bricks"
+    },
+    "title": {
+      "translate": "advancements.aetherwastes.dungeon.title"
+    },
+    "description": {
+      "translate": "advancements.aetherwastes.dungeon.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "lost_archive": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structures": "aetherwastes:lost_archive"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "echo_crypt": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structures": "aetherwastes:echo_crypt"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "ash_citadel": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structures": "aetherwastes:ash_citadel"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "lost_archive",
+      "echo_crypt",
+      "ash_citadel"
+    ]
+  ]
+}

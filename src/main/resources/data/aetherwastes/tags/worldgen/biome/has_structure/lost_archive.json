@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:is_mountain",
+    "#minecraft:is_taiga",
+    "minecraft:snowy_plains",
+    "minecraft:plains",
+    "minecraft:desert",
+    "minecraft:dripstone_caves",
+    "minecraft:deep_dark",
+    "minecraft:lush_caves",
+    "minecraft:windswept_hills",
+    "minecraft:meadow",
+    "minecraft:cherry_grove"
+  ]
+}

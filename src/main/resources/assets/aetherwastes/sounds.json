@@ -45,5 +45,39 @@
       "aetherwastes:anchor_hum"
     ],
     "subtitle": "subtitles.aetherwastes.anchor_hum"
+  },
+  "phantom_phase": {
+    "sounds": [
+      "aetherwastes:phantom_phase1",
+      "aetherwastes:phantom_phase2"
+    ],
+    "subtitle": "subtitles.aetherwastes.phantom_phase"
+  },
+  "phantom_return": {
+    "sounds": [
+      "aetherwastes:phantom_return1",
+      "aetherwastes:phantom_return2"
+    ],
+    "subtitle": "subtitles.aetherwastes.phantom_return"
+  },
+  "dungeon_ambient": {
+    "sounds": [
+      "aetherwastes:dungeon_ambient1",
+      "aetherwastes:dungeon_ambient2"
+    ],
+    "subtitle": "subtitles.aetherwastes.dungeon_ambient"
+  },
+  "boss_slam": {
+    "sounds": [
+      "aetherwastes:boss_slam1",
+      "aetherwastes:boss_slam2"
+    ],
+    "subtitle": "subtitles.aetherwastes.boss_slam"
+  },
+  "seal_break": {
+    "sounds": [
+      "aetherwastes:seal_break1"
+    ],
+    "subtitle": "subtitles.aetherwastes.seal_break"
   }
 }

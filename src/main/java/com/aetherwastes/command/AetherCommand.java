@@ -37,10 +37,41 @@ import java.util.Arrays;
 public final class AetherCommand {
     private AetherCommand() {}
 
+    private static int dungeon(ServerPlayer p, String kind, String view) {
+        com.aetherwastes.world.dungeon.DungeonKind k = switch (kind) {
+            case "archive" -> com.aetherwastes.world.dungeon.DungeonKind.ARCHIVE;
+            case "crypt" -> com.aetherwastes.world.dungeon.DungeonKind.CRYPT;
+            case "citadel" -> com.aetherwastes.world.dungeon.DungeonKind.CITADEL;
+            default -> null;
+        };
+        if (k == null) return 0;
+        return com.aetherwastes.world.dungeon.DungeonShowcase.view(p, k, view) ? 1 : 0;
+    }
+
     @SubscribeEvent
     public static void register(RegisterCommandsEvent event) {
         CommandDispatcher<CommandSourceStack> d = event.getDispatcher();
         d.register(Commands.literal("aether")
+                .then(Commands.literal("dungeon").requires(s -> s.hasPermission(2))
+                        .then(Commands.argument("kind", StringArgumentType.word())
+                                .suggests((c, b) -> SharedSuggestionProvider.suggest(new String[]{"archive", "crypt", "citadel"}, b))
+                                .executes(ctx -> dungeon(ctx.getSource().getPlayerOrException(), StringArgumentType.getString(ctx, "kind"), "boss"))
+                                .then(Commands.argument("view", StringArgumentType.word())
+                                        .suggests((c, b) -> SharedSuggestionProvider.suggest(new String[]{"boss", "room", "outside"}, b))
+                                        .executes(ctx -> dungeon(ctx.getSource().getPlayerOrException(),
+                                                StringArgumentType.getString(ctx, "kind"), StringArgumentType.getString(ctx, "view"))))))
+                .then(Commands.literal("phase").requires(s -> s.hasPermission(2)).executes(ctx -> {
+                    ServerPlayer p = ctx.getSource().getPlayerOrException();
+                    var set = com.aetherwastes.registry.ModGear.PHANTOM_SET;
+                    net.minecraft.world.entity.EquipmentSlot[] slots = {net.minecraft.world.entity.EquipmentSlot.HEAD,
+                            net.minecraft.world.entity.EquipmentSlot.CHEST, net.minecraft.world.entity.EquipmentSlot.LEGS,
+                            net.minecraft.world.entity.EquipmentSlot.FEET};
+                    for (int k = 0; k < 4; k++) p.setItemSlot(slots[k], new net.minecraft.world.item.ItemStack(set[k].get()));
+                    PlayerData pd = Data.get(p);
+                    pd.phaseCooldown = 0;
+                    com.aetherwastes.ability.Phase.request(p);
+                    return 1;
+                }))
                 .then(Commands.literal("status").executes(ctx -> {
                     JournalItem.show(ctx.getSource().getPlayerOrException());
                     return 1;

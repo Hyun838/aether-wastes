@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "EIE",
+    "E E",
+    "E E"
+  ],
+  "key": {
+    "E": {
+      "item": "aetherwastes:phantom_essence"
+    },
+    "I": {
+      "item": "aetherwastes:ether_steel_ingot"
+    }
+  },
+  "result": {
+    "id": "aetherwastes:phantom_leggings",
+    "count": 1
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "armed=true,kind=0": {
+      "model": "aetherwastes:block/dungeon_trap_archive"
+    },
+    "armed=false,kind=0": {
+      "model": "aetherwastes:block/dungeon_trap_archive_off"
+    },
+    "armed=true,kind=1": {
+      "model": "aetherwastes:block/dungeon_trap_crypt"
+    },
+    "armed=false,kind=1": {
+      "model": "aetherwastes:block/dungeon_trap_crypt_off"
+    },
+    "armed=true,kind=2": {
+      "model": "aetherwastes:block/dungeon_trap_citadel"
+    },
+    "armed=false,kind=2": {
+      "model": "aetherwastes:block/dungeon_trap_citadel_off"
+    }
+  }
+}

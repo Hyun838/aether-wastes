@@ -8,9 +8,11 @@ public final class ModNetwork {
     private ModNetwork() {}
 
     public static void register(RegisterPayloadHandlersEvent event) {
-        PayloadRegistrar registrar = event.registrar("2");
+        PayloadRegistrar registrar = event.registrar("3");
         registrar.playToClient(SyncStatsPayload.TYPE, SyncStatsPayload.STREAM_CODEC, ModNetwork::handleStats);
         registrar.playToClient(SyncJournalPayload.TYPE, SyncJournalPayload.STREAM_CODEC, ModNetwork::handleJournal);
+        registrar.playToClient(PhaseStatePayload.TYPE, PhaseStatePayload.STREAM_CODEC, ModNetwork::handlePhase);
+        registrar.playToServer(AbilityRequestPayload.TYPE, AbilityRequestPayload.STREAM_CODEC, ModNetwork::handleAbility);
     }
 
     private static void handleStats(SyncStatsPayload p, IPayloadContext context) {
@@ -26,5 +28,19 @@ public final class ModNetwork {
 
     private static void handleJournal(SyncJournalPayload p, IPayloadContext context) {
         ClientStatsCache.journal = p.journal();
+    }
+
+    private static void handlePhase(PhaseStatePayload p, IPayloadContext context) {
+        ClientStatsCache.phaseTicks = p.ticks();
+        ClientStatsCache.phaseActive = p.ticks() > 0;
+        ClientStatsCache.phaseCooldown = p.cooldown();
+    }
+
+    private static void handleAbility(AbilityRequestPayload p, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (context.player() instanceof net.minecraft.server.level.ServerPlayer sp && p.ability() == 0) {
+                com.aetherwastes.ability.Phase.request(sp);
+            }
+        });
     }
 }

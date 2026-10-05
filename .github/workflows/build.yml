@@ -17,6 +17,16 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
       - name: Build
         run: chmod +x gradlew && ./gradlew build --no-daemon --stacktrace 2>&1 | tee build.log; test ${PIPESTATUS[0]} -eq 0
+      - name: Publish Minecraft sources once (for development)
+        continue-on-error: true
+        run: |
+          if git ls-remote --exit-code origin mcsrc >/dev/null 2>&1; then exit 0; fi
+          ./gradlew createMinecraftArtifacts --no-daemon -q || true
+          J=$(find build .gradle ~/.gradle -name "*neoforge*sources*.jar" 2>/dev/null | head -1)
+          echo "sources: $J"
+          mkdir -p srcout && cp "$J" srcout/mc-sources.jar && cd srcout && git init -q && git checkout -q -b mcsrc && git add . \
+            && git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -q -m src \
+            && git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" mcsrc
       - name: Launch test (server loads the mod and its worlds)
         timeout-minutes: 15
         continue-on-error: true

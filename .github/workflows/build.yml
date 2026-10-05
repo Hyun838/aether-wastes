@@ -22,8 +22,9 @@ jobs:
         run: |
           if git ls-remote --exit-code origin mcsrc >/dev/null 2>&1; then exit 0; fi
           ./gradlew createMinecraftArtifacts --no-daemon -q || true
-          J=$(find build .gradle ~/.gradle -name "*neoforge*sources*.jar" 2>/dev/null | head -1)
-          echo "sources: $J"
+          find build .gradle ~/.gradle -name "*.jar" 2>/dev/null | grep -i -E "sources|minecraft" | head -40
+          J=""; for c in $(find build .gradle ~/.gradle -name "*sources*.jar" 2>/dev/null); do unzip -l "$c" 2>/dev/null | grep -q "net/minecraft/world/entity/Entity.java" && J="$c" && break; done
+          echo "sources: $J"; test -n "$J"
           mkdir -p srcout && cp "$J" srcout/mc-sources.jar && cd srcout && git init -q && git checkout -q -b mcsrc && git add . \
             && git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -q -m src \
             && git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" mcsrc

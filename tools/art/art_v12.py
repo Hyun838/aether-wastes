@@ -474,7 +474,7 @@ def gui():
                (ox + 5 if side == 0 else ox + 5, 14)]
         d.polygon(pts, fill=(60, 40, 20, 255), outline=(230, 180, 70, 255))
         d.point([(ox + 5, 8)], fill=(255, 240, 180, 255))
-    nine(f"{G}/boss_frame.png", bf, 12)
+    nine(f"{G}/boss_frame.png", bf, {"left": 12, "top": 5, "right": 12, "bottom": 5})
     bb = new(16, 7)
     for y in range(7):
         for x in range(16):

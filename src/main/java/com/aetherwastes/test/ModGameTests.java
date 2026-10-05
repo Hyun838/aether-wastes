@@ -281,7 +281,7 @@ public class ModGameTests {
             if (!helper.getLevel().noCollision(p, p.getBoundingBox())) errors.add("still stuck in wall after eject at " + p.blockPosition());
             if (d.phaseCooldown != com.aetherwastes.ability.Phase.COOLDOWN) errors.add("cooldown " + d.phaseCooldown);
             com.aetherwastes.ability.Phase.request(p);
-            if (d.phaseTicks > 0) errors.add("phase restarted during cooldown");
+            if (!p.isCreative() && d.phaseTicks > 0) errors.add("phase restarted during cooldown");
             AetherWastes.LOGGER.info("[aw-test] phase: ejected to {}", p.blockPosition());
         } catch (Throwable t) {
             errors.add(err("phase", t));

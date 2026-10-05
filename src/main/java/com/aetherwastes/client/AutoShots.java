@@ -102,6 +102,11 @@ public final class AutoShots {
     public static void onScreen(ScreenEvent.Init.Post event) {
         if (!ENABLED) return;
         Minecraft mc = Minecraft.getInstance();
+        if (event.getScreen() instanceof net.minecraft.client.gui.screens.AccessibilityOnboardingScreen) {
+            mc.options.onboardAccessibility = false;
+            mc.execute(() -> mc.setScreen(new TitleScreen(false)));
+            return;
+        }
         if (event.getScreen() instanceof TitleScreen && !worldRequested) {
             worldRequested = true;
             mc.options.pauseOnLostFocus = false;

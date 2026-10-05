@@ -96,8 +96,12 @@ public final class DungeonShowcase {
             }
             default -> {
                 BoundingBox all = BoundingBox.encapsulatingBoxes(pieces.stream().map(StructurePiece::getBoundingBox).toList()).orElseThrow();
-                int cxz = level.getHeight(Heightmap.Types.MOTION_BLOCKING, all.minX() - 22, all.minZ() - 22);
-                cam = new Vec3(all.minX() - 22, Math.max(all.maxY() + 14, cxz + 12), all.minZ() - 22);
+                // Камера над землёй: сначала прогрузить чанк, иначе высота рельефа неизвестна
+                int camX = all.minX() - 18, camZ = all.minZ() - 18;
+                level.getChunk(camX >> 4, camZ >> 4);
+                int ground = level.getHeight(Heightmap.Types.MOTION_BLOCKING, camX, camZ);
+                int topAt = level.getHeight(Heightmap.Types.MOTION_BLOCKING, (all.minX() + all.maxX()) / 2, (all.minZ() + all.maxZ()) / 2);
+                cam = new Vec3(camX, Math.max(Math.max(ground, topAt) + 14, all.maxY() + 10), camZ);
                 look = new Vec3((all.minX() + all.maxX()) / 2.0, all.minY() + 4, (all.minZ() + all.maxZ()) / 2.0);
             }
         }

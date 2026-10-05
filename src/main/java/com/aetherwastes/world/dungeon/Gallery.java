@@ -82,7 +82,7 @@ public final class Gallery {
             level.addFreshEntity(stand);
         }
         double cx = o.getX() + width / 2.0 - 1.0;
-        look(p, cx, o.getY() + 2.2, o.getZ() - 6.5, cx, o.getY() + 1.0, o.getZ() + 0.5);
+        look(p, cx, o.getY() + 1.9, o.getZ() - 6.0, cx, o.getY() + 1.1, o.getZ() + 0.5);
         return true;
     }
 
@@ -96,7 +96,7 @@ public final class Gallery {
         List<EntityType<? extends Mob>> types = List.<EntityType<? extends Mob>>of(ModEntities.ASH_HOUND.get(), ModEntities.SALT_WRAITH.get(),
                 ModEntities.RESIN_WALKER.get(), ModEntities.GLASSMAN.get(), ModEntities.ETHER_WISP.get(),
                 ModEntities.SCAR_CRAWLER.get());
-        return row(p, types, 3, 100, 8.0, 2.6);
+        return row(p, types, 3, 100, 6.5, 2.0);
     }
 
     private static boolean row(ServerPlayer p, List<? extends EntityType<? extends Mob>> types, int gap, int dx, double back, double camY) {
